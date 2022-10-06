@@ -1,0 +1,49 @@
+//
+// Table actions
+//
+
+.table-action {
+    font-size: $font-size-sm;
+    color: $table-action-color;
+    margin: 0 .25rem;
+
+    &:hover {
+        color: darken($table-action-color, 10%);
+    }
+}
+
+.table-action-delete {
+    &:hover {
+        color: theme-color("danger");
+    }
+}
+
+.table-action-edit {
+    &:hover {
+        color: theme-color("warning");
+    }
+}
+
+.table-action-primary {
+    &:hover {
+        color: theme-color("primary");
+    }
+}
+
+.table-action-success {
+    &:hover {
+        color: theme-color("success");
+    }
+}
+
+.table-action-reactive {
+    &:hover {
+        color: #00b000;
+    }
+}
+
+.table-dark {
+    .table-action {
+        color: $table-dark-action-color;
+    }
+}

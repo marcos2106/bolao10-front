@@ -1,0 +1,72 @@
+
+#nprogress .bar {
+    background: #4BC5A8;
+}
+
+#nprogress .spinner-icon {
+  width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+
+  border: solid 2px transparent;
+  border-top-color: #04384B;
+  border-left-color: #04384B;
+  border-radius: 50%;
+
+  -webkit-animation: nprogress-spinner 400ms linear infinite;
+          animation: nprogress-spinner 400ms linear infinite;
+}
+
+.list-group-item.active{
+    background-color: #4BC5A8!important;
+    border-color: #4BC5A8!important;
+}
+
+.list-group-item.active > a{
+    color: #fff;
+}
+
+.list-group-item.active > li:hover{
+    color: #fff;
+}
+
+.list-group-item {
+    color: #04384B;
+}
+
+.list-group-item > a:hover{
+    color: #04384B;
+}
+
+.btn-primary{
+    color: #fff;
+    background-color: #4BC5A8!important;
+    border-color: #4BC5A8!important;
+}
+
+.link-padrao{
+     color: rgb(34, 160, 131);
+     font-size: 14px !important;
+}
+
+@media print {
+    .noprint {
+      display: none;
+    }
+}
+
+.font-tabela-peq{
+    font-size: 14px !important;
+}
+
+.back-card {
+  background-image: url("/img/background_card.jpg");
+}
+
+.invoice-pendent{
+    background-color: #FBB8B8;
+}
+
+.little-text{
+    font-size: 12px;
+}
