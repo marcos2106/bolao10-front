@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-3"></div>
                 </div>
-                <div class="row">
+                <div class="row mt-2">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <span class="m-2 font-weight-bold">Vice</span>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-3"></div>
                 </div>
-                <div class="row">
+                <div class="row mt-2">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <span class="m-2 font-weight-bold">Quarto</span>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="col-3"></div>
                 </div>
-                <div class="row">
+                <div class="row mt-2">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <span class="m-2 font-weight-bold">Artilharia</span>
@@ -147,10 +147,16 @@ export default {
         },
         carregarColocacoes() {
             this.$clubApi.get('/configuracao/colocacao').then((response) => {
-                this.colocacao = response.data.object
-                this.desabilitarBotao = (this.colocacao.campeao != null && this.colocacao.vice != null
-                        && this.colocacao.terceiro != null  && this.colocacao.quarto != null
-                        && this.colocacao.artilharia != null);
+                
+                this.colocacao.campeao = (response.data.object.campeao != null) ? response.data.object.campeao : { id: null };
+                this.colocacao.vice = (response.data.object.vice != null) ? response.data.object.vice : { id: null };
+                this.colocacao.terceiro = (response.data.object.terceiro != null) ? response.data.object.terceiro : { id: null };
+                this.colocacao.quarto = (response.data.object.quarto != null) ? response.data.object.quarto : { id: null };
+                this.colocacao.artilharia = (response.data.object.artilharia != null) ? response.data.object.artilharia : { id: null };
+                
+                this.desabilitarBotao = (this.colocacao.campeao.id != null && this.colocacao.vice.id != null
+                        && this.colocacao.terceiro.id != null  && this.colocacao.quarto.id != null
+                        && this.colocacao.artilharia.id != null);
             }) .catch((error) => {
                 this.$notify({type: 'warning', message: error.response.data.msg})
             }).finally(() =>{
@@ -178,19 +184,25 @@ export default {
         },
         invalidoForm() {
             if (this.colocacao.campeao.id == null
-                || this.colocacao.vice.id == null
-                || this.colocacao.terceiro.id == null
-                || this.colocacao.quarto.id == null
-                || this.colocacao.artilharia.id == null){
-                this.$notify({type: 'warning', message: "Todas as posições devem estar preenchidas"})
+                && this.colocacao.vice.id == null
+                && this.colocacao.terceiro.id == null
+                && this.colocacao.quarto.id == null
+                && this.colocacao.artilharia.id == null){
+                this.$notify({type: 'warning', message: "Alguma posição deve estar preenchida"})
                 return true;
             }
-            if (this.colocacao.campeao.id == this.colocacao.vice.id 
-                    || this.colocacao.campeao.id == this.colocacao.terceiro.id
-                    || this.colocacao.campeao.id == this.colocacao.quarto.id
-                    || this.colocacao.vice.id == this.colocacao.terceiro.id
-                    || this.colocacao.vice.id == this.colocacao.quarto.id
-                    || this.colocacao.terceiro.id == this.colocacao.quarto.id) {
+            if ((this.colocacao.campeao.id == this.colocacao.vice.id && this.colocacao.campeao.id != null
+                        && this.colocacao.vice.id != null)
+                    || (this.colocacao.campeao.id == this.colocacao.terceiro.id && this.colocacao.campeao.id != null
+                        && this.colocacao.terceiro.id != null)
+                    || (this.colocacao.campeao.id == this.colocacao.terceiro.id && this.colocacao.campeao.id != null
+                        && this.colocacao.terceiro.id != null)
+                    || (this.colocacao.vice.id == this.colocacao.terceiro.id && this.colocacao.vice.id != null
+                        && this.colocacao.terceiro.id != null)
+                    || (this.colocacao.vice.id == this.colocacao.quarto.id && this.colocacao.vice.id != null
+                        && this.colocacao.quarto.id != null)
+                    || (this.colocacao.terceiro.id == this.colocacao.quarto.id && this.colocacao.terceiro.id != null
+                        && this.colocacao.quarto.id != null)) {
                 this.$notify({type: 'warning', message: "Não pode repetir seleção nas posições"})
                 return true;
             }

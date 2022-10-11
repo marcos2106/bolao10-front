@@ -34,8 +34,8 @@
                                 </td>
                                 <td style="text-align: center"> 
                                     {{ item.pontuacao }} pts 
-                                    <span v-if="item.posicaoAnterior!=0"><i :class="(item.posicaoAnterior > (index+1)) ? 'fas fa-angle-up text-success' : (item.posicaoAnterior < (index+1)) ? 'fas fa-angle-down text-danger' : 'fas fa-minus'"></i></span>
-                                    <span v-if="jogoAoVivo"> &nbsp; ( {{item.pontuacaoProvisoria-item.pontuacao}} )</span> 
+                                    <span v-if="item.posicaoAnterior != 999"><i :class="(item.posicaoAnterior > (index+1)) ? 'fas fa-angle-up text-success' : (item.posicaoAnterior < (index+1)) ? 'fas fa-angle-down text-danger' : 'fas fa-minus'"></i></span>
+                                    <span v-if="jogoAoVivo"> &nbsp; ( +{{item.pontuacaoProvisoria}} )</span> 
                                 </td>
                             </tr>
                         </tbody>

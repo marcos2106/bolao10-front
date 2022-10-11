@@ -49,7 +49,7 @@
                 
                 <div class="col-12 text-center">
                     <jw-pagination
-                        :pageSize="5"
+                        :pageSize="15"
                         :items="jogadores"
                         @changePage="onChangePage"
                         :labels="customLabels"
@@ -67,7 +67,11 @@
                     
                         <el-table-column label="Nome" prop="nome" sortable />
                         
-                        <el-table-column label="Seleção" prop="selecao.nome" sortable />
+                        <el-table-column label="Seleção" sortable>
+                            <div slot-scope="{row}">
+                                <img width="20" class="mr-1" :src="row.selecao.imagem"> {{ row.selecao.nome }}
+                            </div>                            
+                        </el-table-column>
 
                         <el-table-column min-width="60px" align="center">
                             <div slot-scope="{row}" class="table-actions">

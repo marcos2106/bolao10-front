@@ -3,7 +3,7 @@
       <div class="wrapper fadeInDown">
         <div id="formContent">
           <div class="fadeIn first">
-            <img src="@/assets/logo.png" id="icon" />
+            <img src="/img/logo.png" id="icon" />
           </div>
           <form>
            <div class="fadeIn first letra-texto mb-2 mt-2">
@@ -89,7 +89,7 @@ h2 {
   width: 100%;
   min-height: 100%;
   padding: 20px;
-  margin-top: 100px;
+  margin-top: 25px;
 }
 
 #formContent {
@@ -320,7 +320,7 @@ input[type=text]:placeholder {
 } 
 
 #icon {
-  width:60%;
+  width: 40%;
   margin-bottom: 20px;
   margin-top: 20px;
 }

@@ -90,17 +90,21 @@
                         </el-table-column>
 
                         <el-table-column label="Apostou?" prop="aposta" min-width="60px" align="center" sortable>
-                            <div slot-scope="{row}" class="table-actions">
+                            <div slot-scope="{row}" class="table-actions"
+                                    v-if="row.perfil != 'ADMIN'">
                                 <span v-if="row.aposta"><i class="fas fa-check-circle text-success"></i></span>
                                 <span v-if="!row.aposta"><i class="fas fa-times-circle text-danger"></i></span>
                             </div>
+                            <div v-else> - </div>
                         </el-table-column>
 
                         <el-table-column label="Pagou?" prop="pagamento" min-width="60px" align="center" sortable>
-                            <div slot-scope="{row}" class="table-actions">
+                            <div slot-scope="{row}" class="table-actions"
+                                    v-if="row.perfil != 'ADMIN'">
                                 <span v-if="row.pagamento"><i class="fas fa-check-circle text-success"></i></span>
                                 <span v-if="!row.pagamento"><i class="fas fa-times-circle text-danger"></i></span>
                             </div>
+                            <div v-else> - </div>
                         </el-table-column>
 
                         <el-table-column label="Ativo" prop="ativo" min-width="55px" align="center" sortable>
@@ -117,7 +121,8 @@
                                         <i class="fas fa-edit text-warning"></i>
                                     </a>
                                 </el-tooltip>
-                                <el-tooltip content="Alterar Pagamento" placement="top">
+                                <el-tooltip content="Alterar Pagamento" placement="top"
+                                        v-if="row.perfil != 'ADMIN'">
                                     <a href="#!" @click.prevent="alterarPagamento(row)" class="table-action table-action-edit" data-toggle="tooltip" data-original-title="Pagamento">
                                         <i class="fas fa-dollar-sign text-warning"></i>
                                     </a>

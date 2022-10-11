@@ -23,7 +23,7 @@
                             </div>
                         </div>
 
-                        <div class="row" v-if="dadosUsuario.usuario.id != null">
+                        <div class="row mt--2" v-if="dadosUsuario.usuario.id != null">
                             <div class="col-3">
                                 <img class="avatarRedondo" width="160" height="160" :src="dadosUsuario.usuario.avatar">
                             </div>
@@ -74,7 +74,7 @@
                                     </v-tab>
                                 </vue-tabs>
 
-                                <vue-tabs  v-if="idSituacao > 1">
+                                <vue-tabs class="mt--2" v-if="idSituacao > 1">
                                     <v-tab title="Gráficos de Ranking">
                                         
                                         <div class="row mt-3">
@@ -108,12 +108,12 @@
                                     </v-tab>
                                     <v-tab title="Colocação e Artilharia">
                                         
-                                        <div class="row mt-3">
-                                            <div class="col-6 mt-2 text-center font-weight-bold">Campeão</div><div class="col-6 text-center font-weight-bold"> {{ colocacao.campeao.nome}} <span v-if="colocacao.pontosCampeao">({{colocacao.pontosCampeao}})</span></div>
-                                            <div class="col-6 mt-2 text-center">Vice</div><div class="col-6 text-center"> {{ colocacao.vice.nome}} <span v-if="colocacao.pontosVice">({{colocacao.pontosVice}})</span></div>
-                                            <div class="col-6 mt-2 text-center">Terceiro</div><div class="col-6 text-center"> {{ colocacao.terceiro.nome}} <span v-if="colocacao.pontosTerceiro">({{colocacao.pontosTerceiro}})</span></div>
-                                            <div class="col-6 mt-2 text-center linhaHorz">Quarto</div><div class="col-6 text-center linhaHorz"> {{ colocacao.quarto.nome}} <span v-if="colocacao.pontosQuarto">({{colocacao.pontosQuarto}})</span></div>
-                                            <div class="col-6 mt-2 text-center">Artilharia</div><div class="col-6 text-center"> {{ colocacao.artilharia.nome}} <span v-if="colocacao.pontosQuarto">({{colocacao.pontosQuarto}})</span></div>
+                                        <div class="row mt-1">
+                                            <div class="col-6 mt-3 text-right">Campeão</div><div class="col-6 mt-3 text-left"> <img width="20" :src="colocacao.campeao.imagem"> {{ colocacao.campeao.nome}} <span v-if="colocacao.pontosCampeao">({{colocacao.pontosCampeao}})</span></div>
+                                            <div class="col-6 mt-3 text-right">Vice</div><div class="col-6 mt-3 text-left"> <img width="20" :src="colocacao.vice.imagem"> {{ colocacao.vice.nome}} <span v-if="colocacao.pontosVice">({{colocacao.pontosVice}})</span></div>
+                                            <div class="col-6 mt-3 text-right">Terceiro</div><div class="col-6 mt-3 text-left"> <img width="20" :src="colocacao.terceiro.imagem"> {{ colocacao.terceiro.nome}} <span v-if="colocacao.pontosTerceiro">({{colocacao.pontosTerceiro}})</span></div>
+                                            <div class="col-6 mt-3 text-right">Quarto</div><div class="col-6 mt-3 text-left"> <img width="20" :src="colocacao.quarto.imagem"> {{ colocacao.quarto.nome}} <span v-if="colocacao.pontosQuarto">({{colocacao.pontosQuarto}})</span></div>
+                                            <div class="col-6 mt-3 text-right">Artilharia</div><div class="col-6 mt-3 text-left"> <img width="20" :src="colocacao.artilharia.imagem"> {{ colocacao.artilharia.nome}} <span v-if="colocacao.pontosQuarto">({{colocacao.pontosQuarto}})</span></div>
                                         </div>
 
                                     </v-tab>
@@ -142,9 +142,10 @@
                                                     {{index+1}}. {{rank.usuario.nome}}
                                                 </span>
                                             </div>
-                                            <div>{{rank.pontuacao}} pts 
-                                                <i v-if="rank.pontuacao>0" :class="(rank.posicaoAnterior > (index+1)) ? 'fas fa-angle-up text-success' : (rank.posicaoAnterior < (index+1)) ? 'fas fa-angle-down text-danger' : 'fas fa-minus'"></i>
-                                                <span v-if="jogoAoVivo"> &nbsp; ( {{rank.pontuacaoProvisoria-rank.pontuacao}} )</span> 
+                                            <div>
+                                                {{rank.pontuacao}} pts 
+                                                <i v-if="rank.posicaoAnterior != 999" :class="(rank.posicaoAnterior > (index+1)) ? 'fas fa-angle-up text-success' : (rank.posicaoAnterior < (index+1)) ? 'fas fa-angle-down text-danger' : 'fas fa-minus'"></i>
+                                                <span v-if="jogoAoVivo"> &nbsp; ( +{{rank.pontuacaoProvisoria}} )</span> 
                                             </div>
                                         </div>
 

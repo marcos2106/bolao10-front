@@ -9,7 +9,7 @@ import AreaLogadaLayout from '@/views/Layout/AreaLogadaLayout.vue';
 const Home = () => import('@/views/Home.vue');
 const Sair = () => import('@/views/Sair.vue');
 const Login = () => import('@/views/Login.vue');
-const EsqueciSenha = () => import('@/views/EsqueciSenha.vue');
+const TrocarSenha = () => import('@/views/TrocarSenha.vue');
 
 // CONFIGURAÇÃO
 const RegistrarPartida = () => import('@/views/config/RegistrarPartida.vue');
@@ -53,8 +53,8 @@ let rotasLogin = {
 			component: Login
 		},
 		{
-			path: 'esqueci-senha',
-			component: EsqueciSenha
+			path: '/trocarsenha',
+			component: TrocarSenha
 		}
 	]
 };
@@ -208,7 +208,7 @@ const router = new Router({
 })
 
 router.beforeResolve((to, from, next) =>{
-	if (to.path == '/' || to.path == '/login' || to.path == '/login/esqueci-senha'){
+	if (to.path == '/' || to.path == '/login' || to.path == '/trocarsenha' ){
 		next()
 	} else {
 		axios.get(process.env.VUE_APP_API_URL + '/user/data',

@@ -29,7 +29,7 @@
                                     <!--<td class="text-center" :class="{campeao: index === 0}"> {{ index+1 }} </td>-->
                                     <td class="text-center" :class="{campeao: index === 0}"> {{ item.gols }} </td>
                                     <td :class="{campeao: index === 0}"> {{ item.nome }} </td>
-                                    <td :class="{campeao: index === 0}"> {{ item.selecao.nome }} </td>
+                                    <td :class="{campeao: index === 0}"> <img width="20" class="mr-1" :src="item.selecao.imagem"> {{ item.selecao.nome }} </td>
                                 </tr>
                             </tbody>
                         </table>

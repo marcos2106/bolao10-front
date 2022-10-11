@@ -27,18 +27,27 @@
                                             <div class="col-3 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     v-for="partida in partidasRod1" :key="partida.id">
 
-                                                <h5>Grupo {{ partida.selecaoA.grupo }} - {{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h</h5>
                                                 <div class="row">
-                                                    <div class="col-8 little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem">
-                                                        {{partida.selecaoA.nome}}
-                                                    </div><div class="col">{{partida.placarA}}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col-8 little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem">
-                                                        {{partida.selecaoB.nome}}
-                                                    </div><div class="col">{{partida.placarB}}</div>
+                                                    <div class="col-1 mt-1" v-if="partida.iniciada && !partida.finalizada">
+                                                        <div class="tagAoVivoVertical"> &nbsp; <i class="fas fa-wifi mt-2"></i> AO &nbsp; VIVO &nbsp; &nbsp; </div>
+                                                    </div>
+                                                    <div class="col">
+
+                                                        <h5>Grupo {{ partida.selecaoA.grupo }} - {{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h</h5>
+                                                        <div class="row">
+                                                            <div class="col-8 little-text">
+                                                                <img width="20" :src="partida.selecaoA.imagem">
+                                                                {{partida.selecaoA.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarA}}</div>
+                                                        </div>
+                                                        <div class="row mt-2">
+                                                            <div class="col-8 little-text">
+                                                                <img width="20" :src="partida.selecaoB.imagem">
+                                                                {{partida.selecaoB.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarB}}</div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -50,18 +59,27 @@
                                             <div class="col-3 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     v-for="partida in partidasRod2" :key="partida.id">
 
-                                                <h5>Grupo {{ partida.selecaoA.grupo }} - {{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h</h5>
                                                 <div class="row">
-                                                    <div class="col-8 little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem">
-                                                        {{partida.selecaoA.nome}}
-                                                    </div><div class="col">{{partida.placarA}}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col-8 little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem">
-                                                        {{partida.selecaoB.nome}}
-                                                    </div><div class="col">{{partida.placarB}}</div>
+                                                    <div class="col-1 mt-1" v-if="partida.iniciada && !partida.finalizada">
+                                                        <div class="tagAoVivoVertical"> &nbsp; <i class="fas fa-wifi mt-2"></i> AO &nbsp; VIVO &nbsp; &nbsp; </div>
+                                                    </div>
+                                                    <div class="col">
+
+                                                        <h5>Grupo {{ partida.selecaoA.grupo }} - {{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h</h5>
+                                                        <div class="row">
+                                                            <div class="col-8 little-text">
+                                                                <img width="20" :src="partida.selecaoA.imagem">
+                                                                {{partida.selecaoA.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarA}}</div>
+                                                        </div>
+                                                        <div class="row mt-2">
+                                                            <div class="col-8 little-text">
+                                                                <img width="20" :src="partida.selecaoB.imagem">
+                                                                {{partida.selecaoB.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarB}}</div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -73,18 +91,27 @@
                                             <div class="col-3 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     v-for="partida in partidasRod3" :key="partida.id">
 
-                                                <h5>Grupo {{ partida.selecaoA.grupo }} - {{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h</h5>
                                                 <div class="row">
-                                                    <div class="col-8 little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem">
-                                                        {{partida.selecaoA.nome}}
-                                                    </div><div class="col">{{partida.placarA}}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col-8 little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem">
-                                                        {{partida.selecaoB.nome}}
-                                                    </div><div class="col">{{partida.placarB}}</div>
+                                                    <div class="col-1 mt-1" v-if="partida.iniciada && !partida.finalizada">
+                                                        <div class="tagAoVivoVertical"> &nbsp; <i class="fas fa-wifi mt-2"></i> AO &nbsp; VIVO &nbsp; &nbsp; </div>
+                                                    </div>
+                                                    <div class="col">
+
+                                                        <h5>Grupo {{ partida.selecaoA.grupo }} - {{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h</h5>
+                                                        <div class="row">
+                                                            <div class="col-8 little-text">
+                                                                <img width="20" :src="partida.selecaoA.imagem">
+                                                                {{partida.selecaoA.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarA}}</div>
+                                                        </div>
+                                                        <div class="row mt-2">
+                                                            <div class="col-8 little-text">
+                                                                <img width="20" :src="partida.selecaoB.imagem">
+                                                                {{partida.selecaoB.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarB}}</div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -96,18 +123,27 @@
                                             <div class="col-6 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     v-for="partida in partidas8" :key="partida.id">
 
-                                                <h5>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                 <div class="row">
-                                                    <div class="col little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem">
-                                                        {{partida.selecaoA.nome}}
-                                                    </div><div class="col">{{partida.placarA}}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem">
-                                                        {{partida.selecaoB.nome}}
-                                                    </div><div class="col">{{partida.placarB}}</div>
+                                                    <div class="col-1 mt-1" v-if="partida.iniciada && !partida.finalizada">
+                                                        <div class="tagAoVivoVertical"> &nbsp; <i class="fas fa-wifi mt-2"></i> AO &nbsp; VIVO &nbsp; &nbsp; </div>
+                                                    </div>
+                                                    <div class="col">
+
+                                                        <h5>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <div class="row">
+                                                            <div class="col little-text">
+                                                                <img width="20" :src="partida.selecaoA.imagem">
+                                                                {{partida.selecaoA.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarA}}</div>
+                                                        </div>
+                                                        <div class="row mt-2">
+                                                            <div class="col little-text">
+                                                                <img width="20" :src="partida.selecaoB.imagem">
+                                                                {{partida.selecaoB.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarB}}</div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -119,18 +155,27 @@
                                             <div class="col-6 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     v-for="partida in partidas4" :key="partida.id">
 
-                                                <h5>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                 <div class="row">
-                                                    <div class="col little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem">
-                                                        {{partida.selecaoA.nome}}
-                                                    </div><div class="col">{{partida.placarA}}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem">
-                                                        {{partida.selecaoB.nome}}
-                                                    </div><div class="col">{{partida.placarB}}</div>
+                                                    <div class="col-1 mt-1" v-if="partida.iniciada && !partida.finalizada">
+                                                        <div class="tagAoVivoVertical"> &nbsp; <i class="fas fa-wifi mt-2"></i> AO &nbsp; VIVO &nbsp; &nbsp; </div>
+                                                    </div>
+                                                    <div class="col">
+
+                                                        <h5>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <div class="row">
+                                                            <div class="col little-text">
+                                                                <img width="20" :src="partida.selecaoA.imagem">
+                                                                {{partida.selecaoA.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarA}}</div>
+                                                        </div>
+                                                        <div class="row mt-2">
+                                                            <div class="col little-text">
+                                                                <img width="20" :src="partida.selecaoB.imagem">
+                                                                {{partida.selecaoB.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarB}}</div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,18 +187,27 @@
                                             <div class="col-6 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     v-for="partida in partidasS" :key="partida.id">
 
-                                                <h5>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                 <div class="row">
-                                                    <div class="col little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem">
-                                                        {{partida.selecaoA.nome}}
-                                                    </div><div class="col">{{partida.placarA}}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem">
-                                                        {{partida.selecaoB.nome}}
-                                                    </div><div class="col">{{partida.placarB}}</div>
+                                                    <div class="col-1 mt-1" v-if="partida.iniciada && !partida.finalizada">
+                                                        <div class="tagAoVivoVertical"> &nbsp; <i class="fas fa-wifi mt-2"></i> AO &nbsp; VIVO &nbsp; &nbsp; </div>
+                                                    </div>
+                                                    <div class="col">
+
+                                                        <h5>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <div class="row">
+                                                            <div class="col little-text">
+                                                                <img width="20" :src="partida.selecaoA.imagem">
+                                                                {{partida.selecaoA.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarA}}</div>
+                                                        </div>
+                                                        <div class="row mt-2">
+                                                            <div class="col little-text">
+                                                                <img width="20" :src="partida.selecaoB.imagem">
+                                                                {{partida.selecaoB.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarB}}</div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -165,20 +219,29 @@
                                             <div class="col-6 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     v-for="(partida, index) in partidasF" :key="partida.id">
 
-                                                <span v-if="index==0" class="textTerceiro">Disputa de 3º Lugar</span>
-                                                <span v-else class="textFinal">GRANDE FINAL</span>
-                                                <h5 class="mt-3">{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                 <div class="row">
-                                                    <div class="col little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem">
-                                                        {{partida.selecaoA.nome}}
-                                                    </div><div class="col">{{partida.placarA}}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem">
-                                                        {{partida.selecaoB.nome}}
-                                                    </div><div class="col">{{partida.placarB}}</div>
+                                                    <div class="col-1 mt-1" v-if="partida.iniciada && !partida.finalizada">
+                                                        <div class="tagAoVivoVertical"> &nbsp; <i class="fas fa-wifi mt-2"></i> AO &nbsp; VIVO &nbsp; &nbsp; </div>
+                                                    </div>
+                                                    <div class="col">
+
+                                                        <span v-if="index==0" class="textTerceiro">Disputa de 3º Lugar</span>
+                                                        <span v-else class="textFinal">GRANDE FINAL</span>
+                                                        <h5 class="mt-3">{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <div class="row">
+                                                            <div class="col little-text">
+                                                                <img width="20" :src="partida.selecaoA.imagem">
+                                                                {{partida.selecaoA.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarA}}</div>
+                                                        </div>
+                                                        <div class="row mt-2">
+                                                            <div class="col little-text">
+                                                                <img width="20" :src="partida.selecaoB.imagem">
+                                                                {{partida.selecaoB.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarB}}</div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -246,6 +309,16 @@ export default {
 .textFinal {
     color: #ad9300;
     font-weight: 600;
+}
+.tagAoVivoVertical {
+    border: 1px solid #a50d0d;
+    background-color: #fd3434;
+	color: white;
+    border-radius: 4px;
+	font-weight: bold;
+	padding: 2px;
+    font-size: 8px;
+    writing-mode: sideways-lr;
 }
 .clickable:hover {
     cursor: pointer;

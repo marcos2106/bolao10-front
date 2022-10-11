@@ -1,18 +1,18 @@
 <template>
-  <div>Deslogando....</div>
+  <div>....</div>
 </template>
 
 <script>
 export default {
-   mounted(){
-       this.deslogar()
-   },
-   methods:{
-       deslogar(){
-           localStorage.removeItem("token")
-           location.href = '/login'
-       }
-   }
+    mounted(){
+        this.deslogar()
+    },
+    methods:{
+        deslogar(){
+            localStorage.removeItem("token")
+            location.href = '/login'
+        }
+    }
 }
 </script>
 

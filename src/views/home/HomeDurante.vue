@@ -4,6 +4,48 @@
 		<div class="row">
 			<div class="col-8">
 
+				<div class="row mb-3">
+					<div class="col" v-for="partida in partidasAnteriores" :key="partida.id">
+
+						<div class="janelaPartida">
+							<div class="col fonte-minima">
+								<i class="fas fa-futbol mr-1"></i> Jogo Anterior
+							</div>
+							<div class="row m-1">
+								<div class="col-1 text-center alinhaVert">
+									<img width="16" :src="partida.selecaoA.imagem">
+								</div>
+								<div class="col alinhaVert font-weight-bold fonte-minima">
+									{{partida.selecaoA.nome}}
+								</div>
+								<div class="col-1 alinhaVert font-weight-bold fonte-minima">
+									{{partida.placarA}}
+								</div>
+							</div>
+							<div class="row m-1">
+								<div class="col-1 text-center alinhaVert">
+									<img width="16" :src="partida.selecaoB.imagem">
+								</div>
+								<div class="col alinhaVert font-weight-bold fonte-minima">
+									{{partida.selecaoB.nome}}
+								</div>
+								<div class="col-1 alinhaVert font-weight-bold fonte-minima">
+									{{partida.placarB}}
+								</div>
+							</div>
+							<div class="row m-1 text-center">
+								<div class="col-12 text-center">
+									<button type="button" @click="detalharPartida(partida.id)"
+											class="btn btn-outline-secondary btn-sm">
+										<i class="fas fa-eye mr-1"></i> Detalhes da Partida
+									</button>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
 				<div class="janelaPartida" 
 						:class="(partida1.iniciada) ? 'aovivo': ''"
 						v-if="partida1 != null">
@@ -99,16 +141,15 @@
 								<div class="col-1 text-center alinhaVert">
 									<img width="20" :src="partida2.selecaoA.imagem">
 								</div>
-								<div class="col alinhaVert font-weight-bold fonte-pequena">
+								<div class="col text-center alinhaVert font-weight-bold fonte-pequena">
 									{{partida2.selecaoA.nome}}
 								</div>
-							</div>
-							<div class="row m-2 mt-2">
+								<div class="col-1 alinhaVert font-weight-bold fonte-pequena">x</div>
+								<div class="col text-center alinhaVert font-weight-bold fonte-pequena">
+									{{partida2.selecaoB.nome}}
+								</div>
 								<div class="col-1 text-center alinhaVert">
 									<img width="20" :src="partida2.selecaoB.imagem">
-								</div>
-								<div class="col alinhaVert font-weight-bold fonte-pequena">
-									{{partida2.selecaoB.nome}}
 								</div>
 							</div>
 							<div class="row m-2">
@@ -121,13 +162,13 @@
 							</div>
 							<div class="row m-2">
 								<div class="col-4">
-									<div class="font-weight-bold fonte-minima" :style="`color: `+ partida2.selecaoA.cor +`;`"> {{ partida2.selecaoA.nome }}: {{ partida2.aposta.porcSelecaoA }}% ({{partida2.aposta.numSelecaoA}}) </div>
+									<div class="font-weight-bold fonte-minima" :style="`color: `+ partida2.selecaoA.cor +`;`"> {{ partida2.aposta.porcSelecaoA }}% ({{partida2.aposta.numSelecaoA}}) </div>
 								</div>
 								<div class="col-4">
-									<div class="text-center font-weight-bold fonte-minima" style="color: #4d4d4a;"> Empate: {{ partida2.aposta.porcEmpate }}% ({{partida2.aposta.numEmpate}}) </div>
+									<div class="text-center font-weight-bold fonte-minima" style="color: #4d4d4a;"> {{ partida2.aposta.porcEmpate }}% ({{partida2.aposta.numEmpate}}) </div>
 								</div>
 								<div class="col-4">
-									<div class="text-right font-weight-bold fonte-minima" :style="`color: `+ partida2.selecaoB.cor +`;`"> {{ partida2.selecaoB.nome }}: {{ partida2.aposta.porcSelecaoB }}% ({{partida2.aposta.numSelecaoB}}) </div>
+									<div class="text-right font-weight-bold fonte-minima" :style="`color: `+ partida2.selecaoB.cor +`;`"> {{ partida2.aposta.porcSelecaoB }}% ({{partida2.aposta.numSelecaoB}}) </div>
 								</div>
 							</div>
 							<div class="row m-2">
@@ -162,20 +203,19 @@
 								<div class="col-1 text-center alinhaVert">
 									<img width="20" :src="partida3.selecaoA.imagem">
 								</div>
-								<div class="col alinhaVert font-weight-bold fonte-pequena">
+								<div class="col text-center alinhaVert font-weight-bold fonte-pequena">
 									{{partida3.selecaoA.nome}}
 								</div>
-							</div>
-							<div class="row m-2 mt-2">
-								<div class="col-1 text-center alinhaVert">
-									<img width="20" :src="partida3.selecaoB.imagem">	
-								</div>
-								<div class="col alinhaVert font-weight-bold fonte-pequena">
+								<div class="col-1 alinhaVert font-weight-bold fonte-pequena">x</div>
+								<div class="col text-center alinhaVert font-weight-bold fonte-pequena">
 									{{partida3.selecaoB.nome}}
+								</div>
+								<div class="col-1 text-center alinhaVert">
+									<img width="20" :src="partida3.selecaoB.imagem">
 								</div>
 							</div>
 							<div class="row m-2">
-								<div class="col text-center">
+								<div class="col-12 text-center">
 									<button type="button" @click="detalharPartida(partida3.id)"
 											class="btn btn-outline-secondary btn-sm">
 										<i class="fas fa-eye mr-1"></i> Detalhes da Partida
@@ -184,13 +224,13 @@
 							</div>
 							<div class="row m-2">
 								<div class="col-4">
-									<div class="font-weight-bold fonte-minima" :style="`color: `+ partida3.selecaoA.cor +`;`"> {{ partida3.selecaoA.nome }}: {{ partida3.aposta.porcSelecaoA }}% ({{partida3.aposta.numSelecaoA}}) </div>
+									<div class="font-weight-bold fonte-minima" :style="`color: `+ partida3.selecaoA.cor +`;`"> {{ partida3.aposta.porcSelecaoA }}% ({{partida3.aposta.numSelecaoA}}) </div>
 								</div>
 								<div class="col-4">
-									<div class="text-center font-weight-bold fonte-minima" style="color: #4d4d4a;"> Empate: {{ partida3.aposta.porcEmpate }}% ({{partida3.aposta.numEmpate}}) </div>
+									<div class="text-center font-weight-bold fonte-minima" style="color: #4d4d4a;"> {{ partida3.aposta.porcEmpate }}% ({{partida3.aposta.numEmpate}}) </div>
 								</div>
 								<div class="col-4">
-									<div class="text-right font-weight-bold fonte-minima" :style="`color: `+ partida3.selecaoB.cor +`;`"> {{ partida3.selecaoB.nome }}: {{ partida3.aposta.porcSelecaoB }}% ({{partida3.aposta.numSelecaoB}}) </div>
+									<div class="text-right font-weight-bold fonte-minima" :style="`color: `+ partida3.selecaoB.cor +`;`"> {{ partida3.aposta.porcSelecaoB }}% ({{partida3.aposta.numSelecaoB}}) </div>
 								</div>
 							</div>
 							<div class="row m-2">
@@ -217,7 +257,7 @@
 					<div class="col-12 mt--2 font-weight-bold fonte-media">
 						
 						<div class="row ml-1 descricaoRanking">
-							<div class="col-11 text-left" style="height: 430px; overflow: scroll;">
+							<div class="col-11 text-left" style="height: 500px; overflow: scroll;">
 
 								<div class="row p-1 mt-1 colocacaoRanking"
 										:class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
@@ -226,9 +266,10 @@
 									<div class="col alinhaVert font-weight-bold">
 										<span @click="paginaUsuario(rank.usuario.id)" class="clickable">{{index+1}}. {{rank.usuario.nome}}</span>
 									</div>
-									<div>{{rank.pontuacao}} pts 
-										<i v-if="rank.pontuacao > 0" :class="(rank.posicaoAnterior > (index+1)) ? 'fas fa-angle-up text-success' : (rank.posicaoAnterior < (index+1)) ? 'fas fa-angle-down text-danger' : 'fas fa-minus'"></i>
-										<span v-if="jogoAoVivo"> &nbsp; ( {{rank.pontuacaoProvisoria-rank.pontuacao}} )</span> 
+									<div>
+										{{ rank.pontuacao }} pts 
+										<i v-if="rank.posicaoAnterior != 999" :class="(rank.posicaoAnterior > (index+1)) ? 'fas fa-angle-up text-success' : (rank.posicaoAnterior < (index+1)) ? 'fas fa-angle-down text-danger' : 'fas fa-minus'"></i>
+										<span v-if="jogoAoVivo"> &nbsp; ( +{{rank.pontuacaoProvisoria}} )</span> 
 									</div>
 								</div>
 
@@ -292,7 +333,8 @@ export default {
 			partida3: null,
             jogoAoVivo: false,
 			ranking: [],
-			classificacao: []
+			classificacao: [],
+			partidasAnteriores: []
 		}
 	},
 	methods: {
@@ -305,6 +347,7 @@ export default {
 				NProgress.done();
 			});
 			this.carregarPartidas();
+			this.carregarPartidasAnteriores();
 			this.carregarRanking();
 			this.carregarGrupos();
 		},
@@ -313,6 +356,15 @@ export default {
 				this.partida1 = response.data.object.partida1;
 				this.partida2 = response.data.object.partida2;
 				this.partida3 = response.data.object.partida3;
+			}) .catch((error) => {
+				this.$notify({type: 'warning', message: error.response.data.msg})
+			}).finally(() =>{
+				NProgress.done();
+			})
+		},
+		carregarPartidasAnteriores() {
+			this.$clubApi.get("/home/durante/partidas/anteriores").then((response) => {
+				this.partidasAnteriores = response.data.object;
 			}) .catch((error) => {
 				this.$notify({type: 'warning', message: error.response.data.msg})
 			}).finally(() =>{
@@ -368,7 +420,7 @@ export default {
     border-radius: 6px;
     height: 90px;
 }
-.tagAoVivo{
+.tagAoVivo {
     border: 1px solid #a50d0d;
     background-color: #fd3434;
 	color: white;

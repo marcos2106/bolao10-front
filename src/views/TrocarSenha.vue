@@ -8,9 +8,9 @@
 				</div>
 				<!-- Login Form -->
 				<form>
-				<input type="text" id="login" class="fadeIn second" placeholder="E-mail" v-model="login" @keypress.enter="loginAction">
-				<input type="password" id="password" class="fadeIn third" placeholder="Senha" v-model="passwd" @keypress.enter="loginAction">
-				<input type="button" class="fadeIn fourth mt-3" value="Acessar" @keyup.enter.native="loginAction" @click="loginAction">
+				<input type="password" class="fadeIn third" placeholder="Nova Senha" v-model="novaSenha" @keypress.enter="trocarSenha">
+				<input type="password" class="fadeIn second" placeholder="Confirmar Senha" v-model="confirmarSenha" @keypress.enter="trocarSenha">
+				<input type="button" class="fadeIn fourth mt-3" value="Trocar Senha" @keyup.enter.native="trocarSenha" @click="trocarSenha">
 				</form>
 			</div>
 		</div>
@@ -20,54 +20,47 @@
 <script>
 export default {
 	name: 'logon',
-	created(){
-		//redirect to https ambiance
-		/*
-		if(location.href.indexOf("localhost") < 0 && location.href.indexOf("https") < 0 && location.href.indexOf("192.168.0.11") < 0){
-			location.href = location.href.replace("http","https");
-		}
-		*/
-	},
 	data() {
 		return {
-			login : '',
-			passwd : ''
+			novaSenha : '',
+			confirmarSenha : ''
 		}
 	},
 	methods : {
-		loginAction() {
+		trocarSenha() {
 			if (this.invalidoForm()) {
 				return;
 			}
-			this.$clubApi.post('/user/login', {
-				login: this.login,
-				password: this.passwd
+			this.$clubApi.post('/user/novasenha', {
+				novaSenha: this.novaSenha,
+				confirmarSenha: this.confirmarSenha,
+				id: localStorage.getItem("id")
 			})
 			.then((response) => {
-				if (response.data.object.indexOf("primeiro") >= 0) {
-					let usuario = response.data.object.split("$");
-					localStorage.setItem("id", usuario[1]);
-					setTimeout(() => {
-						location.href = '/trocarsenha'
-					}, 3000);	
-					this.$notify({type: 'warning', message: 'É necessário trocar a senha no primeiro acesso!'})				
-				} else {
-					localStorage.setItem("token", response.data.object);
-					location.href = '/'
-				}
+				this.$notify({type: 'success', message: 'Senha alterada com sucesso!'})
+				localStorage.setItem("token", response.data.object)
+				location.href = '/'
 			}) .catch(() => {
-				this.$notify({type: 'warning', message: 'Login ou senha inválido!'})
+				this.$notify({type: 'warning', message: error.response.data.msg})
 			}).finally(() =>{
 				NProgress.done() 
 			})
 		},
 		invalidoForm() {
-			if (this.login == "") {
-				this.$notify({type: 'warning', message: 'E-mail não preenchido!'})
+			if (this.novaSenha == "") {
+				this.$notify({type: 'warning', message: 'Nova senha não preenchida!'})
 				return true;
 			}
-			if (this.passwd == "") {
-				this.$notify({type: 'warning', message: 'Senha não preenchida!'})
+			if (this.confirmarSenha == "") {
+				this.$notify({type: 'warning', message: 'Confirmação da senha não preenchida!'})
+				return true;
+			}
+            if (this.novaSenha.length != 8) {
+                this.$notify({type: 'warning', message: "Nova senha precisa ter 8 dígitos" });
+                return true;
+            }
+			if (this.novaSenha != this.confirmarSenha) {
+				this.$notify({type: 'warning', message: 'Nova senha e a confirmação estão diferentes!'})
 				return true;
 			}
 			return false;
