@@ -13,7 +13,6 @@
 							</div>
 							<div class="row m-1 ml--1">
 								<div class="col text-left font-weight-bold fonte-minima">
-									<img width="16" class="mr-1" :src="partida.selecaoA.imagem">
 									{{partida.selecaoA.nome}}
 								</div>
 								<div class="col-1 alinhaVert font-weight-bold fonte-minima">
@@ -22,7 +21,6 @@
 							</div>
 							<div class="row m-1 ml--1">
 								<div class="col text-left font-weight-bold fonte-minima">
-									<img width="16" class="mr-1" :src="partida.selecaoB.imagem">
 									{{partida.selecaoB.nome}}
 								</div>
 								<div class="col-1 alinhaVert font-weight-bold fonte-minima">
