@@ -19,36 +19,37 @@
                     <div class="col-12">
                         <div class="card">
 
-                            <div class="col-12 m-3">
+                            <div class="col-12">
+                                <div class="mb-2 little-text">P - Placar da Partida &nbsp; &nbsp; A - Placar da Aposta</div>
                                 <vue-tabs>
                                     <v-tab title="Rodada 1">
 
                                         <div class="row">
-                                            <div class="col-3 mt-3 clickable" @click="detalhePartida(aposta.partida.id)"
+                                            <div class="col-3 mt-3 ml--1 clickable" @click="detalhePartida(aposta.partida.id)"
                                                     v-for="aposta in apostasRod1" :key="aposta.partida.id">
 
                                                 <div class="row">
-                                                    <div class="col-8 little-text"> <h5>Grupo {{ aposta.partida.selecaoA.grupo }} - {{ aposta.partida.dataHoraFmt.substring(0, 5) }} - {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h</h5> </div>
-                                                    <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>P</h5></el-tooltip></div>
-                                                    <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>A</h5></el-tooltip></div>
+                                                    <div class="col little-text"> <h5>Grupo {{ aposta.partida.selecaoA.grupo }} <br/>{{ aposta.partida.dataHoraFmt.substring(0, 5) }} - {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h</h5> </div>
+                                                    <div class="col-1 alinhaVert"><el-tooltip content="Placar da Partida" placement="top"><h5>P</h5></el-tooltip></div>
+                                                    <div class="col-1 alinhaVert"><el-tooltip content="Sua Aposta" placement="top"><h5>A</h5></el-tooltip></div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-8 little-text">
-                                                        <img width="20" :src="aposta.partida.selecaoA.imagem">
+                                                    <div class="col little-text">
+                                                        <img width="16" :src="aposta.partida.selecaoA.imagem">
                                                         {{aposta.partida.selecaoA.nome}}
                                                     </div>
-                                                    <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarA) ? aposta.partida.placarA : '-'}}</h5></el-tooltip></div>
-                                                    <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarA}}</h5></el-tooltip></div>
+                                                    <div class="col-1"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarA != null) ? aposta.partida.placarA : '-'}}</h5></el-tooltip></div>
+                                                    <div class="col-1"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarA}}</h5></el-tooltip></div>
                                                 </div>
                                                 <div class="row mt-2">
-                                                    <div class="col-8 little-text">
-                                                        <img width="20" :src="aposta.partida.selecaoB.imagem">
+                                                    <div class="col little-text">
+                                                        <img width="16" :src="aposta.partida.selecaoB.imagem">
                                                         {{aposta.partida.selecaoB.nome}}
                                                     </div>
-                                                    <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarB) ? aposta.partida.placarB : '-'}}</h5></el-tooltip></div>
-                                                    <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarB}}</h5></el-tooltip></div>
+                                                    <div class="col-1"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarB != null) ? aposta.partida.placarB : '-'}}</h5></el-tooltip></div>
+                                                    <div class="col-1"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarB}}</h5></el-tooltip></div>
                                                 </div>
-                                                <span class="text-right" v-if="aposta.partida.finalizada"><h5>{{ (aposta.pontuacao>0) ? '+' : ''}}{{ aposta.pontuacao }} ponto{{ (aposta.pontuacao>1) ? 's' : ''}}</h5></span>
+                                                <div class="row"><div class="col-12 text-right little-text font-weight-bold" v-if="aposta.partida.finalizada"> {{ (aposta.pontuacao>0) ? '+' : ''}}{{ aposta.pontuacao }} ponto{{ (aposta.pontuacao>1) ? 's' : ''}} </div></div>
                                             </div>
                                         </div>
 
@@ -56,31 +57,31 @@
                                     <v-tab title="Rodada 2">
 
                                         <div class="row">
-                                            <div class="col-3 mt-3 clickable" @click="detalhePartida(aposta.partida.id)"
+                                            <div class="col-3 mt-3 ml--1 clickable" @click="detalhePartida(aposta.partida.id)"
                                                     v-for="aposta in apostasRod2" :key="aposta.partida.id">
 
                                                 <div class="row">
-                                                    <div class="col-8 little-text"> <h5>Grupo {{ aposta.partida.selecaoA.grupo }} - {{ aposta.partida.dataHoraFmt.substring(0, 5) }} - {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h</h5> </div>
-                                                    <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>P</h5></el-tooltip></div>
-                                                    <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>A</h5></el-tooltip></div>
+                                                    <div class="col little-text"> <h5>Grupo {{ aposta.partida.selecaoA.grupo }} <br/>{{ aposta.partida.dataHoraFmt.substring(0, 5) }} - {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h</h5> </div>
+                                                    <div class="col-1 alinhaVert"><el-tooltip content="Placar da Partida" placement="top"><h5>P</h5></el-tooltip></div>
+                                                    <div class="col-1 alinhaVert"><el-tooltip content="Sua Aposta" placement="top"><h5>A</h5></el-tooltip></div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-8 little-text">
-                                                        <img width="20" :src="aposta.partida.selecaoA.imagem">
+                                                    <div class="col little-text">
+                                                        <img width="16" :src="aposta.partida.selecaoA.imagem">
                                                         {{aposta.partida.selecaoA.nome}}
                                                     </div>
-                                                    <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarA) ? aposta.partida.placarA : '-'}}</h5></el-tooltip></div>
-                                                    <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarA}}</h5></el-tooltip></div>
+                                                    <div class="col-1"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarA != null) ? aposta.partida.placarA : '-'}}</h5></el-tooltip></div>
+                                                    <div class="col-1"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarA}}</h5></el-tooltip></div>
                                                 </div>
                                                 <div class="row mt-2">
-                                                    <div class="col-8 little-text">
-                                                        <img width="20" :src="aposta.partida.selecaoB.imagem">
+                                                    <div class="col little-text">
+                                                        <img width="16" :src="aposta.partida.selecaoB.imagem">
                                                         {{aposta.partida.selecaoB.nome}}
                                                     </div>
-                                                    <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarB) ? aposta.partida.placarB : '-'}}</h5></el-tooltip></div>
-                                                    <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarB}}</h5></el-tooltip></div>
+                                                    <div class="col-1"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarB != null) ? aposta.partida.placarB : '-'}}</h5></el-tooltip></div>
+                                                    <div class="col-1"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarB}}</h5></el-tooltip></div>
                                                 </div>
-                                                <span class="text-right" v-if="aposta.partida.finalizada"><h5>{{ (aposta.pontuacao>0) ? '+' : ''}}{{ aposta.pontuacao }} ponto{{ (aposta.pontuacao>1) ? 's' : ''}}</h5></span>
+                                                <div class="row"><div class="col-12 text-right little-text font-weight-bold" v-if="aposta.partida.finalizada"> {{ (aposta.pontuacao>0) ? '+' : ''}}{{ aposta.pontuacao }} ponto{{ (aposta.pontuacao>1) ? 's' : ''}} </div></div>
                                             </div>
                                         </div>
 
@@ -88,31 +89,31 @@
                                     <v-tab title="Rodada 3">
 
                                         <div class="row">
-                                            <div class="col-3 mt-3 clickable" @click="detalhePartida(aposta.partida.id)"
+                                            <div class="col-3 mt-3 ml--1 clickable" @click="detalhePartida(aposta.partida.id)"
                                                     v-for="aposta in apostasRod3" :key="aposta.partida.id">
 
                                                 <div class="row">
-                                                    <div class="col-8 little-text"> <h5>Grupo {{ aposta.partida.selecaoA.grupo }} - {{ aposta.partida.dataHoraFmt.substring(0, 5) }} - {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h</h5> </div>
-                                                    <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>P</h5></el-tooltip></div>
-                                                    <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>A</h5></el-tooltip></div>
+                                                    <div class="col little-text"> <h5>Grupo {{ aposta.partida.selecaoA.grupo }} <br/>{{ aposta.partida.dataHoraFmt.substring(0, 5) }} - {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h</h5> </div>
+                                                    <div class="col-1 alinhaVert"><el-tooltip content="Placar da Partida" placement="top"><h5>P</h5></el-tooltip></div>
+                                                    <div class="col-1 alinhaVert"><el-tooltip content="Sua Aposta" placement="top"><h5>A</h5></el-tooltip></div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-8 little-text">
-                                                        <img width="20" :src="aposta.partida.selecaoA.imagem">
+                                                    <div class="col little-text">
+                                                        <img width="16" :src="aposta.partida.selecaoA.imagem">
                                                         {{aposta.partida.selecaoA.nome}}
                                                     </div>
-                                                    <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarA) ? aposta.partida.placarA : '-'}}</h5></el-tooltip></div>
-                                                    <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarA}}</h5></el-tooltip></div>
+                                                    <div class="col-1"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarA != null) ? aposta.partida.placarA : '-'}}</h5></el-tooltip></div>
+                                                    <div class="col-1"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarA}}</h5></el-tooltip></div>
                                                 </div>
                                                 <div class="row mt-2">
-                                                    <div class="col-8 little-text">
-                                                        <img width="20" :src="aposta.partida.selecaoB.imagem">
+                                                    <div class="col little-text">
+                                                        <img width="16" :src="aposta.partida.selecaoB.imagem">
                                                         {{aposta.partida.selecaoB.nome}}
                                                     </div>
-                                                    <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarB) ? aposta.partida.placarB : '-'}}</h5></el-tooltip></div>
-                                                    <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarB}}</h5></el-tooltip></div>
+                                                    <div class="col-1"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarB != null) ? aposta.partida.placarB : '-'}}</h5></el-tooltip></div>
+                                                    <div class="col-1"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarB}}</h5></el-tooltip></div>
                                                 </div>
-                                                <span class="text-right" v-if="aposta.partida.finalizada"><h5>{{ (aposta.pontuacao>0) ? '+' : ''}}{{ aposta.pontuacao }} ponto{{ (aposta.pontuacao>1) ? 's' : ''}}</h5></span>
+                                                <div class="row"><div class="col-12 text-right little-text font-weight-bold" v-if="aposta.partida.finalizada"> {{ (aposta.pontuacao>0) ? '+' : ''}}{{ aposta.pontuacao }} ponto{{ (aposta.pontuacao>1) ? 's' : ''}} </div></div>
                                             </div>
                                         </div>
                                         

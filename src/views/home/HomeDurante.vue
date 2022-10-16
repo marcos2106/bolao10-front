@@ -11,22 +11,18 @@
 							<div class="col fonte-minima">
 								<i class="fas fa-futbol mr-1"></i> Jogo Anterior
 							</div>
-							<div class="row m-1">
-								<div class="col-1 text-center alinhaVert">
-									<img width="16" :src="partida.selecaoA.imagem">
-								</div>
-								<div class="col alinhaVert font-weight-bold fonte-minima">
+							<div class="row m-1 ml--1">
+								<div class="col text-left font-weight-bold fonte-minima">
+									<img width="16" class="mr-1" :src="partida.selecaoA.imagem">
 									{{partida.selecaoA.nome}}
 								</div>
 								<div class="col-1 alinhaVert font-weight-bold fonte-minima">
 									{{partida.placarA}}
 								</div>
 							</div>
-							<div class="row m-1">
-								<div class="col-1 text-center alinhaVert">
-									<img width="16" :src="partida.selecaoB.imagem">
-								</div>
-								<div class="col alinhaVert font-weight-bold fonte-minima">
+							<div class="row m-1 ml--1">
+								<div class="col text-left font-weight-bold fonte-minima">
+									<img width="16" class="mr-1" :src="partida.selecaoB.imagem">
 									{{partida.selecaoB.nome}}
 								</div>
 								<div class="col-1 alinhaVert font-weight-bold fonte-minima">
@@ -37,7 +33,7 @@
 								<div class="col-12 text-center">
 									<button type="button" @click="detalharPartida(partida.id)"
 											class="btn btn-outline-secondary btn-sm">
-										<i class="fas fa-eye mr-1"></i> Detalhes da Partida
+										<i class="fas fa-eye mr-1"></i> Ver Partida
 									</button>
 								</div>
 							</div>
@@ -73,21 +69,23 @@
 							</div>
 						</div>
 					</div>
-					<div class="row m-2 mt-4">
-						<div class="col-1 text-center alinhaVert">
+                    <div class="row m-2 mt-4">
+						<div class="col-4 text-left alinhaVert">
 							<img width="40" :src="partida1.selecaoA.imagem">
-						</div>
-						<div class="col-3 text-left alinhaVert font-weight-bold fonte-media">
-							{{partida1.selecaoA.nome}}
 						</div>
 						<div class="col-4 text-center alinhaVert font-weight-bold fonte-grande">
 							{{partida1.placarA}} x {{partida1.placarB}}
 						</div>
-						<div class="col-3 text-right alinhaVert font-weight-bold fonte-media">
-							{{partida1.selecaoB.nome}}
-						</div>
-						<div class="col-1 text-center alinhaVert">
+						<div class="col-4 text-right alinhaVert">
 							<img width="40" :src="partida1.selecaoB.imagem">
+						</div>
+					</div>
+					<div class="row m-2 mt--3">
+						<div class="col-6 text-left alinhaVert font-weight-bold fonte-media">
+							{{partida1.selecaoA.nome}}
+						</div>
+						<div class="col-6 text-right alinhaVert font-weight-bold fonte-media">
+							{{partida1.selecaoB.nome}}
 						</div>
 					</div>
 					<div class="row m-2">
@@ -137,26 +135,28 @@
 									</div>
 								</div>
 							</div>
-							<div class="row m-2 mt-3">
-								<div class="col-1 text-center alinhaVert">
+							<div class="row m-1">
+								<div class="col-4 text-left alinhaVert">
 									<img width="20" :src="partida2.selecaoA.imagem">
 								</div>
-								<div class="col text-center alinhaVert font-weight-bold fonte-pequena">
-									{{partida2.selecaoA.nome}}
-								</div>
-								<div class="col-1 alinhaVert font-weight-bold fonte-pequena">x</div>
-								<div class="col text-center alinhaVert font-weight-bold fonte-pequena">
-									{{partida2.selecaoB.nome}}
-								</div>
-								<div class="col-1 text-center alinhaVert">
+								<div class="col-4 text-center alinhaVert font-weight-bold fonte-pequena">x</div>
+								<div class="col-4 text-right alinhaVert">
 									<img width="20" :src="partida2.selecaoB.imagem">
 								</div>
 							</div>
-							<div class="row m-2">
+							<div class="row m-1 mt--1">
+								<div class="col-6 text-left alinhaVert font-weight-bold fonte-pequena">
+									{{partida2.selecaoA.nome}}
+								</div>
+								<div class="col-6 text-right alinhaVert font-weight-bold fonte-pequena">
+									{{partida2.selecaoB.nome}}
+								</div>
+							</div>
+							<div class="row">
 								<div class="col text-center">
 									<button type="button" @click="detalharPartida(partida2.id)"
 											class="btn btn-outline-secondary btn-sm">
-										<i class="fas fa-eye mr-1"></i> Detalhes da Partida
+										<i class="fas fa-eye mr-1"></i> Ver Partida
 									</button>
 								</div>
 							</div>
@@ -199,26 +199,28 @@
 									</div>
 								</div>
 							</div>
-							<div class="row m-2 mt-3">
-								<div class="col-1 text-center alinhaVert">
+							<div class="row m-1">
+								<div class="col-4 text-left alinhaVert">
 									<img width="20" :src="partida3.selecaoA.imagem">
 								</div>
-								<div class="col text-center alinhaVert font-weight-bold fonte-pequena">
-									{{partida3.selecaoA.nome}}
-								</div>
-								<div class="col-1 alinhaVert font-weight-bold fonte-pequena">x</div>
-								<div class="col text-center alinhaVert font-weight-bold fonte-pequena">
-									{{partida3.selecaoB.nome}}
-								</div>
-								<div class="col-1 text-center alinhaVert">
+								<div class="col-4 text-center alinhaVert font-weight-bold fonte-pequena">x</div>
+								<div class="col-4 text-right alinhaVert">
 									<img width="20" :src="partida3.selecaoB.imagem">
 								</div>
 							</div>
-							<div class="row m-2">
-								<div class="col-12 text-center">
+							<div class="row m-1 mt--1">
+								<div class="col-6 text-left alinhaVert font-weight-bold fonte-pequena">
+									{{partida3.selecaoA.nome}}
+								</div>
+								<div class="col-6 text-right alinhaVert font-weight-bold fonte-pequena">
+									{{partida3.selecaoB.nome}}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col text-center">
 									<button type="button" @click="detalharPartida(partida3.id)"
 											class="btn btn-outline-secondary btn-sm">
-										<i class="fas fa-eye mr-1"></i> Detalhes da Partida
+										<i class="fas fa-eye mr-1"></i> Ver Partida
 									</button>
 								</div>
 							</div>

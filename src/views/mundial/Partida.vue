@@ -53,20 +53,22 @@
                                 </div>
                             </div>
                             <div class="row m-2 mt-4">
-                                <div class="col-1 text-center alinhaVert">
+                                <div class="col-4 alinhaVert">
                                     <img width="40" :src="partida.selecaoA.imagem">
-                                </div>
-                                <div class="col-3 text-left alinhaVert font-weight-bold fonte-media">
-                                    {{partida.selecaoA.nome}}
                                 </div>
                                 <div class="col-4 text-center alinhaVert font-weight-bold fonte-grande">
                                     {{partida.placarA}} x {{partida.placarB}}
                                 </div>
-                                <div class="col-3 text-right alinhaVert font-weight-bold fonte-media">
-                                    {{partida.selecaoB.nome}}
-                                </div>
-                                <div class="col-1 text-center alinhaVert">
+                                <div class="col-4 alinhaVert text-right">
                                     <img width="40" :src="partida.selecaoB.imagem">
+                                </div>
+                            </div>
+                            <div class="row m-2 mt--4">
+                                <div class="col-6 text-left alinhaVert font-weight-bold fonte-selecao">
+                                    {{partida.selecaoA.nome}}
+                                </div>
+                                <div class="col-6 text-right alinhaVert font-weight-bold fonte-selecao">
+                                    {{partida.selecaoB.nome}}
                                 </div>
                             </div>
                             <div class="row p-3 mt-2"
@@ -132,44 +134,54 @@
                                                 </div>
                                                 <div class="col-6 fonte-pequena">
 
-                                                    <div class="row mt-4 clickable" @click="detalhePartida(partidaSel.id)"
+                                                    <div class="mt-4 clickable" @click="detalhePartida(partidaSel.id)"
                                                             v-for="partidaSel in outrasPartidasA" :key="partidaSel.id">
-                                                        <div class="col-1 text-center alinhaVert">
-                                                            <img width="20" :src="partidaSel.selecaoA.imagem">
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-4 text-left alinhaVert">
+                                                                <img width="20" :src="partidaSel.selecaoA.imagem">
+                                                            </div>
+                                                            <div class="col-4 text-center alinhaVert font-weight-bold fonte-minima">
+                                                                {{partidaSel.placarA}} x {{partidaSel.placarB}}
+                                                            </div>
+                                                            <div class="col-4 text-right alinhaVert">
+                                                                <img width="20" :src="partidaSel.selecaoB.imagem">
+                                                            </div>
                                                         </div>
-                                                        <div class="col-3 text-left alinhaVert font-weight-bold fonte-minima">
-                                                            {{partidaSel.selecaoA.nome}}
-                                                        </div>
-                                                        <div class="col-3 text-center alinhaVert font-weight-bold fonte-minima">
-                                                            {{partidaSel.placarA}} x {{partidaSel.placarB}}
-                                                        </div>
-                                                        <div class="col-3 text-right alinhaVert font-weight-bold fonte-minima">
-                                                            {{partidaSel.selecaoB.nome}}
-                                                        </div>
-                                                        <div class="col-1 text-center alinhaVert">
-                                                            <img width="20" :src="partidaSel.selecaoB.imagem">
+                                                        <div class="row">
+                                                            <div class="col-6 text-left alinhaVert font-weight-bold fonte-minima">
+                                                                {{partidaSel.selecaoA.nome}}
+                                                            </div>
+                                                            <div class="col-6 text-right alinhaVert font-weight-bold fonte-minima">
+                                                                {{partidaSel.selecaoB.nome}}
+                                                            </div>
                                                         </div>
                                                     </div>
 
                                                 </div>
                                                 <div class="col-6 fonte-pequena bordaEsquerda">
 
-                                                    <div class="row mt-4 clickable" @click="detalhePartida(partidaSel.id)"
+                                                    <div class="mt-4 clickable" @click="detalhePartida(partidaSel.id)"
                                                             v-for="partidaSel in outrasPartidasB" :key="partidaSel.id">
-                                                        <div class="col-1 text-center alinhaVert">
-                                                            <img width="20" :src="partidaSel.selecaoA.imagem">
+                                                            
+                                                        <div class="row">
+                                                            <div class="col-4 text-left alinhaVert">
+                                                                <img width="20" :src="partidaSel.selecaoA.imagem">
+                                                            </div>
+                                                            <div class="col-4 text-center alinhaVert font-weight-bold fonte-minima">
+                                                                {{partidaSel.placarA}} x {{partidaSel.placarB}}
+                                                            </div>
+                                                            <div class="col-4 text-right alinhaVert">
+                                                                <img width="20" :src="partidaSel.selecaoB.imagem">
+                                                            </div>
                                                         </div>
-                                                        <div class="col-3 text-left alinhaVert font-weight-bold fonte-minima">
-                                                            {{partidaSel.selecaoA.nome}}
-                                                        </div>
-                                                        <div class="col-3 text-center alinhaVert font-weight-bold fonte-minima">
-                                                            {{partidaSel.placarA}} x {{partidaSel.placarB}}
-                                                        </div>
-                                                        <div class="col-3 text-right alinhaVert font-weight-bold fonte-minima">
-                                                            {{partidaSel.selecaoB.nome}}
-                                                        </div>
-                                                        <div class="col-1 text-center alinhaVert">
-                                                            <img width="20" :src="partidaSel.selecaoB.imagem">
+                                                        <div class="row">
+                                                            <div class="col-6 text-left alinhaVert font-weight-bold fonte-minima">
+                                                                {{partidaSel.selecaoA.nome}}
+                                                            </div>
+                                                            <div class="col-6 text-right alinhaVert font-weight-bold fonte-minima">
+                                                                {{partidaSel.selecaoB.nome}}
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -246,9 +258,9 @@
                                                 <span @click="paginaUsuario(aposta.usuario.id)" class="clickable">{{aposta.usuario.nome}}</span>
                                             </div>
                                             <div class="col-3 font-weight-bolder" v-if="idSituacao>1">{{aposta.placarA}} x {{aposta.placarB}}</div>
-                                            <div class="col-2" v-if="partida.iniciada && !partida.finalizada">({{aposta.pontuacaoProvisoria}})</div>
-                                            <div class="col-2" v-else-if="partida.finalizada">({{aposta.pontuacao}})</div>
-                                            <div class="col-2" v-else> </div>
+                                            <div class="col-3" v-if="partida.iniciada && !partida.finalizada">({{aposta.pontuacaoProvisoria}})</div>
+                                            <div class="col-3" v-else-if="partida.finalizada">({{aposta.pontuacao}})</div>
+                                            <div class="col-1" v-else> </div>
                                         </div>
 
                                     </div>
@@ -495,6 +507,9 @@ export default {
 	font-weight: bold;
 	padding: 2px;
     font-size: 11px;
+}
+.fonte-selecao {
+    font-size: 35px;
 }
 .fonte-grande {
     font-size: 42px;

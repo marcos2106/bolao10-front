@@ -52,21 +52,21 @@
 							</div>
 						</div>
 					</div>
-					<div class="row m-3 mt-4">
-						<div class="col text-center alinhaVert">
+					<div class="row m-1">
+						<div class="col-4 text-left alinhaVert">
 							<img width="40" :src="jogoEstreia.selecaoA.imagem">
 						</div>
-						<div class="col-4 text-left alinhaVert font-weight-bold fonte-media">
-							{{ jogoEstreia.selecaoA.nome }}
-						</div>
-						<div class="col text-center alinhaVert">
-							x
-						</div>
-						<div class="col-4 text-right alinhaVert font-weight-bold fonte-media">
-							{{ jogoEstreia.selecaoB.nome }}
-						</div>
-						<div class="col text-center alinhaVert">
+						<div class="col-4 text-center alinhaVert font-weight-bold fonte-pequena">x</div>
+						<div class="col-4 text-right alinhaVert">
 							<img width="40" :src="jogoEstreia.selecaoB.imagem">
+						</div>
+					</div>
+					<div class="row m-1 mt--1">
+						<div class="col-6 text-left alinhaVert font-weight-bold fonte-selecao">
+							{{jogoEstreia.selecaoA.nome}}
+						</div>
+						<div class="col-6 text-right alinhaVert font-weight-bold fonte-selecao">
+							{{jogoEstreia.selecaoB.nome}}
 						</div>
 					</div>
 					<div class="row m-2">
@@ -388,6 +388,9 @@ export default {
 }
 .fonte-pequena {
     font-size: 15px;
+}
+.fonte-selecao {
+    font-size: 35px;
 }
 .avatarRedondo {
     border-radius: 80px;

@@ -45,7 +45,7 @@ export default {
 	methods: {
 		carregarSituacao() {
 			this.$clubApi.get('/configuracao/situacao/ativa').then((response) => {
-				this.idSituacao = response.data.object.id;
+				this.idSituacao = 3;//response.data.object.id;
 			});
 		}
 	},

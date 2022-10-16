@@ -17,7 +17,7 @@
 						<div class="col-6 text-center alinhaVert descricaoCampeao font-weight-bold fonte-media">
 							Campeão
 						</div>
-						<div class="col text-center alinhaVert">
+						<div class="col-1 text-center alinhaVert">
 							<img width="20" :src="colocacao.campeao.imagem">
 						</div>
 						<div class="col-5 text-left alinhaVert font-weight-bold fonte-media">
@@ -28,7 +28,7 @@
 						<div class="col-6 text-center alinhaVert font-weight-bold fonte-media">
 							Vice-Campeão
 						</div>
-						<div class="col text-center alinhaVert">
+						<div class="col-1 text-center alinhaVert">
 							<img width="20" :src="colocacao.vice.imagem">
 						</div>
 						<div class="col-5 text-left alinhaVert font-weight-bold fonte-media">
@@ -39,7 +39,7 @@
 						<div class="col-6 text-center alinhaVert font-weight-bold fonte-media">
 							Terceiro Lugar
 						</div>
-						<div class="col text-center alinhaVert">
+						<div class="col-1 text-center alinhaVert">
 							<img width="20" :src="colocacao.terceiro.imagem">
 						</div>
 						<div class="col-5 text-left alinhaVert font-weight-bold fonte-media">
@@ -50,7 +50,7 @@
 						<div class="col-6 text-center alinhaVert font-weight-bold fonte-media">
 							Quarto Lugar
 						</div>
-						<div class="col text-center alinhaVert">
+						<div class="col-1 text-center alinhaVert">
 							<img width="20" :src="colocacao.quarto.imagem">
 						</div>
 						<div class="col-5 text-left alinhaVert font-weight-bold fonte-media">
@@ -61,7 +61,7 @@
 						<div class="col-6 text-center alinhaVert font-weight-bold fonte-media">
 							Artilharia
 						</div>
-						<div class="col text-center alinhaVert">
+						<div class="col-1 text-center alinhaVert">
 							<img width="20" :src="colocacao.artilharia.imagem">
 						</div>
 						<div class="col-5 text-left alinhaVert font-weight-bold fonte-media">
