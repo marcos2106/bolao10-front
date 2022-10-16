@@ -454,10 +454,10 @@
                         <div class="row ml-4"> 
                             <div v-if="listaPartidas8.length==0" class="loading">Carregando partidas...</div>
                             
-                            <div class="row mt-4">
+                            <div class="row mt-3">
                                 <div class="col-12">
                                     <div class="row">
-                                        <div class="col-5 separacaoTabela" 
+                                        <div class="col-5 m-2 separacaoTabela" 
                                                 v-for="partida in listaPartidas8" :key="partida.id">
                                             <div class="col-12 mt-2" style="justify-content: space-around; display: flex;">
                                                 <div class="badge badge-secondary"><i class="fas fa-futbol"></i>&nbsp; Partida {{ partida.id }} </div>
@@ -467,15 +467,11 @@
                                             </div>
                                             <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
-                                                    <img width="20" class="m-2" v-if="partida.selecaoA.imagem" 
-                                                        :src="partida.selecaoA.imagem"> 
-                                                    <img width="20" class="m-2" v-if="!partida.selecaoA.imagem" 
-                                                        :src="`/img/selecao/0.png`"> 
                                                     <el-tooltip :content=partida.selecaoA.nome placement="top">
                                                         <input :value=partida.selecaoA.nome />
                                                     </el-tooltip>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-5">
                                                     <el-select filterable v-model="partida.placarA" placeholder="Selecione">
                                                         <el-option v-for="gol in gols"
                                                                     :key="gol"
@@ -486,17 +482,13 @@
                                                     </el-select>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
-                                                    <img width="20" class="m-2" v-if="partida.selecaoB.imagem" 
-                                                        :src="partida.selecaoB.imagem"> 
-                                                    <img width="20" class="m-2" v-if="!partida.selecaoB.imagem" 
-                                                        :src="`/img/selecao/0.png`"> 
                                                     <el-tooltip :content=partida.selecaoB.nome placement="top">
                                                         <input :value=partida.selecaoB.nome />
                                                     </el-tooltip>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-5">
                                                     <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
                                                         <el-option v-for="gol in gols"
                                                                     :key="gol"
@@ -531,15 +523,11 @@
                                             </div>
                                             <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
-                                                    <img width="20" class="m-2" v-if="partida.selecaoA.imagem" 
-                                                        :src="partida.selecaoA.imagem"> 
-                                                    <img width="20" class="m-2" v-if="!partida.selecaoA.imagem" 
-                                                        :src="`/img/selecao/0.png`"> 
                                                     <el-tooltip :content=partida.selecaoA.nome placement="top">
                                                         <input :value=partida.selecaoA.nome />
                                                     </el-tooltip>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-5">
                                                     <el-select filterable v-model="partida.placarA" placeholder="Selecione">
                                                         <el-option v-for="gol in gols"
                                                                     :key="gol"
@@ -550,17 +538,13 @@
                                                     </el-select>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
-                                                    <img width="20" class="m-2" v-if="partida.selecaoB.imagem" 
-                                                        :src="partida.selecaoB.imagem"> 
-                                                    <img width="20" class="m-2" v-if="!partida.selecaoB.imagem" 
-                                                        :src="`/img/selecao/0.png`"> 
                                                     <el-tooltip :content=partida.selecaoB.nome placement="top">
                                                         <input :value=partida.selecaoB.nome />
                                                     </el-tooltip>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-5">
                                                     <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
                                                         <el-option v-for="gol in gols"
                                                                     :key="gol"
@@ -595,15 +579,11 @@
                                             </div>
                                             <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
-                                                    <img width="20" class="m-2" v-if="partida.selecaoA.imagem" 
-                                                        :src="partida.selecaoA.imagem"> 
-                                                    <img width="20" class="m-2" v-if="!partida.selecaoA.imagem" 
-                                                        :src="`/img/selecao/0.png`"> 
                                                     <el-tooltip :content=partida.selecaoA.nome placement="top">
                                                         <input :value=partida.selecaoA.nome />
                                                     </el-tooltip>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-5">
                                                     <el-select filterable v-model="partida.placarA" placeholder="Selecione">
                                                         <el-option v-for="gol in gols"
                                                                     :key="gol"
@@ -614,17 +594,13 @@
                                                     </el-select>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
-                                                    <img width="20" class="m-2" v-if="partida.selecaoB.imagem" 
-                                                        :src="partida.selecaoB.imagem"> 
-                                                    <img width="20" class="m-2" v-if="!partida.selecaoB.imagem" 
-                                                        :src="`/img/selecao/0.png`"> 
                                                     <el-tooltip :content=partida.selecaoB.nome placement="top">
                                                         <input :value=partida.selecaoB.nome />
                                                     </el-tooltip>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-5">
                                                     <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
                                                         <el-option v-for="gol in gols"
                                                                     :key="gol"
@@ -660,15 +636,11 @@
                                             </div>
                                             <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
-                                                    <img width="20" class="m-2" v-if="partida.selecaoA.imagem" 
-                                                        :src="partida.selecaoA.imagem"> 
-                                                    <img width="20" class="m-2" v-if="!partida.selecaoA.imagem" 
-                                                        :src="`/img/selecao/0.png`"> 
                                                     <el-tooltip :content=partida.selecaoA.nome placement="top">
                                                         <input :value=partida.selecaoA.nome />
                                                     </el-tooltip>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-5">
                                                     <el-select filterable v-model="partida.placarA" placeholder="Selecione">
                                                         <el-option v-for="gol in gols"
                                                                     :key="gol"
@@ -679,17 +651,13 @@
                                                     </el-select>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
-                                                    <img width="20" class="m-2" v-if="partida.selecaoB.imagem" 
-                                                        :src="partida.selecaoB.imagem"> 
-                                                    <img width="20" class="m-2" v-if="!partida.selecaoB.imagem" 
-                                                        :src="`/img/selecao/0.png`"> 
                                                     <el-tooltip :content=partida.selecaoB.nome placement="top">
                                                         <input :value=partida.selecaoB.nome />
                                                     </el-tooltip>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-5">
                                                     <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
                                                         <el-option v-for="gol in gols"
                                                                     :key="gol"
@@ -1493,7 +1461,7 @@ export default {
             return aposta;
         },
         verificaApostaFinalizada() {
-            this.$clubApi.get("/bolao/finalizada").then(() => {
+            this.$clubApi.get("/bolao/finalizada").then((response) => {
                 if (response.data.object) {
                     this.$notify({type: 'warning', message: "Aposta já finalizada!" });
                     location.href = '/meubolao/'+ localStorage.getItem("id");
