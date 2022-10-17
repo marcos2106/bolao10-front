@@ -244,6 +244,11 @@
                             <div class="col-12 mt-1 tituloQuadroPequeno font-weight-bold">
                                 <i class="fas fa-dice-four mr-1"></i> Apostas nessa partida
                             </div>
+
+                            <div v-if="apostas.length == 0" class="col-12 mt-4 text-center fonte-pequena">
+                                Apostas ainda não podem<br/> ser divulgadas
+                            </div>
+
                             <div class="col-12 mt-2 font-weight-bold fonte-media">
                                 
                                 <div class="row descricaoAposta">
