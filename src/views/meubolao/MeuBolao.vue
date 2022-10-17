@@ -2,13 +2,13 @@
 	<div>
 		<base-header class="pb-1">
 			<div class="row align-items-center py-4">
-			<div class="col-lg-6 col-7">
-				<h6 class="h2 text-white d-inline-block mb-0">Meu Bolão</h6>
-			</div>
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Meu Bolão</h6>
+                </div>
 			</div>
 		</base-header>
 
-	<div class="container-fluid mt--6">
+        <div class="container-fluid mt--6">
 			<card>
 				<h2 slot="header" class="mb-0">Bolão <span v-if="dadosUsuario.usuario.id != null">de {{ dadosUsuario.usuario.nome }}</span></h2>
                 <h5 slot="header" class="mb-0">Página inicial com informações completas do "Meu Bolão"</h5>
@@ -109,11 +109,11 @@
                                     <v-tab title="Colocação e Artilharia">
                                         
                                         <div class="row mt-1">
-                                            <div class="col-6 mt-3 text-right">Campeão</div><div class="col-6 mt-3 text-left"> <img width="20" :src="colocacao.campeao.imagem"> {{ colocacao.campeao.nome}} <span v-if="colocacao.pontosCampeao">({{colocacao.pontosCampeao}})</span></div>
-                                            <div class="col-6 mt-3 text-right">Vice</div><div class="col-6 mt-3 text-left"> <img width="20" :src="colocacao.vice.imagem"> {{ colocacao.vice.nome}} <span v-if="colocacao.pontosVice">({{colocacao.pontosVice}})</span></div>
-                                            <div class="col-6 mt-3 text-right">Terceiro</div><div class="col-6 mt-3 text-left"> <img width="20" :src="colocacao.terceiro.imagem"> {{ colocacao.terceiro.nome}} <span v-if="colocacao.pontosTerceiro">({{colocacao.pontosTerceiro}})</span></div>
-                                            <div class="col-6 mt-3 text-right">Quarto</div><div class="col-6 mt-3 text-left"> <img width="20" :src="colocacao.quarto.imagem"> {{ colocacao.quarto.nome}} <span v-if="colocacao.pontosQuarto">({{colocacao.pontosQuarto}})</span></div>
-                                            <div class="col-6 mt-3 text-right">Artilharia</div><div class="col-6 mt-3 text-left"> <img width="20" :src="colocacao.artilharia.imagem"> {{ colocacao.artilharia.nome}} <span v-if="colocacao.pontosQuarto">({{colocacao.pontosQuarto}})</span></div>
+                                            <div class="col-6 mt-3 text-right">Campeão</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.campeao"><img width="20" :src="colocacao.campeao.imagem"> {{ colocacao.campeao.nome}} <span v-if="colocacao.pontosCampeao">({{colocacao.pontosCampeao}})</span></span></div>
+                                            <div class="col-6 mt-3 text-right">Vice</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.vice"><img width="20" :src="colocacao.vice.imagem"> {{ colocacao.vice.nome}} <span v-if="colocacao.pontosVice">({{colocacao.pontosVice}})</span></span></div>
+                                            <div class="col-6 mt-3 text-right">Terceiro</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.terceiro"><img width="20" :src="colocacao.terceiro.imagem"> {{ colocacao.terceiro.nome}} <span v-if="colocacao.pontosTerceiro">({{colocacao.pontosTerceiro}})</span></span></div>
+                                            <div class="col-6 mt-3 text-right">Quarto</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.quarto"><img width="20" :src="colocacao.quarto.imagem"> {{ colocacao.quarto.nome}} <span v-if="colocacao.pontosQuarto">({{colocacao.pontosQuarto}})</span></span></div>
+                                            <div class="col-6 mt-3 text-right">Artilharia</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.artilharia"><img width="20" :src="colocacao.artilharia.imagem"> {{ colocacao.artilharia.nome}} <span v-if="colocacao.pontosQuarto">({{colocacao.pontosQuarto}})</span></span></div>
                                         </div>
 
                                     </v-tab>
@@ -158,9 +158,7 @@
                 </div>
 
 			</card>
-
 		</div> <!--- fecha conteudo -->
-
 
         <!-- Modal Usuário --> 
         <modal :show.sync="modals.modalTrocarSenha">
