@@ -39,7 +39,7 @@
                         <br/>
                         &nbsp;&nbsp; &nbsp;&nbsp; b) o administrador do Bolão 10 fornecerá o "login" (e-mail) e a "senha provisória" para o apostador;<br/>
                         <br/>
-                        &nbsp;&nbsp; &nbsp;&nbsp; c) de posse do "login" e da "senha provisória" o apostador poderá fazer as apostas no site www.bolao10.net;<br/>
+                        &nbsp;&nbsp; &nbsp;&nbsp; c) de posse do "login" e da "senha provisória" o apostador poderá fazer as apostas no site www.bolao10.top;<br/>
                         <br/>
                         &nbsp;&nbsp; &nbsp;&nbsp; d) ao fazer o primeiro acesso no "login" será necessário alterar a "senha provisória" para sua "senha definitiva" a escolha do usuário, necessitando ter 8 caracteres.<br/>
                         <br/>
