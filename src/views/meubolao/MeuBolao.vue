@@ -49,7 +49,7 @@
                                         
                                         <div class="row mt-4">
                                             <div class="col-12 text-center">
-                                                Aguardando início do Mundial --{{ idSituacao }}--
+                                                Aguardando início do Mundial
                                             </div>
                                         </div>
 
