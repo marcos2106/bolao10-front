@@ -242,14 +242,14 @@
 				
                         <div class="quadroAposta">
                             <div class="col-12 mt-1 tituloQuadroPequeno font-weight-bold">
-                                <i class="fas fa-dice-four mr-1"></i> Apostas nessa partida
+                                <i class="fas fa-dice-four mr-1"></i> Apostas nessa partida --{{apostas.length}}=--
                             </div>
 
-                            <div v-if="apostas.length == 0" class="col-12 mt-4 text-center fonte-pequena">
+                            <div v-if="idSituacao==1" class="col-12 mt-4 text-center fonte-pequena">
                                 Apostas ainda não podem<br/> ser divulgadas
                             </div>
 
-                            <div class="col-12 mt-2 font-weight-bold fonte-media">
+                            <div v-else class="col-12 mt-2 font-weight-bold fonte-media">
                                 
                                 <div class="row descricaoAposta">
                                     <div class="col-12 text-left" style="height: 430px; overflow: scroll;">

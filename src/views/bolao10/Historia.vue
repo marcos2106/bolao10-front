@@ -37,10 +37,10 @@
                         
                         &nbsp;&nbsp; Para essa Copa do Mundo de 2022 avançamos muito mais: Um sistema moderno, com usabilidade e tudo de forma <strong>on-line</strong>, onde se poderá ter todas as informações de forma atualizada a cada evento ou gol marcado pelas Seleções durante a Copa do Mundo!!<br/><br/>
                         
-                        &nbsp;&nbsp; Desde o seu início, nesses 44 anos, temos participantes assíduos, tais como: <strong>Oswaldo Osorio (DF), Oswalmar (RJ), Rodrigo (RJ), Chaim (RJ), José Carlos, André Luiz (RJ) e Ricardo André</strong>. Esses todos praticamente do Rio de Janeiro, onde o Bolão iniciou e também quando o seu administrador ainda morava na cidade e hoje residente na Capital Federal. Outros, também, apesar de não estarem desde o seu início, fiéis em muito outros anos no bolão.<br/><br/>
+                        &nbsp;&nbsp; Desde o seu início, nesses 44 anos, temos participantes assíduos, tais como: <strong>Oswaldo Osorio (DF), Oswalmar (RJ), Rodrigo (RJ), Chaim (RJ), José Carlos, André Luiz (RJ) e Ricardo André</strong>. Esses todos praticamente do Rio de Janeiro, onde o Bolão iniciou e também quando o seu administrador ainda morava na cidade e hoje residente na Capital Federal. Outros, também, apesar de não estarem desde o seu início, fiéis em muitos outros anos no bolão.<br/><br/>
                         
                         &nbsp;&nbsp; Apesar de estarmos no 11º bolão (Copa no Catar), o nome ainda se manteve em homenagem ao 10º bolão completado, por isso essa denominação de <strong>BOLÃO 10 !!!</strong><br/><br/>
-                        &nbsp;&nbsp; Seja bem vindo você também ao nosso Bolão!!!! E <strong>BOA SORTE</strong>!!!!<br/><br/>
+                        &nbsp;&nbsp; Seja bem-vindo você também ao nosso Bolão!!!! E <strong>BOA SORTE</strong>!!!!<br/><br/>
 
                         <div class="row">
                             <div class="col-6 text-center">

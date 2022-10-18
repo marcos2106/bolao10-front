@@ -1229,7 +1229,7 @@
 
                     <el-tooltip
                         style="margin-left: 8px"
-                        content="Concluir difinitivamente sua aposta"
+                        content="Concluir definitivamente sua aposta"
                         placement="top"
                         v-if="current == steps.length - 1">
                         <span>
