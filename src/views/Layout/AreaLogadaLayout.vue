@@ -112,7 +112,7 @@ export default {
 		},
         verificaApostaFinalizada() {
             this.$clubApi.get("/bolao/finalizada").then((response) => {
-                this.finalizada = false;//response.data.object;
+                this.finalizada = response.data.object;
             })
         }
 	}
