@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-8">
 
-				<div class="row janelaSituacaoUsuario m-2 mb-3" v-if="dadosUsuario!=null && (!dadosUsuario.aposta || !dadosUsuario.pagamento)">
+				<div class="row janelaSituacaoUsuario m-2 mb-3" v-if="getPerfil()=='USER' && dadosUsuario!=null && (!dadosUsuario.aposta || !dadosUsuario.pagamento)">
 					<div class="col-11 tituloJanelaPequena mt-2">
 						Olá, <strong>{{ dadosUsuario.nome }}</strong>, seja bem vindo ao nosso bolão!! Sua situação é:
 					</div>
@@ -247,6 +247,9 @@ export default {
 		}
 	},
 	methods: {
+		getPerfil() {
+			return localStorage.getItem("perfil")
+		},
 		carregarDados() {
 			this.carregarDadosUsuarios();
 			this.carregarJogoEstreia();
