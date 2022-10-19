@@ -248,6 +248,50 @@
                                         </div>
 
                                     </v-tab>
+                                    <v-tab title="Colocações">
+
+                                        <div class="row mt-4 textFinal" >
+                                            <div class="col-5 text-right alinhaVert" >
+                                                Campeão
+                                            </div>
+                                            <div class="col-7 alinhaVert">
+                                                <span class="alinhaVert"><img class="mt--1" width="20" :src="colocacao.campeao.imagem"> {{ colocacao.campeao.nome }}</span> <span v-if="colocacao.pontosCampeao != null"> ({{ colocacao.pontosCampeao }}) </span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-5 text-right alinhaVert">
+                                                2º Colocado
+                                            </div>
+                                            <div class="col-7">
+                                                <span class="alinhaVert"><img class="mt--1" width="20" :src="colocacao.vice.imagem"> {{ colocacao.vice.nome }}</span> <span v-if="colocacao.pontosVice != null"> ({{ colocacao.pontosVice }}) </span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-5 text-right alinhaVert">
+                                                3º Colocado
+                                            </div>
+                                            <div class="col-7">
+                                                <span class="alinhaVert"><img class="mt--1" width="20" :src="colocacao.terceiro.imagem"> {{ colocacao.terceiro.nome }}</span> <span v-if="colocacao.pontosTerceiro != null"> ({{ colocacao.pontosTerceiro }}) </span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-5 text-right alinhaVert">
+                                                4º Colocado
+                                            </div>
+                                            <div class="col-7">
+                                                <span class="alinhaVert"><img class="mt--1" width="20" :src="colocacao.quarto.imagem"> {{ colocacao.quarto.nome }}</span> <span v-if="colocacao.pontosQuarto != null"> ({{ colocacao.pontosQuarto }}) </span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3 mb-4" >
+                                            <div class="col-5 text-right alinhaVert">
+                                                Artilharia
+                                            </div>
+                                            <div class="col-7">
+                                                <span class="alinhaVert"><img class="mt--1" width="20" :src="colocacao.artilharia.imagem"> {{ colocacao.artilharia.nome }}</span> <span v-if="colocacao.pontosArtilharia != null"> ({{ colocacao.pontosArtilharia }}) </span>
+                                            </div>
+                                        </div>
+
+                                    </v-tab>
                                 </vue-tabs>
                             </div>  
                         </div>             
@@ -278,17 +322,30 @@ export default {
             apostas4: [],
             apostasS: [],
             apostasF: [],
+            colocacao: {
+                campeao: {
+                    imagem: ""
+                },
+                vice: {
+                    imagem: ""
+                },
+                terceiro: {
+                    imagem: ""
+                },
+                quarto: {
+                    imagem: ""
+                },
+                artilharia: {
+                    imagem: ""
+                },
+            },
         }
     },
     methods: {
         carregarApostas(){
 
-            console.log("id", localStorage.getItem("id"));
-
             this.$clubApi.get('/bolao/aposta/usuario/'+ localStorage.getItem("id")).then((response) => {
-
                 let apostas = response.data.object;
-
                 this.apostasRod1 = apostas.filter( (aposta) => aposta.partida.rodada == 1);
                 this.apostasRod2 = apostas.filter( (aposta) => aposta.partida.rodada == 2);
                 this.apostasRod3 = apostas.filter( (aposta) => aposta.partida.rodada == 3);
@@ -296,12 +353,14 @@ export default {
                 this.apostas4 = apostas.filter( (aposta) => aposta.partida.fase == 3);
                 this.apostasS = apostas.filter( (aposta) => aposta.partida.fase == 4);
                 this.apostasF = apostas.filter( (aposta) => aposta.partida.fase == 5 || aposta.partida.fase == 6);
-
             }) .catch((error) => {
                 this.$notify({type: 'warning', message: error.response.data.msg})
             }).finally(() =>{
                 NProgress.done();
             })
+            this.$clubApi.get("/bolao/colocacao").then((response) => {    
+                this.colocacao = response.data.object;
+            });            
         },
         detalhePartida(idPartida) {
             location.href = '/mundial/partida/'+ idPartida;
@@ -318,5 +377,8 @@ export default {
 .clickable:hover {
     cursor: pointer;
     background-color: #e8f5e6;
+}
+.alinhaVert {
+	margin: auto;
 }
 </style>

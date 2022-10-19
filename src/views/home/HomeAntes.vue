@@ -108,16 +108,16 @@
 										1º lugar - {{ dadosIniciais.valor1 }}
 									</div>
 									<div class="col-6">
-										4º lugar - {{ dadosIniciais.valor2 }}
+										2º lugar - {{ dadosIniciais.valor2 }}
 									</div>
 									<div class="col-6">
-										2º lugar - {{ dadosIniciais.valor3 }}
+										3º lugar - {{ dadosIniciais.valor3 }}
 									</div>
 									<div class="col-6">
-										5º lugar - {{ dadosIniciais.valor4 }}
+										4º lugar - {{ dadosIniciais.valor4 }}
 									</div>
 									<div class="col-6">
-										3º lugar - {{ dadosIniciais.valor5 }}
+										5º lugar - {{ dadosIniciais.valor5 }}
 									</div>
 									<div class="col-6">
 										6º lugar - {{ dadosIniciais.valor6 }}
