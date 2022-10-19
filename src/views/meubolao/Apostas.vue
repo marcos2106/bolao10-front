@@ -125,7 +125,7 @@
                                                     v-for="aposta in apostas8" :key="aposta.partida.id">
 
                                                 <div class="row">
-                                                    <div class="col-8 little-text"> <h5>{{ aposta.partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ aposta.partida.local }}</h5> </div>
+                                                    <div class="col-8 little-text"> <h5>{{ aposta.partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ aposta.partida.local }} <span class="fonte-partida">Partida #{{ aposta.partida.id }}</span> </h5></div>
                                                     <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>P</h5></el-tooltip></div>
                                                     <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>A</h5></el-tooltip></div>
                                                 </div> 
@@ -157,7 +157,7 @@
                                                     v-for="aposta in apostas4" :key="aposta.partida.id">
 
                                                 <div class="row">
-                                                    <div class="col-8 little-text"> <h5>{{ aposta.partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ aposta.partida.local }}</h5> </div>
+                                                    <div class="col-8 little-text"> <h5>{{ aposta.partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ aposta.partida.local }} <span class="fonte-partida">Partida #{{ aposta.partida.id }}</span> </h5> </div>
                                                     <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>P</h5></el-tooltip></div>
                                                     <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>A</h5></el-tooltip></div>
                                                 </div> 
@@ -189,7 +189,7 @@
                                                     v-for="aposta in apostasS" :key="aposta.partida.id">
 
                                                 <div class="row">
-                                                    <div class="col-8 little-text"> <h5>{{ aposta.partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ aposta.partida.local }}</h5> </div>
+                                                    <div class="col-8 little-text"> <h5>{{ aposta.partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ aposta.partida.local }} <span class="fonte-partida">Partida #{{ aposta.partida.id }}</span> </h5> </div>
                                                     <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>P</h5></el-tooltip></div>
                                                     <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>A</h5></el-tooltip></div>
                                                 </div> 
@@ -223,7 +223,7 @@
                                                 <span v-if="index==0" class="textTerceiro">Disputa de 3º Lugar</span>
                                                 <span v-else class="textFinal">GRANDE FINAL</span>
                                                 <div class="row">
-                                                    <div class="col-8 little-text"> <h5 class="mt-3">{{ aposta.partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ aposta.partida.local }}</h5> </div>
+                                                    <div class="col-8 little-text"> <h5 class="mt-3">{{ aposta.partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ aposta.partida.local }} </h5> </div>
                                                     <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>P</h5></el-tooltip></div>
                                                     <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>A</h5></el-tooltip></div>
                                                 </div> 
@@ -377,6 +377,11 @@ export default {
 .clickable:hover {
     cursor: pointer;
     background-color: #e8f5e6;
+}
+.fonte-partida {
+    font-size: 10px;
+    margin-left: 15px;
+    color: #757575;
 }
 .alinhaVert {
 	margin: auto;
