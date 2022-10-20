@@ -261,7 +261,7 @@ export default {
     },
     methods: {
         carregarUsuario() {
-            if (this.idUsuario == null) {
+            if (this.idUsuario == null || this.idUsuario == undefined) {
                 this.idUsuario = localStorage.getItem("id");
             }
             this.carregarSituacao();
@@ -282,6 +282,9 @@ export default {
 			});
 		},
         carregarPosicao() {
+            if (this.idUsuario == null || this.idUsuario == undefined) {
+                this.idUsuario = localStorage.getItem("id");
+            }
 			this.$clubApi.get("/bolao/colocacao/"+ this.idUsuario).then((response) => {
 				this.colocacao = response.data.object;
 			}) .catch((error) => {
@@ -298,10 +301,14 @@ export default {
 			}).finally(() =>{
 				NProgress.done();
 			});
+            if (this.idUsuario == null || this.idUsuario == undefined) {
+                this.idUsuario = localStorage.getItem("id");
+            }
 			this.$clubApi.get("/bolao/dados/usuario/"+ this.idUsuario).then((response) => {
+                console.log("idUsuario", this.idUsuario);
+                console.log("localStorage.getItem(id)", localStorage.getItem("id"));
 				this.dadosUsuario = response.data.object;
                 this.carregarGrafico();
-
 			}) .catch((error) => {
 				this.$notify({type: 'warning', message: error.response.data.msg})
 			}).finally(() =>{
@@ -321,6 +328,12 @@ export default {
 
         },
         carregarGrafico() {
+            console.log("carregarGrafico idUsuario", this.idUsuario);
+            console.log("carregarGrafico localStorage.getItem(id)", localStorage.getItem("id"));
+
+            if (this.idUsuario == null || this.idUsuario == undefined) {
+                this.idUsuario = localStorage.getItem("id");
+            }
             this.$clubApi.get('/bolao/dados/grafico/'+ this.idUsuario).then((response) => {
 
                 let dadosGrafico = response.data.object;
