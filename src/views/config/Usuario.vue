@@ -170,7 +170,7 @@
                     </div>
                     <div class="col-6 mb-2">
                         <label class="form-control-label">Avatar</label>
-                        <input type="text" class="form-control" v-model="usuario.avatar" placeholder="Avatar" maxlength="100"/>
+                        <input type="text" class="form-control" v-model="usuario.avatar" placeholder="Avatar" maxlength="200"/>
                     </div>        
                 </div>
                 <div class="row">
