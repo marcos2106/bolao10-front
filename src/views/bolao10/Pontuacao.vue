@@ -41,11 +41,11 @@
                                                 <img width="20" :src="partida.selecaoB.imagem">
                                             </el-tooltip>
                                         </th>
-                                        <th scope="col" class="borderFase text-center"> <span v-if="colocacao.artiharia == null"><el-tooltip content="Artilharia" placement="top"><i class="fas fa-futbol"></i></el-tooltip></span><span v-else><el-tooltip :content="`Artilharia: `+ colocacao.artilharia.nome" placement="top"><img width="20" :src="colocacao.artilharia.imagem"></el-tooltip></span> </th>
-                                        <th scope="col" class="text-center"> <span v-if="colocacao.quarto == null"> 4º </span><span v-else><el-tooltip :content="`Quarto: `+ colocacao.quarto.nome" placement="top"><img width="20" :src="colocacao.quarto.imagem"></el-tooltip></span> </th>
-                                        <th scope="col" class="text-center fundoTerceiro"> <span v-if="colocacao.terceiro == null"> 3º </span><span v-else><el-tooltip :content="`Terceiro: `+ colocacao.terceiro.nome" placement="top"><img width="20" :src="colocacao.terceiro.imagem"></el-tooltip></span> </th>
-                                        <th scope="col" class="text-center fundoVice"> <span v-if="colocacao.vice == null"> 2º </span><span v-else><el-tooltip :content="`Vice-campeão: `+ colocacao.vice.nome" placement="top"><img width="20" :src="colocacao.vice.imagem"></el-tooltip></span> </th>
-                                        <th scope="col" class="text-center fundoCampeao"> <span v-if="colocacao.campeao == null"> 1º </span><span v-else><el-tooltip :content="`Campeão: `+ colocacao.campeao.nome" placement="top"><img width="20" :src="colocacao.campeao.imagem"></el-tooltip></span> </th>
+                                        <th scope="col" class="borderFase text-center"> <span v-if="colocacao == null || colocacao.artiharia == null"><el-tooltip content="Artilharia" placement="top"><i class="fas fa-futbol"></i></el-tooltip></span><span v-if="colocacao != null && colocacao.artiharia != null"><el-tooltip :content="`Artilharia: `+ colocacao.artilharia.nome" placement="top"><img width="20" :src="colocacao.artilharia.imagem"></el-tooltip></span> </th>
+                                        <th scope="col" class="text-center"> <span v-if="colocacao == null || colocacao.quarto == null"> 4º </span><span v-if="colocacao != null && colocacao.quarto != null"><el-tooltip :content="`Quarto: `+ colocacao.quarto.nome" placement="top"><img width="20" :src="colocacao.quarto.imagem"></el-tooltip></span> </th>
+                                        <th scope="col" class="text-center fundoTerceiro"> <span v-if="colocacao == null || colocacao.terceiro == null"> 3º </span><span v-if="colocacao != null && colocacao.terceiro != null"><el-tooltip :content="`Terceiro: `+ colocacao.terceiro.nome" placement="top"><img width="20" :src="colocacao.terceiro.imagem"></el-tooltip></span> </th>
+                                        <th scope="col" class="text-center fundoVice"> <span v-if="colocacao == null || colocacao.vice == null"> 2º </span><span v-if="colocacao != null && colocacao.vice != null"><el-tooltip :content="`Vice-campeão: `+ colocacao.vice.nome" placement="top"><img width="20" :src="colocacao.vice.imagem"></el-tooltip></span> </th>
+                                        <th scope="col" class="text-center fundoCampeao"> <span v-if="colocacao == null || colocacao.campeao == null"> 1º </span><span v-if="colocacao != null && colocacao.campeao != null"><el-tooltip :content="`Campeão: `+ colocacao.campeao.nome" placement="top"><img width="20" :src="colocacao.campeao.imagem"></el-tooltip></span> </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,14 +61,14 @@
                                                 :class="(index == 0 || index == 48 || index == 56 || index == 60 || index == 62) ? 'borderFase' : ''"> 
                                             {{ aposta.placarA }} x {{ aposta.placarB }} <span v-if="aposta.partida.iniciada && !aposta.partida.finalizada"> ({{ aposta.pontuacaoProvisoria }}) </span><span v-if="aposta.partida.iniciada && aposta.partida.finalizada"> ({{ aposta.pontuacao }}) </span>
                                         </td>
-                                        <td v-show="idSituacao>1" class="borderFase"> <el-tooltip :content="pontuacao.apostaColocacao.artilharia.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.artilharia.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao.pontosArtilharia != null"> ({{ pontuacao.apostaColocacao.pontosArtilharia }}) </span></td>
-                                        <td v-show="idSituacao>1"> <el-tooltip :content="pontuacao.apostaColocacao.quarto.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.quarto.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao.pontosQuarto != null"> ({{ pontuacao.apostaColocacao.pontosQuarto }}) </span></td>
-                                        <td v-show="idSituacao>1" class="fundoTerceiro"> <el-tooltip :content="pontuacao.apostaColocacao.terceiro.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.terceiro.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao.pontosTerceiro != null"> ({{ pontuacao.apostaColocacao.pontosTerceiro }}) </span></td>
-                                        <td v-show="idSituacao>1" class="fundoVice"> <el-tooltip :content="pontuacao.apostaColocacao.vice.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.vice.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao.pontosVice != null"> ({{ pontuacao.apostaColocacao.pontosVice }}) </span></td>
-                                        <td v-show="idSituacao>1" class="fundoCampeao"> <el-tooltip :content="pontuacao.apostaColocacao.campeao.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.campeao.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao.pontosCampeao != null"> ({{ pontuacao.apostaColocacao.pontosCampeao }}) </span></td>
-                                        <td v-show="idSituacao==1" colspan="69"> 
+                                        <td v-show="idSituacao==1" class="borderFase fonteApostas" colspan="64"> 
                                             Apostas ainda não podem ser divulgadas
                                         </td>
+                                        <td class="borderFase"> <span v-if="idSituacao>1"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.artilharia.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.artilharia.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosArtilharia != null"> ({{ pontuacao.apostaColocacao.pontosArtilharia }}) </span></span></td>
+                                        <td> <span v-if="idSituacao>1"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.quarto.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.quarto.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosQuarto != null"> ({{ pontuacao.apostaColocacao.pontosQuarto }}) </span></span></td>
+                                        <td class="fundoTerceiro"> <span v-if="idSituacao>1"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.terceiro.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.terceiro.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosTerceiro != null"> ({{ pontuacao.apostaColocacao.pontosTerceiro }}) </span></span></td>
+                                        <td class="fundoVice"> <span v-if="idSituacao>1"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.vice.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.vice.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosVice != null"> ({{ pontuacao.apostaColocacao.pontosVice }}) </span></span></td>
+                                        <td class="fundoCampeao"> <span v-if="idSituacao>1"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.campeao.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.campeao.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosCampeao != null"> ({{ pontuacao.apostaColocacao.pontosCampeao }}) </span></span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -97,13 +97,7 @@ export default {
             idSituacao: 1,
             listaPontuacao : [],
             listaPartidas: [],
-            colocacao: {
-                campeao: null,
-                vice: null,
-                terceiro: null,
-                quarto: null,
-                artilharia: null,
-            },
+            colocacao: null,
         }
     },
     methods: {
@@ -155,6 +149,9 @@ export default {
 }
 .borderFase {
     border-left: 1px solid #c0c5cc;
+}
+.fonteApostas {
+    color: #555555;
 }
 .alinhaVert {
 	margin: auto;
