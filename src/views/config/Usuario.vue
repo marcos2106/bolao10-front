@@ -301,14 +301,15 @@ export default {
             this.usuario = {
                 id: null,
                 nome: '',
-                perfil: null,
+                perfil: 'USER',
                 avatar: '',
                 telefone: '',
                 email: '',
                 senha: '',
+                cidade: 'Brasília - DF',
                 aposta: false,
                 pagamento: false,
-                ativo: false,
+                ativo: true,
             },
             this.abrirModalUsuario();
         },
