@@ -263,11 +263,12 @@ export default {
             usuario: {
                 id: null,
                 nome: '',
-                perfil: null,
+                perfil: 'USER',
                 avatar: '',
                 telefone: '',
                 email: '',
                 senha: '',
+                cidade: 'Brasília - DF',
                 aposta: false,
                 pagamento: false,
                 ativo: true,
