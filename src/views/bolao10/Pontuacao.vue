@@ -52,7 +52,7 @@
                                     <tr v-for="(pontuacao, index) in listaPontuacao" :key="pontuacao.usuario.id"
                                             :class="(index % 2 == 0) ? 'registroImpar' : ''">
                                         <td>
-                                            <span @click="paginaUsuario(usuario.id)" class="clickable">
+                                            <span @click="paginaUsuario(pontuacao.usuario.id)" class="clickable">
                                                 <strong><img class="avatarRedondo" width="25" :src="pontuacao.usuario.avatar"> {{ pontuacao.usuario.nome}}</strong>
                                             </span>
                                         </td>
