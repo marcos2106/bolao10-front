@@ -28,7 +28,7 @@
                                             <div class="col-11 text-left" style="height: 370px; overflow: scroll;">
 
                                                 <div class="row p-1 mt-1 colocacaoRanking"
-                                                        :class="(index <= 6) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
+                                                        :class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
                                                         v-for="(rank, index) in listaRanking" :key="rank.usuario.id">
                                                     <div class="col-1 ml--2"><img class="avatarRedondo" width="25" :src="rank.usuario.avatar"></div>
                                                     <div class="col alinhaVert font-weight-bold">
