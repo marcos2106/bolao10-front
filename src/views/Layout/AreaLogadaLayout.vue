@@ -29,6 +29,7 @@
 					<sidebar-item :link="{ name: 'Minha Página', path: '/meubolao' }"></sidebar-item>
 					<sidebar-item v-if="!finalizada" :link="{ name: 'Fazer Apostas', path: '/meubolao/apostar' }"></sidebar-item>
 					<sidebar-item v-if="finalizada" :link="{ name: 'Minhas Apostas', path: '/meubolao/apostas' }"></sidebar-item>
+					<sidebar-item :link="{ name: 'Meus Rankings', path: '/meubolao/meuranking' }"></sidebar-item>
 				</sidebar-item>
 
 				<sidebar-item :link="{

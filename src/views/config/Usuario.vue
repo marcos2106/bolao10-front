@@ -121,8 +121,7 @@
                                         <i class="fas fa-edit text-warning"></i>
                                     </a>
                                 </el-tooltip>
-                                <el-tooltip content="Alterar Pagamento" placement="top"
-                                        v-if="row.perfil != 'ADMIN'">
+                                <el-tooltip content="Alterar Pagamento" placement="top">
                                     <a href="#!" @click.prevent="alterarPagamento(row)" class="table-action table-action-edit" data-toggle="tooltip" data-original-title="Pagamento">
                                         <i class="fas fa-dollar-sign text-warning"></i>
                                     </a>
@@ -197,7 +196,7 @@
                 </div>  
                 <br class="clear"/>
                 <div class="col-md-12 text-center mt-3">
-                    <button type="button" class="btn btn-primary" @click="adicionarUsuario">Salvar</button>
+                    <button type="button" class="btn btn-primary" @click="salvarUsuario">Salvar</button>
                     <button type="button" class="btn btn-secundary ml-4" @click="fecharModalUsuario">Desistir</button>
                 </div>  
             </form> 
@@ -319,7 +318,7 @@ export default {
         fecharModalUsuario(){
             this.modals.modalUsuario = false;
         },
-        adicionarUsuario() {
+        salvarUsuario() {
             if (this.invalidoForm()) {
                 return;
             }
@@ -371,15 +370,14 @@ export default {
             return false;
         },
         filtrar() {
-            console.log("this.filtro", this.filtro);
             if ((this.filtro.nome == null || this.filtro.nome == "") 
                     && (this.filtro.apostou == null || this.filtro.apostou == "")
                     && (this.filtro.pagou == null || this.filtro.pagou == "")
                     && (this.filtro.ativo == null || this.filtro.ativo == "")) {
                 this.usuarios = this.usuariosFiltro;
             } else {
-                this.usuarios = this.usuariosFiltro.filter( 
-                    item => { console.log("item", item); return ((this.filtro.nome == "" || this.filtro.nome == null) 
+                this.usuarios = this.usuariosFiltro.filter( item => { 
+                    return ((this.filtro.nome == "" || this.filtro.nome == null) 
                             || item.nome.toUpperCase().includes(this.filtro.nome.toUpperCase())) 
                         && (this.filtro.apostou == "" || this.filtro.apostou == null || item.aposta == this.filtro.apostou)
                         && (this.filtro.pagou == "" || this.filtro.pagou == null || item.pagamento == this.filtro.pagou)

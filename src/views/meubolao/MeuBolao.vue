@@ -328,9 +328,6 @@ export default {
 
         },
         carregarGrafico() {
-            console.log("carregarGrafico idUsuario", this.idUsuario);
-            console.log("carregarGrafico localStorage.getItem(id)", localStorage.getItem("id"));
-
             if (this.idUsuario == null || this.idUsuario == undefined) {
                 this.idUsuario = localStorage.getItem("id");
             }

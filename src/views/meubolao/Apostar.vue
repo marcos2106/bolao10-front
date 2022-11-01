@@ -468,7 +468,7 @@
                                             <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
                                                     <el-tooltip :content=partida.selecaoA.nome placement="top">
-                                                        <input :value=partida.selecaoA.nome />
+                                                        <input v-model=partida.selecaoA.nome />
                                                     </el-tooltip>
                                                 </div>
                                                 <div class="col-5">
@@ -485,7 +485,7 @@
                                             <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
                                                     <el-tooltip :content=partida.selecaoB.nome placement="top">
-                                                        <input :value=partida.selecaoB.nome />
+                                                        <input v-model=partida.selecaoB.nome />
                                                     </el-tooltip>
                                                 </div>
                                                 <div class="col-5">
@@ -524,7 +524,7 @@
                                             <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
                                                     <el-tooltip :content=partida.selecaoA.nome placement="top">
-                                                        <input :value=partida.selecaoA.nome />
+                                                        <input v-model=partida.selecaoA.nome />
                                                     </el-tooltip>
                                                 </div>
                                                 <div class="col-5">
@@ -541,7 +541,7 @@
                                             <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
                                                     <el-tooltip :content=partida.selecaoB.nome placement="top">
-                                                        <input :value=partida.selecaoB.nome />
+                                                        <input v-model=partida.selecaoB.nome />
                                                     </el-tooltip>
                                                 </div>
                                                 <div class="col-5">
@@ -580,7 +580,7 @@
                                             <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
                                                     <el-tooltip :content=partida.selecaoA.nome placement="top">
-                                                        <input :value=partida.selecaoA.nome />
+                                                        <input v-model=partida.selecaoA.nome />
                                                     </el-tooltip>
                                                 </div>
                                                 <div class="col-5">
@@ -597,7 +597,7 @@
                                             <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
                                                     <el-tooltip :content=partida.selecaoB.nome placement="top">
-                                                        <input :value=partida.selecaoB.nome />
+                                                        <input v-model=partida.selecaoB.nome />
                                                     </el-tooltip>
                                                 </div>
                                                 <div class="col-5">
@@ -637,7 +637,7 @@
                                             <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
                                                     <el-tooltip :content=partida.selecaoA.nome placement="top">
-                                                        <input :value=partida.selecaoA.nome />
+                                                        <input v-model=partida.selecaoA.nome />
                                                     </el-tooltip>
                                                 </div>
                                                 <div class="col-5">
@@ -654,7 +654,7 @@
                                             <div class="row mt-2">
                                                 <div class="col-7 mt-2 little-text">
                                                     <el-tooltip :content=partida.selecaoB.nome placement="top">
-                                                        <input :value=partida.selecaoB.nome />
+                                                        <input v-model=partida.selecaoB.nome />
                                                     </el-tooltip>
                                                 </div>
                                                 <div class="col-5">

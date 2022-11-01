@@ -22,6 +22,7 @@ const Situacao = () => import('@/views/config/Situacao.vue');
 const MeuBolao = () => import('@/views/meubolao/MeuBolao.vue');
 const Apostar = () => import('@/views/meubolao/Apostar.vue');
 const Apostas = () => import('@/views/meubolao/Apostas.vue');
+const MeuRanking = () => import('@/views/meubolao/MeuRanking.vue');
 
 // MUNDIAL
 const Tabela = () => import('@/views/mundial/Tabela.vue');
@@ -118,6 +119,10 @@ let rotasMeuBolao = {
 		{
 			path: 'apostas',
 			component: Apostas
+		},
+		{
+			path: 'meuranking',
+			component: MeuRanking
 		},
 		{
 			path: '/',
