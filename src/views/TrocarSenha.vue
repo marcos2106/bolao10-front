@@ -8,8 +8,8 @@
 				</div>
 				<!-- Login Form -->
 				<form>
-				<input type="password" class="fadeIn third" placeholder="Nova Senha" v-model="novaSenha" @keypress.enter="trocarSenha">
-				<input type="password" class="fadeIn second" placeholder="Confirmar Senha" v-model="confirmarSenha" @keypress.enter="trocarSenha">
+				<input type="password" class="fadeIn third" placeholder="Nova Senha" maxlength="8" v-model="novaSenha" @keypress.enter="trocarSenha">
+				<input type="password" class="fadeIn second" placeholder="Confirmar Senha" maxlength="8" v-model="confirmarSenha" @keypress.enter="trocarSenha">
 				<input type="button" class="fadeIn fourth mt-3" value="Trocar Senha" @keyup.enter.native="trocarSenha" @click="trocarSenha">
 				</form>
 			</div>
