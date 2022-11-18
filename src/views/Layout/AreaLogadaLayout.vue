@@ -27,9 +27,9 @@
 					icon: 'fas fa-futbol text-success',
 				}">
 					<sidebar-item :link="{ name: 'Minha Página', path: '/meubolao' }"></sidebar-item>
-					<sidebar-item v-if="!finalizada" :link="{ name: 'Fazer Apostas', path: '/meubolao/apostar' }"></sidebar-item>
+					<sidebar-item v-if="!finalizada && idSituacao==1" :link="{ name: 'Fazer Apostas', path: '/meubolao/apostar' }"></sidebar-item>
 					<sidebar-item v-if="finalizada" :link="{ name: 'Minhas Apostas', path: '/meubolao/apostas' }"></sidebar-item>
-					<!-- <sidebar-item :link="{ name: 'Meus Rankings', path: '/meubolao/meuranking' }"></sidebar-item> -->
+					<sidebar-item v-if="idSituacao > 1" :link="{ name: 'Meus Rankings', path: '/meubolao/meuranking' }"></sidebar-item>
 				</sidebar-item>
 
 				<sidebar-item :link="{
@@ -91,10 +91,12 @@ export default {
 	},
     created() {
         this.verificaApostaFinalizada();
+		this.carregarSituacao();
     },
     data() {
         return {
-            finalizada: true
+            finalizada: true,
+			idSituacao: 0
 		}
 	},
 	methods: {
@@ -115,7 +117,12 @@ export default {
             this.$clubApi.get("/bolao/finalizada").then((response) => {
                 this.finalizada = response.data.object;
             })
-        }
+        },
+		carregarSituacao() {
+			this.$clubApi.get('/configuracao/situacao/ativa').then((response) => {
+				this.idSituacao = response.data.object.id;
+			});
+		}
 	}
 };
 </script>

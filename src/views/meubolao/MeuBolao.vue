@@ -96,13 +96,13 @@
                                             <div class="col-6 text-right">Posição atual no Ranking:</div><div class="col-6"> {{ dadosUsuario.posicao }}º </div>
                                         </div>
                                         <div class="row mt-2">
-                                            <div class="col-6 text-right">Melhor posição:</div><div class="col-6"> {{ dadosUsuario.melhorPosicao }}º em {{ dadosUsuario.melhorPosicaoData }}</div>
+                                            <div class="col-6 text-right">Melhor posição:</div><div class="col-6"> <span v-if="dadosUsuario.melhorPosicao">{{ dadosUsuario.melhorPosicao }}º em {{ dadosUsuario.melhorPosicaoData }}</span><span v-else> - </span> </div>
                                         </div>
                                         <div class="row mt-2">
                                             <div class="col-6 text-right">Qntd de placares exatos:</div><div class="col-6"> {{ dadosUsuario.placarExato }} / {{ dadosUsuario.totalPartida }} </div>
                                         </div>
                                         <div class="row mt-2">
-                                            <div class="col-6 text-right">Aproveitamento:</div><div class="col-6"> {{ dadosUsuario.aproveitamento }}% </div>
+                                            <div class="col-6 text-right">Aproveitamento:</div><div class="col-6"> <span v-if="dadosUsuario.totalPartida > 0">{{ dadosUsuario.aproveitamento }}%</span><span v-else> - </span> </div>
                                         </div>
 
                                     </v-tab>

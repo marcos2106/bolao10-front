@@ -1259,6 +1259,7 @@ export default {
     },
     created() {
         this.verificaApostaFinalizada();
+        this.carregarSituacao();
     },
     data() {
         return {
@@ -1469,7 +1470,16 @@ export default {
                     this.carregarPartidas();
                 }
             })
-        }
+        },
+		carregarSituacao() {
+			this.$clubApi.get('/configuracao/situacao/ativa').then((response) => {
+				let idSituacao = response.data.object.id;
+                if (idSituacao > 1) {
+                    this.$notify({type: 'warning', message: "Período já finalizado!" });
+                    location.href = '/meubolao/'+ localStorage.getItem("id");
+                }
+			});
+		}
     }
 };
 </script>

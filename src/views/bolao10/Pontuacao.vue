@@ -15,7 +15,6 @@
                 
                 <div class="row">
                     <div class="col-12">
-                        <card>
                             <table class="table table-responsive font-tabela-peq">
                                 <thead class="thead">
                                     <tr class="font-weight-bold">
@@ -27,6 +26,7 @@
                                         <th colspan="2" class="borderFase"> S E M I - F I N A L</th>
                                         <th colspan="2" class="borderFase"> F I N A I S</th>
                                         <th colspan="5" class="borderFase"> C L A S S I F I C A Ç Ã O</th>
+                                        <th class="text-center alinhaVert" rowspan="2">Nome </th> 
                                     </tr>
                                     <tr>
                                         <th scope="col" v-for="(partida, index) in listaPartidas" :key="partida.id" @click="detalharPartida(partida.id)"
@@ -56,7 +56,7 @@
                                                 <strong><img class="avatarRedondo" width="25" :src="pontuacao.usuario.avatar"> {{ pontuacao.usuario.nome}}</strong>
                                             </span>
                                         </td>
-                                        <td class="text-center font-weight-bold"> {{ pontuacao.pontuacao }} </td>
+                                        <td class="text-center font-weight-bold fonte-pontuacao"> {{ pontuacao.pontuacao }} </td>
                                         <td v-show="idSituacao>1" class="text-center" v-for="(aposta, index) in pontuacao.listaApostas" :key="aposta.partida.id"
                                                 :class="(index == 0 || index == 48 || index == 56 || index == 60 || index == 62) ? 'borderFase' : ''"> 
                                             {{ aposta.placarA }} x {{ aposta.placarB }} <span v-if="aposta.partida.iniciada && !aposta.partida.finalizada"> ({{ aposta.pontuacaoProvisoria }}) </span><span v-if="aposta.partida.iniciada && aposta.partida.finalizada"> ({{ aposta.pontuacao }}) </span>
@@ -69,10 +69,14 @@
                                         <td class="fundoTerceiro"> <span v-if="idSituacao>1"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.terceiro.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.terceiro.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosTerceiro != null"> ({{ pontuacao.apostaColocacao.pontosTerceiro }}) </span></span></td>
                                         <td class="fundoVice"> <span v-if="idSituacao>1"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.vice.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.vice.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosVice != null"> ({{ pontuacao.apostaColocacao.pontosVice }}) </span></span></td>
                                         <td class="fundoCampeao"> <span v-if="idSituacao>1"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.campeao.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.campeao.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosCampeao != null"> ({{ pontuacao.apostaColocacao.pontosCampeao }}) </span></span></td>
+                                        <td>
+                                            <span @click="paginaUsuario(pontuacao.usuario.id)" class="clickable">
+                                                <strong><img class="avatarRedondo" width="25" :src="pontuacao.usuario.avatar"> {{ pontuacao.usuario.nome}}</strong>
+                                            </span>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </card> 
                     </div>
                 </div>		
 
@@ -140,6 +144,9 @@ export default {
 </script>
 
 <style>
+.fonte-pontuacao {
+    font-size: 17px !important;
+}
 .avatarRedondo {
     border-radius: 80px;
 }

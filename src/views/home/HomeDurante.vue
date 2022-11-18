@@ -2,37 +2,35 @@
 	<div>
 
 		<div class="row">
-			<div class="col-8">
+			<div class="col-8 mt--3">
 
-				<div class="row mb-3">
+				<div class="row mb-3 mt-3">
 					<div class="col" v-for="partida in partidasAnteriores" :key="partida.id">
 
-						<div class="janelaPartida">
+						<div class="janelaPartida clickable" @click="detalharPartida(partida.id)">
 							<div class="col fonte-minima">
 								<i class="fas fa-futbol mr-1"></i> Jogo Anterior
 							</div>
 							<div class="row m-1 ml--1">
+								<div class="text-left alinhaVert">
+									<img width="15" class="ml-3 mt--2" :src="partida.selecaoA.imagem">
+								</div>
 								<div class="col text-left font-weight-bold fonte-minima">
 									{{partida.selecaoA.nome}}
 								</div>
-								<div class="col-1 alinhaVert font-weight-bold fonte-minima">
+								<div class="col-1 mr-2 alinhaVert font-weight-bold fonte-minima">
 									{{partida.placarA}}
 								</div>
 							</div>
 							<div class="row m-1 ml--1">
+								<div class="text-left alinhaVert">
+									<img width="15" class="ml-3 mt--2" :src="partida.selecaoB.imagem">
+								</div>
 								<div class="col text-left font-weight-bold fonte-minima">
 									{{partida.selecaoB.nome}}
 								</div>
-								<div class="col-1 alinhaVert font-weight-bold fonte-minima">
+								<div class="col-1 mr-2 alinhaVert font-weight-bold fonte-minima">
 									{{partida.placarB}}
-								</div>
-							</div>
-							<div class="row m-1 text-center">
-								<div class="col-12 text-center">
-									<button type="button" @click="detalharPartida(partida.id)"
-											class="btn btn-outline-secondary btn-sm">
-										<i class="fas fa-eye mr-1"></i> Ver Partida
-									</button>
 								</div>
 							</div>
 						</div>
@@ -257,7 +255,7 @@
 					<div class="col-12 mt--2 font-weight-bold fonte-media">
 						
 						<div class="row ml-1 descricaoRanking">
-							<div class="col-11 text-left" style="height: 500px; overflow: scroll;">
+							<div class="col-11 text-left" style="height: 510px; overflow: scroll;">
 
 								<div class="row p-1 mt-1 colocacaoRanking"
 										:class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"

@@ -29,7 +29,7 @@
                                     </div>
                                     <div class="tituloJanelaPequena ml-2" v-if="!partida.iniciada">
                                         <i class="fas fa-futbol mr-1"></i>  Partida 
-                                            <span v-if="partida.fase==1"> do <strong>Grupo {{ partida.selecaoA.grupo }}</strong> (rodada {{ partida.rodada }})</span>
+                                            <span v-if="partida.fase==1"> do <strong>Grupo {{ partida.selecaoA.grupo }}</strong> ({{ partida.rodada }}ª rodada)</span>
                                             <span v-if="partida.fase==2"> das oitavas de final</span>
                                             <span v-if="partida.fase==3"> das quartas de final</span>
                                             <span v-if="partida.fase==4"> da semi final</span>
@@ -75,13 +75,33 @@
                                     v-if="listaGolsA.length > 0 || listaGolsB.length > 0">
                                 <div class="col-4 mb-2">
                                     <div class="fonte-pequena" v-for="gol in listaGolsA" :key="gol.id">
-                                        <i class="fas fa-futbol mr-1"></i> {{gol.jogador.nome}} {{ gol.minuto}}' {{ gol.golcontra ? "(GC)" : ""}}
+                                        <i class="fas fa-futbol mr-1"></i> {{gol.jogador.nome}}  <i class="far fa-clock ml-2"></i> {{ gol.minuto}}' {{ gol.golcontra ? "(GC)" : ""}}
                                     </div>
                                 </div>        
                                 <div class="col-4 mb-2 text-center"></div>
                                 <div class="col-4 mb-2">
                                     <div class="fonte-pequena" v-for="gol in listaGolsB" :key="gol.id">
-                                        <i class="fas fa-futbol mr-1"></i> {{gol.jogador.nome}} {{ gol.minuto}}' {{ gol.golcontra ? "(GC)" : ""}}
+                                        <i class="fas fa-futbol mr-1"></i> {{gol.jogador.nome}} <i class="far fa-clock ml-2"></i> {{ gol.minuto}}' {{ gol.golcontra ? "(GC)" : ""}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-2">
+                                <div class="col-4">
+                                    <div class="font-weight-bold fonte-minima" :style="`color: `+ partida.selecaoA.cor +`;`"> {{ partida.selecaoA.nome }}: {{ partida.aposta.porcSelecaoA }}% ({{partida.aposta.numSelecaoA}}) </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-center font-weight-bold fonte-minima" style="color: #4d4d4a;"> Empate: {{ partida.aposta.porcEmpate }}% ({{partida.aposta.numEmpate}}) </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-right font-weight-bold fonte-minima" :style="`color: `+ partida.selecaoB.cor +`;`"> {{ partida.selecaoB.nome }}: {{ partida.aposta.porcSelecaoB }}% ({{partida.aposta.numSelecaoB}}) </div>
+                                </div>
+                            </div>
+                            <div class="row m-2">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="barraPorcentagem" :style="`background-color: `+ partida.selecaoA.cor +`; width: `+ partida.aposta.porcSelecaoA +`%`"> </div>
+                                        <div class="barraPorcentagem" :style="`background-color: #a4a4a2; width: `+ partida.aposta.porcEmpate +`%`"> </div>
+                                        <div class="barraPorcentagem" :style="`background-color: `+ partida.selecaoB.cor +`; width: `+ partida.aposta.porcSelecaoB +`%`"> </div>
                                     </div>
                                 </div>
                             </div>
@@ -311,7 +331,8 @@ export default {
                 selecaoB: {
                     nome: ""
                 },
-                dataHoraFmt: ""
+                dataHoraFmt: "",
+                aposta: ""
             },
             apostas: [],
             listaGols: [],
@@ -575,5 +596,9 @@ export default {
 .clickable:hover {
     cursor: pointer;
     background-color: #e8f5e6;
+}
+.barraPorcentagem {
+	height: 4px;
+    border-radius: 4px;
 }
 </style>

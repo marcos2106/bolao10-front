@@ -9,7 +9,7 @@
 				<!-- Login Form -->
 				<form>
 				<input type="text" id="login" class="fadeIn second" placeholder="E-mail" v-model="login" @keypress.enter="loginAction">
-				<input type="password" id="password" class="fadeIn third" placeholder="Senha" v-model="passwd" @keypress.enter="loginAction">
+				<input type="password" id="password" maxlength="8" class="fadeIn third" placeholder="Senha" v-model="passwd" @keypress.enter="loginAction">
 				<input type="button" class="fadeIn fourth mt-3" value="Acessar" @keyup.enter.native="loginAction" @click="loginAction">
 				</form>
 			</div>
