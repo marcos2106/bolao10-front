@@ -31,7 +31,7 @@
                                     <tr>
                                         <th scope="col" v-for="(partida, index) in listaPartidas" :key="partida.id" @click="detalharPartida(partida.id)"
                                                 class="clickable"
-                                                :class="(index == 0 || index == 48 || index == 56 || index == 60 || index == 62) ? 'borderFase' : ''">
+                                                :class="(index == 0 || index == 48 || index == 56 || index == 60 || index == 62) ? 'borderFase' : (index == 63) ? 'fundoFinal' : ''">
                                             <div class="tagAoVivo mb-2" v-if="partida.iniciada && !partida.finalizada"> <i class="fas fa-wifi ml-1 mr-1"></i> AO VIVO</div>
                                             <el-tooltip :content="partida.selecaoA.nome" placement="top">
                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -58,7 +58,7 @@
                                         </td>
                                         <td class="text-center font-weight-bold fonte-pontuacao"> {{ pontuacao.pontuacao }} </td>
                                         <td v-show="idSituacao>1" class="text-center" v-for="(aposta, index) in pontuacao.listaApostas" :key="aposta.partida.id"
-                                                :class="(index == 0 || index == 48 || index == 56 || index == 60 || index == 62) ? 'borderFase' : ''"> 
+                                                :class="(index == 0 || index == 48 || index == 56 || index == 60 || index == 62) ? 'borderFase' : (index == 63) ? 'fundoFinal' : ''"> 
                                             {{ aposta.placarA }} x {{ aposta.placarB }} <span v-if="aposta.partida.iniciada && !aposta.partida.finalizada"> ({{ aposta.pontuacaoProvisoria }}) </span><span v-if="aposta.partida.iniciada && aposta.partida.finalizada"> ({{ aposta.pontuacao }}) </span>
                                         </td>
                                         <td v-show="idSituacao==1" class="borderFase fonteApostas" colspan="64"> 
@@ -162,6 +162,10 @@ export default {
 }
 .alinhaVert {
 	margin: auto;
+}
+.fundoFinal {
+    color: #7c7806 !important;
+    font-weight: 700;
 }
 .fundoCampeao {
     background-color: #fffeb4;
