@@ -415,7 +415,7 @@ export default {
                 let aposta = response.data.object;
 
                 this.datasetAposta = {
-                    labels: [this.partida.selecaoA.nome +" "+ aposta.porcSelecaoA +"% ("+ aposta.numSelecaoA +")", "Empate "+ aposta.porcEmpate +"% ("+ aposta.numEmpate +")", this.partida.selecaoB.nome +" "+ aposta.porcSelecaoB +"% ("+ aposta.numSelecaoB +")"],
+                    labels: [this.partida.selecaoA.nome +" "+ aposta.porcSelecaoA +"% ", "Empate "+ aposta.porcEmpate +"% ", this.partida.selecaoB.nome +" "+ aposta.porcSelecaoB +"% "],
                     datasets: [
                         {
                             borderWidth: 1,

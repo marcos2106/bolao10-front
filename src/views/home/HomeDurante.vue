@@ -4,6 +4,10 @@
 		<div class="row">
 			<div class="col-8 mt--3">
 
+				<div class="col-12 mb-3 text-center fraseInicio">
+					"Enquanto houver partida, haverá esperança"
+				</div>
+
 				<div class="row mb-3 mt-3">
 					<div class="col" v-for="partida in partidasAnteriores" :key="partida.id">
 
@@ -488,5 +492,10 @@ export default {
 .clickable:hover {
     cursor: pointer;
     background-color: #e8f5e6;
+}
+.fraseInicio {
+	letter-spacing: 4px;
+	font-size: 13px;
+	font-style: italic;
 }
 </style>
