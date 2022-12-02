@@ -5,7 +5,7 @@
 			<div class="col-8 mt--3">
 
 				<div class="col-12 mb-3 text-center fraseInicio">
-					"Enquanto houver partida, haverá esperança"
+					"Enquanto houver partida, haverá esperança!"
 				</div>
 
 				<div class="row mb-3 mt-3">
