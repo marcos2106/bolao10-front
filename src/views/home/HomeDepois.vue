@@ -97,7 +97,10 @@
 										:class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
 										v-for="(rank, index) in ranking" :key="rank.usuario.id">
 									<div class="col-1 ml--2"><img class="avatarRedondo" width="25" :src="rank.usuario.avatar"></div>
-									<div class="col alinhaVert font-weight-bold">{{index+1}}. {{rank.usuario.nome}}</div><div>{{rank.pontuacao}} pts</div>
+									<div class="col alinhaVert font-weight-bold">
+										<span @click="paginaUsuario(rank.usuario.id)" class="clickable">{{index+1}}. {{rank.usuario.nome}}</span>
+									</div>
+									<div>{{rank.pontuacao}} pts</div>
 								</div>
 
 							</div>
@@ -123,7 +126,12 @@
 								<div class="mt-1" v-if="curiosidades.listaPlacarExato.length > 0">
 									<div class="row mt-1"
 											v-for="colocacao in curiosidades.listaPlacarExato" :key="colocacao.usuario.id">
-										<div class="col-1"><img class="avatarRedondo" width="25" :src="colocacao.usuario.avatar"></div><div class="col-8 alinhaVert">- {{ colocacao.usuario.nome }}</div><div class="col text-center"> {{ colocacao.quantidade }}</div>
+										<div class="col-1">
+											<img class="avatarRedondo" width="25" :src="colocacao.usuario.avatar">
+										</div>
+										<div class="col-8 alinhaVert">
+											<span @click="paginaUsuario(colocacao.usuario.id)" class="clickable">- {{ colocacao.usuario.nome }}</span>
+										</div><div class="col text-center"> {{ colocacao.quantidade }}</div>
 									</div>
 								</div>
 								<div v-else clss="text-center">
@@ -133,11 +141,12 @@
 							</div>
 
 							<div class="col-3">
-								Quem acertou os 4 colocados: <br/>
+								Quem acertou os finalistas: <br/>
 								<div class="mt-1" v-if="curiosidades.listaColocado.length > 0">
 									<div class="row mt-1"
 											v-for="usuario in curiosidades.listaColocado" :key="usuario.id">
-										<div class="col-1"><img class="avatarRedondo" width="25" :src="usuario.avatar"></div><div class="col alinhaVert">- {{ usuario.nome }}</div>
+										<div class="col-1"><img class="avatarRedondo" width="25" :src="usuario.avatar"></div>
+										<div class="col alinhaVert"><span @click="paginaUsuario(usuario.id)" class="clickable">- {{ usuario.nome }}</span></div>
 									</div>
 								</div>
 								<div v-else clss="text-center">
@@ -147,16 +156,18 @@
 							</div>
 
 							<div class="col-3">
-								Quem não fez NENHUM placar exato: <br/>
+								Quem mais errou placares (zerou): <br/>
 								<div class="mt-1" v-if="curiosidades.listaNenhumPlacar.length > 0">
 									<div class="row mt-1"
-											v-for="usuario in curiosidades.listaNenhumPlacar" :key="usuario.id">
-										<div class="col-1"><img class="avatarRedondo" width="25" :src="usuario.avatar"></div><div class="col alinhaVert">- {{ usuario.nome }}</div>
+											v-for="colocacao in curiosidades.listaNenhumPlacar" :key="colocacao.usuario.id">
+										<div class="col-1"><img class="avatarRedondo" width="25" :src="colocacao.usuario.avatar"></div>
+										<div class="col-8 alinhaVert"><span @click="paginaUsuario(colocacao.usuario.id)" class="clickable">- {{ colocacao.usuario.nome }}</span></div>
+										<div class="col text-center"> {{ colocacao.quantidade }}</div>
 									</div>
 								</div>
 								<div v-else clss="text-center">
 									<br/><br/>
-									- Todos acertaram ao menos 1 partida!! :)
+									- Ninguém errou partida!! oO
 								</div>
 							</div>
 
@@ -165,7 +176,8 @@
 								<div class="mt-1" v-if="curiosidades.listaNenhumColocado.length > 0">
 									<div class="row mt-1"
 											v-for="usuario in curiosidades.listaNenhumColocado" :key="usuario.id">
-										<div class="col-1"><img class="avatarRedondo" width="25" :src="usuario.avatar"></div><div class="col alinhaVert">- {{ usuario.nome }}</div>
+										<div class="col-1"><img class="avatarRedondo" width="25" :src="usuario.avatar"></div>
+										<div class="col alinhaVert"><span @click="paginaUsuario(usuario.id)" class="clickable">- {{ usuario.nome }}</span></div>
 									</div>
 								</div>
 								<div v-else clss="text-center">
@@ -258,7 +270,10 @@ export default {
 			}).finally(() =>{
 				NProgress.done();
 			})
-		}
+		},
+        paginaUsuario(idUsuario) {
+            location.href = '/meubolao/'+ idUsuario;
+        }
 	},
 };
 </script>
@@ -339,5 +354,9 @@ export default {
 }
 .avatarRedondo {
     border-radius: 80px;
+}
+.clickable:hover {
+    cursor: pointer;
+    background-color: #e8f5e6;
 }
 </style>
