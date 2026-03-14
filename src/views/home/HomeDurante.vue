@@ -4,9 +4,11 @@
 		<div class="row">
 			<div class="col-8 mt--3">
 
-				<div class="col-12 mb-3 text-center fraseInicio">
-					"Enquanto houver partida, haverá esperança!"
-				</div>
+				<!--
+					<div class="col-12 mb-3 text-center fraseInicio">
+						"Enquanto houver partida, haverá esperança!"
+					</div>
+				-->
 
 				<div class="row mb-3 mt-3">
 					<div class="col" v-for="partida in partidasAnteriores" :key="partida.id">
@@ -121,12 +123,13 @@
 				<div class="row mt-3">
 					<div class="col-6">
 
-						<div class="janelaPartida"
-								v-if="partida2 != null">
-							<div class="col tituloQuadroPequeno">
-								<i class="fas fa-futbol mr-1"></i> Jogo Seguinte
+						<div class="janelaPartida" v-if="partida2 != null">
+							<div class="row">
+								<div class="col tituloQuadroPequeno">
+									<i class="fas fa-futbol ml-1"></i> Jogo Seguinte
+								</div>
 							</div>
-							<div class="row mt-2 mt--4">
+							<div class="row">
 								<div class="col text-center">
 									<div class="col mt-2" style="justify-content: space-around; display: flex;">
 										<div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida2.dataHoraFmt.substring(0, 5) }} </div>
@@ -185,12 +188,13 @@
 					</div>
 					<div class="col-6">
 
-						<div class="janelaPartida"
-								v-if="partida3 != null">
-							<div class="col tituloQuadroPequeno">
-								<i class="fas fa-futbol mr-1"></i> Jogo Seguinte
+						<div class="janelaPartida" v-if="partida3 != null">
+							<div class="row">
+								<div class="col tituloQuadroPequeno">
+									<i class="fas fa-futbol ml-1"></i> Jogo Seguinte
+								</div>
 							</div>
-							<div class="row mt-2 mt--4">
+							<div class="row">
 								<div class="col text-center">
 									<div class="col mt-2" style="justify-content: space-around; display: flex;">
 										<div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida3.dataHoraFmt.substring(0, 5) }} </div>

@@ -58,10 +58,14 @@
 				<span class="ml-1 text-danger" v-if="!dadosUsuario.aposta"> <i class="far fa-times-circle"></i> Pendente </span>
 				<span class="ml-1 text-success" v-if="dadosUsuario.aposta"> <i class="far fa-check-circle"></i> Realizada </span>
 			  </div>
-			  <button v-if="!dadosUsuario.aposta" type="button" @click="fazerAposta(dadosUsuario.id)"
-					  class="btn btn-outline-secondary btn-sm">
-				<i class="fas fa-rocket mr-1"></i> Fazer aposta
-			  </button>
+			</div>
+			<div class="d-flex flex-column flex-sm-row justify-content-between mb-2">
+				<div class="tituloJanelaPequena alinhaVert mb-2 mb-sm-0">
+					<button v-if="!dadosUsuario.aposta" type="button" @click="fazerAposta(dadosUsuario.id)"
+						class="btn btn-outline-secondary btn-sm">
+						<i class="fas fa-rocket mr-1"></i> Fazer aposta
+					</button>
+				</div>
 			</div>
 			<div class="d-flex flex-column flex-sm-row justify-content-between">
 			  <div class="tituloJanelaPequena alinhaVert mb-2 mb-sm-0">

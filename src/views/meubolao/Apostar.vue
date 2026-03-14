@@ -21,19 +21,19 @@
                 </a-steps>
 
                 <div class="steps-content">
-                    <div class="row d-flex justify-content-center" v-if="current == 0"> <!-- FASE GRUPOS -->
+
+                    <!-- STEP 0: FASE DE GRUPOS -->
+                    <div class="row d-flex justify-content-center" v-if="current == 0">
                         <div class="row">
-                            <div class="col-11 ml-4 mt-4"> <!-- GRUPOA A -->
-                                <h4 class="card-title">
-                                    Grupo A
-                                </h4>
-                                <div v-if="listaPartidasA.length==0" class="loading">Carregando partidas...</div>
-                                
+                            <div class="col-11 ml-4 mt-4" v-for="grupo in grupos" :key="grupo">
+                                <h4 class="card-title">Grupo {{ grupo }}</h4>
+                                <div v-if="!listaPartidasGrupo[grupo] || listaPartidasGrupo[grupo].length == 0" class="loading">Carregando partidas...</div>
+
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="row">
-                                            <div class="col-4 separacaoTabela" 
-                                                    v-for="partida in listaPartidasA" :key="partida.id">
+                                            <div class="col-12 col-md-6 col-lg-4 separacaoTabela"
+                                                    v-for="partida in listaPartidasGrupo[grupo]" :key="partida.id">
                                                 <div class="col-12 mt-2" style="justify-content: space-around; display: flex;">
                                                     <div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} </div>
                                                     <div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida.dataHoraFmt.substring(6, 8) }}h </div>
@@ -41,416 +41,36 @@
                                                 </div>
                                                 <div class="row mt-2">
                                                     <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem"> 
+                                                        <img width="20" :src="partida.selecaoA.imagem" loading="lazy">
                                                         {{ partida.selecaoA.nome }}
                                                     </div>
                                                     <div class="col">
                                                         <el-select filterable v-model="partida.placarA" placeholder="Selecione">
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
+                                                            <el-option v-for="gol in gols" :key="gol" :label="gol" :value="gol">{{ gol }}</el-option>
                                                         </el-select>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem"> 
+                                                        <img width="20" :src="partida.selecaoB.imagem" loading="lazy">
                                                         {{ partida.selecaoB.nome }}
                                                     </div>
                                                     <div class="col">
-                                                        <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
+                                                        <el-select filterable v-model="partida.placarB" placeholder="Selecione">
+                                                            <el-option v-for="gol in gols" :key="gol" :label="gol" :value="gol">{{ gol }}</el-option>
                                                         </el-select>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div> 
-                                    </div> 
-                                </div> 
-                            </div>
-                            <div class="col-11 ml-4 mt-4"> <!-- GRUPOA B -->
-                                <h4 class="card-title">
-                                    Grupo B
-                                </h4>
-                                <div v-if="listaPartidasB.length==0" class="loading">Carregando partidas...</div>
-                                
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-4 separacaoTabela" 
-                                                    v-for="partida in listaPartidasB" :key="partida.id">
-                                                <div class="col-12 mt-2" style="justify-content: space-around; display: flex;">
-                                                    <div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} </div>
-                                                    <div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida.dataHoraFmt.substring(6, 8) }}h </div>
-                                                    <div class="badge badge-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida.local }}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem"> 
-                                                        {{ partida.selecaoA.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarA" placeholder="Selecione">
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem"> 
-                                                        {{ partida.selecaoB.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div> 
-                                </div> 
-                            </div>
-                            <div class="col-11 ml-4 mt-4"> <!-- GRUPOA C -->
-                                <h4 class="card-title">
-                                    Grupo C
-                                </h4>
-                                <div v-if="listaPartidasC.length==0" class="loading">Carregando partidas...</div>
-                                
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-4 separacaoTabela" 
-                                                    v-for="partida in listaPartidasC" :key="partida.id">
-                                                <div class="col-12 mt-2" style="justify-content: space-around; display: flex;">
-                                                    <div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} </div>
-                                                    <div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida.dataHoraFmt.substring(6, 8) }}h </div>
-                                                    <div class="badge badge-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida.local }}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem"> 
-                                                        {{ partida.selecaoA.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarA" placeholder="Selecione">
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem"> 
-                                                        {{ partida.selecaoB.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div> 
-                                </div> 
-                            </div>
-                            <div class="col-11 ml-4 mt-4"> <!-- GRUPOA D -->
-                                <h4 class="card-title">
-                                    Grupo D
-                                </h4>
-                                <div v-if="listaPartidasD.length==0" class="loading">Carregando partidas...</div>
-                                
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-4 separacaoTabela" 
-                                                    v-for="partida in listaPartidasD" :key="partida.id">
-                                                <div class="col-12 mt-2" style="justify-content: space-around; display: flex;">
-                                                    <div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} </div>
-                                                    <div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida.dataHoraFmt.substring(6, 8) }}h </div>
-                                                    <div class="badge badge-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida.local }}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem"> 
-                                                        {{ partida.selecaoA.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarA" placeholder="Selecione">
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem"> 
-                                                        {{ partida.selecaoB.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div> 
-                                </div> 
-                            </div>
-                            <div class="col-11 ml-4 mt-4"> <!-- GRUPOA E -->
-                                <h4 class="card-title">
-                                    Grupo E
-                                </h4>
-                                <div v-if="listaPartidasE.length==0" class="loading">Carregando partidas...</div>
-                                
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-4 separacaoTabela" 
-                                                    v-for="partida in listaPartidasE" :key="partida.id">
-                                                <div class="col-12 mt-2" style="justify-content: space-around; display: flex;">
-                                                    <div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} </div>
-                                                    <div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida.dataHoraFmt.substring(6, 8) }}h </div>
-                                                    <div class="badge badge-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida.local }}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem"> 
-                                                        {{ partida.selecaoA.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarA" placeholder="Selecione">
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem"> 
-                                                        {{ partida.selecaoB.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div> 
-                                </div> 
-                            </div>
-                            <div class="col-11 ml-4 mt-4"> <!-- GRUPOA F -->
-                                <h4 class="card-title">
-                                    Grupo F
-                                </h4>
-                                <div v-if="listaPartidasF.length==0" class="loading">Carregando partidas...</div>
-                                
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-4 separacaoTabela" 
-                                                    v-for="partida in listaPartidasF" :key="partida.id">
-                                                <div class="col-12 mt-2" style="justify-content: space-around; display: flex;">
-                                                    <div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} </div>
-                                                    <div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida.dataHoraFmt.substring(6, 8) }}h </div>
-                                                    <div class="badge badge-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida.local }}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem"> 
-                                                        {{ partida.selecaoA.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarA" placeholder="Selecione">
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem"> 
-                                                        {{ partida.selecaoB.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div> 
-                                </div> 
-                            </div>
-                            <div class="col-11 ml-4 mt-4"> <!-- GRUPOA G -->
-                                <h4 class="card-title">
-                                    Grupo G
-                                </h4>
-                                <div v-if="listaPartidasG.length==0" class="loading">Carregando partidas...</div>
-                                
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-4 separacaoTabela" 
-                                                    v-for="partida in listaPartidasG" :key="partida.id">
-                                                <div class="col-12 mt-2" style="justify-content: space-around; display: flex;">
-                                                    <div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} </div>
-                                                    <div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida.dataHoraFmt.substring(6, 8) }}h </div>
-                                                    <div class="badge badge-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida.local }}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem"> 
-                                                        {{ partida.selecaoA.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarA" placeholder="Selecione">
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem"> 
-                                                        {{ partida.selecaoB.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div> 
-                                </div> 
-                            </div>
-                            <div class="col-11 ml-4 mt-4"> <!-- GRUPOA H -->
-                                <h4 class="card-title">
-                                    Grupo H
-                                </h4>
-                                <div v-if="listaPartidasH.length==0" class="loading">Carregando partidas...</div>
-                                
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-4 separacaoTabela" 
-                                                    v-for="partida in listaPartidasH" :key="partida.id">
-                                                <div class="col-12 mt-2" style="justify-content: space-around; display: flex;">
-                                                    <div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} </div>
-                                                    <div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida.dataHoraFmt.substring(6, 8) }}h </div>
-                                                    <div class="badge badge-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida.local }}</div>
-                                                </div>
-                                                <div class="row mt-2">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoA.imagem"> 
-                                                        {{ partida.selecaoA.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarA" placeholder="Selecione">
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6 mt-2 little-text">
-                                                        <img width="20" :src="partida.selecaoB.imagem"> 
-                                                        {{ partida.selecaoB.nome }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
-                                                            <el-option v-for="gol in gols"
-                                                                        :key="gol"
-                                                                        :label="gol"
-                                                                        :value="gol">
-                                                                {{ gol }}
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div> 
-                                </div> 
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row d-flex justify-content-center" v-if="current == 1"> <!-- OITAVAS -->
+                    <!-- STEP 1: OITAVAS -->
+                    <div class="row d-flex justify-content-center" v-if="current == 1">
                         <div class="row ml-4"> 
                             <div v-if="listaPartidas8.length==0" class="loading">Carregando partidas...</div>
                             
@@ -473,12 +93,7 @@
                                                 </div>
                                                 <div class="col-5">
                                                     <el-select filterable v-model="partida.placarA" placeholder="Selecione">
-                                                        <el-option v-for="gol in gols"
-                                                                    :key="gol"
-                                                                    :label="gol"
-                                                                    :value="gol">
-                                                            {{ gol }}
-                                                        </el-option>
+                                                        <el-option v-for="gol in gols" :key="gol" :label="gol" :value="gol">{{ gol }}</el-option>
                                                     </el-select>
                                                 </div>
                                             </div>
@@ -489,13 +104,8 @@
                                                     </el-tooltip>
                                                 </div>
                                                 <div class="col-5">
-                                                    <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
-                                                        <el-option v-for="gol in gols"
-                                                                    :key="gol"
-                                                                    :label="gol"
-                                                                    :value="gol">
-                                                            {{ gol }}
-                                                        </el-option>
+                                                    <el-select filterable v-model="partida.placarB" placeholder="Selecione">
+                                                        <el-option v-for="gol in gols" :key="gol" :label="gol" :value="gol">{{ gol }}</el-option>
                                                     </el-select>
                                                 </div>
                                             </div>
@@ -506,7 +116,8 @@
                         </div>     
                     </div>
 
-                    <div class="row d-flex justify-content-center" v-if="current == 2"> <!-- QUARTAS -->
+                    <!-- STEP 2: QUARTAS -->
+                    <div class="row d-flex justify-content-center" v-if="current == 2">
                         <div class="row ml-4"> 
                             <div v-if="listaPartidas4.length==0" class="loading">Carregando partidas...</div>
                             
@@ -529,12 +140,7 @@
                                                 </div>
                                                 <div class="col-5">
                                                     <el-select filterable v-model="partida.placarA" placeholder="Selecione">
-                                                        <el-option v-for="gol in gols"
-                                                                    :key="gol"
-                                                                    :label="gol"
-                                                                    :value="gol">
-                                                            {{ gol }}
-                                                        </el-option>
+                                                        <el-option v-for="gol in gols" :key="gol" :label="gol" :value="gol">{{ gol }}</el-option>
                                                     </el-select>
                                                 </div>
                                             </div>
@@ -545,13 +151,8 @@
                                                     </el-tooltip>
                                                 </div>
                                                 <div class="col-5">
-                                                    <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
-                                                        <el-option v-for="gol in gols"
-                                                                    :key="gol"
-                                                                    :label="gol"
-                                                                    :value="gol">
-                                                            {{ gol }}
-                                                        </el-option>
+                                                    <el-select filterable v-model="partida.placarB" placeholder="Selecione">
+                                                        <el-option v-for="gol in gols" :key="gol" :label="gol" :value="gol">{{ gol }}</el-option>
                                                     </el-select>
                                                 </div>
                                             </div>
@@ -562,7 +163,8 @@
                         </div>     
                     </div>
 
-                    <div class="row d-flex justify-content-center" v-if="current == 3"> <!-- SEMIS -->
+                    <!-- STEP 3: SEMIS -->
+                    <div class="row d-flex justify-content-center" v-if="current == 3">
                         <div class="row ml-4"> 
                             <div v-if="listaPartidasS.length==0" class="loading">Carregando partidas...</div>
                             
@@ -585,12 +187,7 @@
                                                 </div>
                                                 <div class="col-5">
                                                     <el-select filterable v-model="partida.placarA" placeholder="Selecione">
-                                                        <el-option v-for="gol in gols"
-                                                                    :key="gol"
-                                                                    :label="gol"
-                                                                    :value="gol">
-                                                            {{ gol }}
-                                                        </el-option>
+                                                        <el-option v-for="gol in gols" :key="gol" :label="gol" :value="gol">{{ gol }}</el-option>
                                                     </el-select>
                                                 </div>
                                             </div>
@@ -601,13 +198,8 @@
                                                     </el-tooltip>
                                                 </div>
                                                 <div class="col-5">
-                                                    <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
-                                                        <el-option v-for="gol in gols"
-                                                                    :key="gol"
-                                                                    :label="gol"
-                                                                    :value="gol">
-                                                            {{ gol }}
-                                                        </el-option>
+                                                    <el-select filterable v-model="partida.placarB" placeholder="Selecione">
+                                                        <el-option v-for="gol in gols" :key="gol" :label="gol" :value="gol">{{ gol }}</el-option>
                                                     </el-select>
                                                 </div>
                                             </div>
@@ -618,7 +210,8 @@
                         </div>     
                     </div>
 
-                    <div class="row d-flex justify-content-center" v-if="current == 4"> <!-- FINAIS -->
+                    <!-- STEP 4: FINAIS -->
+                    <div class="row d-flex justify-content-center" v-if="current == 4">
                         <div class="row ml-4"> 
                             <div v-if="listaPartidas1.length==0" class="loading">Carregando partidas...</div>
                             
@@ -628,7 +221,7 @@
                                         <div class="col-5 separacaoTabela" 
                                                 v-for="partida in listaPartidas1" :key="partida.id">
                                             <div class="col-12 mt-2" style="justify-content: space-around; display: flex;">
-                                                <div class="badge badge-secondary" v-if="partida.id == 63"><i class="fas fa-futbol"></i>&nbsp; Terceiro lugar </div>
+                                                <div class="badge badge-secondary descricaoFinal" v-if="partida.id == 63"><i class="fas fa-futbol"></i>&nbsp; Terceiro lugar </div>
                                                 <div class="badge badge-secondary descricaoFinal" v-if="partida.id == 64"><i class="fas fa-trophy"></i>&nbsp; FINAL </div>
                                                 <div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} </div>
                                                 <div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida.dataHoraFmt.substring(6, 8) }}h </div>
@@ -642,12 +235,7 @@
                                                 </div>
                                                 <div class="col-5">
                                                     <el-select filterable v-model="partida.placarA" placeholder="Selecione">
-                                                        <el-option v-for="gol in gols"
-                                                                    :key="gol"
-                                                                    :label="gol"
-                                                                    :value="gol">
-                                                            {{ gol }}
-                                                        </el-option>
+                                                        <el-option v-for="gol in gols" :key="gol" :label="gol" :value="gol">{{ gol }}</el-option>
                                                     </el-select>
                                                 </div>
                                             </div>
@@ -658,13 +246,8 @@
                                                     </el-tooltip>
                                                 </div>
                                                 <div class="col-5">
-                                                    <el-select filterable v-model="partida.placarB" placeholder="Selecione" >
-                                                        <el-option v-for="gol in gols"
-                                                                    :key="gol"
-                                                                    :label="gol"
-                                                                    :value="gol">
-                                                            {{ gol }}
-                                                        </el-option>
+                                                    <el-select filterable v-model="partida.placarB" placeholder="Selecione">
+                                                        <el-option v-for="gol in gols" :key="gol" :label="gol" :value="gol">{{ gol }}</el-option>
                                                     </el-select>
                                                 </div>
                                             </div>
@@ -675,7 +258,8 @@
                         </div>     
                     </div>
 
-                    <div class="row d-flex justify-content-center" v-if="current == 5"> <!-- POSIÇÕES -->
+                    <!-- STEP 5: POSIÇÕES -->
+                    <div class="row d-flex justify-content-center" v-if="current == 5">
                         <div class="row mt-4"> 
                             <div class="col separacaoTabela">
                                 <div class="row mt-2">
@@ -684,12 +268,9 @@
                                         <p class="little-text">({{pontuacao.pontosCampeao}} pontos)</p>
                                     </div>
                                     <div class="col-6">
-                                        <el-select filterable v-model="posicao1" placeholder="Campeão" >
-                                            <el-option v-for="selecao in listaSelecao"
-                                                        :key="selecao.id"
-                                                        :label="selecao.nome"
-                                                        :value="selecao.nome">
-                                                <img width="20" class="m-2" :src=selecao.imagem> &nbsp; {{ selecao.nome}}
+                                        <el-select filterable v-model="posicao1" placeholder="Campeão">
+                                            <el-option v-for="selecao in listaSelecao" :key="selecao.id" :label="selecao.nome" :value="selecao.nome">
+                                                <img width="20" class="m-2" :src=selecao.imagem loading="lazy"> &nbsp; {{ selecao.nome}}
                                             </el-option>
                                         </el-select>
                                     </div>
@@ -700,12 +281,9 @@
                                         <p class="little-text">({{pontuacao.pontosVice}} pontos)</p>
                                     </div>
                                     <div class="col-6">
-                                        <el-select filterable v-model="posicao2" placeholder="2º Colocado" >
-                                            <el-option v-for="selecao in listaSelecao"
-                                                        :key="selecao.id"
-                                                        :label="selecao.nome"
-                                                        :value="selecao.nome">
-                                                <img width="20" class="m-2" :src=selecao.imagem> &nbsp; {{ selecao.nome}}
+                                        <el-select filterable v-model="posicao2" placeholder="2º Colocado">
+                                            <el-option v-for="selecao in listaSelecao" :key="selecao.id" :label="selecao.nome" :value="selecao.nome">
+                                                <img width="20" class="m-2" :src=selecao.imagem loading="lazy"> &nbsp; {{ selecao.nome}}
                                             </el-option>
                                         </el-select>
                                     </div>
@@ -716,12 +294,9 @@
                                         <p class="little-text">({{pontuacao.pontosTerceiro}} pontos)</p>
                                     </div>
                                     <div class="col-6">
-                                        <el-select filterable v-model="posicao3" placeholder="3º Colocado" >
-                                            <el-option v-for="selecao in listaSelecao"
-                                                        :key="selecao.id"
-                                                        :label="selecao.nome"
-                                                        :value="selecao.nome">
-                                                <img width="20" class="m-2" :src=selecao.imagem> &nbsp; {{ selecao.nome}}
+                                        <el-select filterable v-model="posicao3" placeholder="3º Colocado">
+                                            <el-option v-for="selecao in listaSelecao" :key="selecao.id" :label="selecao.nome" :value="selecao.nome">
+                                                <img width="20" class="m-2" :src=selecao.imagem loading="lazy"> &nbsp; {{ selecao.nome}}
                                             </el-option>
                                         </el-select>
                                     </div>
@@ -732,12 +307,9 @@
                                         <p class="little-text">({{pontuacao.pontosQuarto}} pontos)</p>
                                     </div>
                                     <div class="col-6">
-                                        <el-select filterable v-model="posicao4" placeholder="4º Colocado" >
-                                            <el-option v-for="selecao in listaSelecao"
-                                                        :key="selecao.id"
-                                                        :label="selecao.nome"
-                                                        :value="selecao.nome">
-                                                <img width="20" class="m-2" :src=selecao.imagem> &nbsp; {{ selecao.nome}}
+                                        <el-select filterable v-model="posicao4" placeholder="4º Colocado">
+                                            <el-option v-for="selecao in listaSelecao" :key="selecao.id" :label="selecao.nome" :value="selecao.nome">
+                                                <img width="20" class="m-2" :src=selecao.imagem loading="lazy"> &nbsp; {{ selecao.nome}}
                                             </el-option>
                                         </el-select>
                                     </div>
@@ -746,7 +318,8 @@
                         </div> 
                     </div>
 
-                    <div class="row d-flex justify-content-center" v-if="current == 6"> <!-- ARTILHARIA -->
+                    <!-- STEP 6: ARTILHARIA -->
+                    <div class="row d-flex justify-content-center" v-if="current == 6">
                         <div class="row mt-4"> 
                             <div class="col separacaoTabela">
                                 <div class="row mt-2">
@@ -755,12 +328,9 @@
                                         <p class="little-text">({{pontuacao.pontosArtilharia}} pontos)</p>
                                     </div>
                                     <div class="col-6">
-                                        <el-select filterable v-model="artilharia" placeholder="Artilharia" >
-                                            <el-option v-for="selecao in listaSelecao"
-                                                        :key="selecao.id"
-                                                        :label="selecao.nome"
-                                                        :value="selecao.nome">
-                                                <img width="20" class="m-2" :src=selecao.imagem> &nbsp; {{ selecao.nome}}
+                                        <el-select filterable v-model="artilharia" placeholder="Artilharia">
+                                            <el-option v-for="selecao in listaSelecao" :key="selecao.id" :label="selecao.nome" :value="selecao.nome">
+                                                <img width="20" class="m-2" :src=selecao.imagem loading="lazy"> &nbsp; {{ selecao.nome}}
                                             </el-option>
                                         </el-select>
                                     </div>
@@ -769,265 +339,50 @@
                         </div>
                     </div>
 
-                    <div class="row d-flex justify-content-center" v-if="current == 7"> <!-- FINALIZAÇÃO -->
+                    <!-- STEP 7: FINALIZAÇÃO (resumo de tudo) -->
+                    <div class="row d-flex justify-content-center" v-if="current == 7">
                         <div class="row">
-                            <div class="col-11 ml-4 mt-4"> <!-- GRUPOA A -->
-                                <h4 class="little-text">
-                                    Grupo A
-                                </h4>
+
+                            <!-- Grupos A–L dinâmicos -->
+                            <div class="col-11 ml-4 mt-4" v-for="grupo in grupos" :key="grupo">
+                                <h4 class="little-text">Grupo {{ grupo }}</h4>
                                 <div class="row mt-n2">
-                                    <div class="col-4 separacaoTabelaFinaliza" 
+                                    <div class="col-12 col-md-6 col-lg-4 separacaoTabelaFinaliza"
                                             :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
-                                            v-for="partida in listaPartidasA" :key="partida.id">
+                                            v-for="partida in listaPartidasGrupo[grupo]" :key="partida.id">
                                         <div class="row p-2 mt-2 little-text">
                                             <div class="col-10">
-                                                <img width="20" :src="partida.selecaoA.imagem"> 
+                                                <img width="20" :src="partida.selecaoA.imagem" loading="lazy">
                                                 {{ partida.selecaoA.nome }}
                                             </div>
-                                            <div class="col">
-                                                {{ partida.placarA }}
-                                            </div>
+                                            <div class="col">{{ partida.placarA }}</div>
                                         </div>
                                         <div class="row p-2 little-text">
                                             <div class="col-10">
-                                                <img width="20" :src="partida.selecaoB.imagem"> 
+                                                <img width="20" :src="partida.selecaoB.imagem" loading="lazy">
                                                 {{ partida.selecaoB.nome }}
                                             </div>
-                                            <div class="col">
-                                                {{ partida.placarB }}
-                                            </div>
+                                            <div class="col">{{ partida.placarB }}</div>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
-                            <div class="col-11 ml-4 mt-2"> <!-- GRUPOA B -->
-                                <h4 class="little-text">
-                                    Grupo B
-                                </h4>
-                                <div class="row mt-n2">
-                                    <div class="col-4 separacaoTabelaFinaliza"
-                                            :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
-                                            v-for="partida in listaPartidasB" :key="partida.id">
-                                        <div class="row p-2 mt-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoA.imagem"> 
-                                                {{ partida.selecaoA.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarA }}
-                                            </div>
-                                        </div>
-                                        <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoB.imagem"> 
-                                                {{ partida.selecaoB.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarB }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="col-11 ml-4 mt-2"> <!-- GRUPOA C -->
-                                <h4 class="little-text">
-                                    Grupo C
-                                </h4>
-                                <div class="row mt-n2">
-                                    <div class="col-4 separacaoTabelaFinaliza" 
-                                            :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
-                                            v-for="partida in listaPartidasC" :key="partida.id">
-                                        <div class="row p-2 mt-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoA.imagem"> 
-                                                {{ partida.selecaoA.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarA }}
-                                            </div>
-                                        </div>
-                                        <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoB.imagem"> 
-                                                {{ partida.selecaoB.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarB }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="col-11 ml-4 mt-2"> <!-- GRUPOA D -->
-                                <h4 class="little-text">
-                                    Grupo D
-                                </h4>
-                                <div class="row mt-n2">
-                                    <div class="col-4 separacaoTabelaFinaliza" 
-                                            :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
-                                            v-for="partida in listaPartidasD" :key="partida.id">
-                                        <div class="row p-2 mt-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoA.imagem"> 
-                                                {{ partida.selecaoA.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarA }}
-                                            </div>
-                                        </div>
-                                        <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoB.imagem"> 
-                                                {{ partida.selecaoB.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarB }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="col-11 ml-4 mt-2"> <!-- GRUPOA E -->
-                                <h4 class="little-text">
-                                    Grupo E
-                                </h4>
-                                <div class="row mt-n2">
-                                    <div class="col-4 separacaoTabelaFinaliza" 
-                                            :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
-                                            v-for="partida in listaPartidasE" :key="partida.id">
-                                        <div class="row p-2 mt-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoA.imagem"> 
-                                                {{ partida.selecaoA.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarA }}
-                                            </div>
-                                        </div>
-                                        <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoB.imagem"> 
-                                                {{ partida.selecaoB.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarB }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="col-11 ml-4 mt-2"> <!-- GRUPOA F -->
-                                <h4 class="little-text">
-                                    Grupo F
-                                </h4>
-                                <div class="row mt-n2">
-                                    <div class="col-4 separacaoTabelaFinaliza" 
-                                            :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
-                                            v-for="partida in listaPartidasF" :key="partida.id">
-                                        <div class="row p-2 mt-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoA.imagem"> 
-                                                {{ partida.selecaoA.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarA }}
-                                            </div>
-                                        </div>
-                                        <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoB.imagem"> 
-                                                {{ partida.selecaoB.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarB }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="col-11 ml-4 mt-2"> <!-- GRUPOA G -->
-                                <h4 class="little-text">
-                                    Grupo G
-                                </h4>
-                                <div class="row mt-n2">
-                                    <div class="col-4 separacaoTabelaFinaliza" 
-                                            :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
-                                            v-for="partida in listaPartidasG" :key="partida.id">
-                                        <div class="row p-2 mt-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoA.imagem"> 
-                                                {{ partida.selecaoA.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarA }}
-                                            </div>
-                                        </div>
-                                        <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoB.imagem"> 
-                                                {{ partida.selecaoB.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarB }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="col-11 ml-4 mt-2"> <!-- GRUPOA H -->
-                                <h4 class="little-text">
-                                    Grupo H
-                                </h4>
-                                <div class="row mt-n2">
-                                    <div class="col-4 separacaoTabelaFinaliza" 
-                                            :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
-                                            v-for="partida in listaPartidasH" :key="partida.id">
-                                        <div class="row p-2 mt-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoA.imagem"> 
-                                                {{ partida.selecaoA.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarA }}
-                                            </div>
-                                        </div>
-                                        <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                <img width="20" :src="partida.selecaoB.imagem"> 
-                                                {{ partida.selecaoB.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarB }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>
+
                         </div>
                         <div class="row" style="width: 90%"> <!-- OITAVAS -->
                             <div class="col-12 mt-4"> 
-                                <h4 class="little-text">
-                                    Oitavas de Final
-                                </h4>
+                                <h4 class="little-text">Oitavas de Final</h4>
                                 <div class="row">
                                     <div class="col-6 separacaoTabelaFinaliza" 
                                             :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
                                             v-for="partida in listaPartidas8" :key="partida.id">
                                         <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                {{ partida.selecaoA.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarA }}
-                                            </div>
+                                            <div class="col-10">{{ partida.selecaoA.nome }}</div>
+                                            <div class="col">{{ partida.placarA }}</div>
                                         </div>
                                         <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                {{ partida.selecaoB.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarB }}
-                                            </div>
+                                            <div class="col-10">{{ partida.selecaoB.nome }}</div>
+                                            <div class="col">{{ partida.placarB }}</div>
                                         </div>
                                     </div>
                                 </div> 
@@ -1035,28 +390,18 @@
                         </div> 
                         <div class="row" style="width: 90%"> <!-- QUARTAS -->
                             <div class="col-12 mt-4">
-                                <h4 class="little-text">
-                                    Quartas de Final
-                                </h4>
+                                <h4 class="little-text">Quartas de Final</h4>
                                 <div class="row">
                                     <div class="col-6 separacaoTabelaFinaliza" 
                                             :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
                                             v-for="partida in listaPartidas4" :key="partida.id">
                                         <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                {{ partida.selecaoA.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarA }}
-                                            </div>
+                                            <div class="col-10">{{ partida.selecaoA.nome }}</div>
+                                            <div class="col">{{ partida.placarA }}</div>
                                         </div>
                                         <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                {{ partida.selecaoB.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarB }}
-                                            </div>
+                                            <div class="col-10">{{ partida.selecaoB.nome }}</div>
+                                            <div class="col">{{ partida.placarB }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -1064,28 +409,18 @@
                         </div>  
                         <div class="row" style="width: 90%"> <!-- SEMI -->
                             <div class="col-12 mt-4">
-                                <h4 class="little-text">
-                                    Semi-Final
-                                </h4>
+                                <h4 class="little-text">Semi-Final</h4>
                                 <div class="row">
                                     <div class="col-6 separacaoTabelaFinaliza" 
                                             :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
                                             v-for="partida in listaPartidasS" :key="partida.id">
                                         <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                {{ partida.selecaoA.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarA }}
-                                            </div>
+                                            <div class="col-10">{{ partida.selecaoA.nome }}</div>
+                                            <div class="col">{{ partida.placarA }}</div>
                                         </div>
                                         <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                {{ partida.selecaoB.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarB }}
-                                            </div>
+                                            <div class="col-10">{{ partida.selecaoB.nome }}</div>
+                                            <div class="col">{{ partida.placarB }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -1093,28 +428,18 @@
                         </div>   
                         <div class="row" style="width: 90%"> <!-- FINAL -->
                             <div class="col-12 mt-4">
-                                <h4 class="little-text">
-                                    Final
-                                </h4>
+                                <h4 class="little-text">Final</h4>
                                 <div class="row">
                                     <div class="col-6 separacaoTabelaFinaliza" 
                                             :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
                                             v-for="partida in listaPartidas1" :key="partida.id">
                                         <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                {{ partida.selecaoA.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarA }}
-                                            </div>
+                                            <div class="col-10">{{ partida.selecaoA.nome }}</div>
+                                            <div class="col">{{ partida.placarA }}</div>
                                         </div>
                                         <div class="row p-2 little-text">
-                                            <div class="col-10">
-                                                {{ partida.selecaoB.nome }}
-                                            </div>
-                                            <div class="col">
-                                                {{ partida.placarB }}
-                                            </div>
+                                            <div class="col-10">{{ partida.selecaoB.nome }}</div>
+                                            <div class="col">{{ partida.placarB }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -1122,72 +447,44 @@
                         </div>     
                         <div class="row" style="width: 90%"> <!-- COLOCAÇÕES -->
                             <div class="col-12 mt-4">
-                                <h4 class="little-text">
-                                    Colocações
-                                </h4>
+                                <h4 class="little-text">Colocações</h4>
                                 <div class="row"> 
                                     <div class="col separacaoTabela little-text">
-                                        <div class="row mt-2"
-                                                :class="[{ 'partidaFaltando': (posicao1 == null) }]" >
-                                            <div class="col-6 mt-2"
-                                                    :class="[{ 'descricaoFinal': (posicao1 != null) }]" >
-                                                Campeão
-                                            </div>
-                                            <div class="col-6">
-                                                {{ posicao1 }}
-                                            </div>
+                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (posicao1 == null) }]">
+                                            <div class="col-6 mt-2" :class="[{ 'descricaoFinal': (posicao1 != null) }]">Campeão</div>
+                                            <div class="col-6">{{ posicao1 }}</div>
                                         </div>
-                                        <div class="row mt-2"
-                                                :class="[{ 'partidaFaltando': (posicao2 == null) }]" >
-                                            <div class="col-6 mt-2">
-                                                2º Colocado
-                                            </div>
-                                            <div class="col-6">
-                                                {{ posicao2 }}
-                                            </div>
+                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (posicao2 == null) }]">
+                                            <div class="col-6 mt-2">2º Colocado</div>
+                                            <div class="col-6">{{ posicao2 }}</div>
                                         </div>
-                                        <div class="row mt-2"
-                                                :class="[{ 'partidaFaltando': (posicao3 == null) }]" >
-                                            <div class="col-6 mt-2">
-                                                3º Colocado
-                                            </div>
-                                            <div class="col-6">
-                                                {{ posicao3 }}
-                                            </div>
+                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (posicao3 == null) }]">
+                                            <div class="col-6 mt-2">3º Colocado</div>
+                                            <div class="col-6">{{ posicao3 }}</div>
                                         </div>
-                                        <div class="row mt-2"
-                                                :class="[{ 'partidaFaltando': (posicao4 == null) }]" >
-                                            <div class="col-6 mt-2">
-                                                4º Colocado
-                                            </div>
-                                            <div class="col-6">
-                                                {{ posicao4 }}
-                                            </div>
+                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (posicao4 == null) }]">
+                                            <div class="col-6 mt-2">4º Colocado</div>
+                                            <div class="col-6">{{ posicao4 }}</div>
                                         </div>
                                     </div>
                                 </div> 
                             </div> 
-                        </div>  <div class="row" style="width: 90%"> <!-- ARTILHARIA -->
+                        </div>
+                        <div class="row" style="width: 90%"> <!-- ARTILHARIA -->
                             <div class="col-12 mt-4">
-                                <h4 class="little-text">
-                                    Artilharia
-                                </h4>
+                                <h4 class="little-text">Artilharia</h4>
                                 <div class="row"> 
                                     <div class="col separacaoTabela little-text">
-                                        <div class="row mt-2"
-                                                :class="[{ 'partidaFaltando': (artilharia == null) }]" >
-                                            <div class="col-6 mt-2">
-                                                Seleção do Artilheiro
-                                            </div>
-                                            <div class="col-6">
-                                                {{ artilharia }}
-                                            </div>
+                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (artilharia == null) }]">
+                                            <div class="col-6 mt-2">Seleção do Artilheiro</div>
+                                            <div class="col-6">{{ artilharia }}</div>
                                         </div>
                                     </div>
                                 </div> 
                             </div> 
-                        </div>  
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="steps-action w-100 text-center steps-btn"> <!-- BOTÕES -->
@@ -1263,15 +560,9 @@ export default {
     },
     data() {
         return {
+            grupos: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'],
             listaPartidas: [],
-            listaPartidasA: [],
-            listaPartidasB: [],
-            listaPartidasC: [],
-            listaPartidasD: [],
-            listaPartidasE: [],
-            listaPartidasF: [],
-            listaPartidasG: [],
-            listaPartidasH: [],
+            listaPartidasGrupo: {},
             listaPartidas8: [],
             listaPartidas4: [],
             listaPartidasS: [],
@@ -1325,42 +616,24 @@ export default {
             this.$clubApi.get("/bolao/partida").then((response) => {
                 this.listaPartidas = response.data.object;
 
-                this.listaPartidasA = this.listaPartidas.filter(partida => {
-                    return partida.selecaoA.grupo === "A" && partida.fase == 1;
+                // Preenche listaPartidasGrupo para cada letra de A até L
+                const grupoMap = {};
+                this.grupos.forEach(g => { grupoMap[g] = []; });
+                this.listaPartidas.forEach(partida => {
+                    if (partida.fase == 1 && partida.selecaoA.grupo) {
+                        const g = partida.selecaoA.grupo.toUpperCase();
+                        if (grupoMap[g] !== undefined) {
+                            grupoMap[g].push(partida);
+                        }
+                    }
                 });
-                this.listaPartidasB = this.listaPartidas.filter(partida => {
-                    return partida.selecaoA.grupo === "B" && partida.fase == 1;
-                });
-                this.listaPartidasC = this.listaPartidas.filter(partida => {
-                    return partida.selecaoA.grupo === "C" && partida.fase == 1;
-                });
-                this.listaPartidasD = this.listaPartidas.filter(partida => {
-                    return partida.selecaoA.grupo === "D" && partida.fase == 1;
-                });
-                this.listaPartidasE = this.listaPartidas.filter(partida => {
-                    return partida.selecaoA.grupo === "E" && partida.fase == 1;
-                });
-                this.listaPartidasF = this.listaPartidas.filter(partida => {
-                    return partida.selecaoA.grupo === "F" && partida.fase == 1;
-                });
-                this.listaPartidasG = this.listaPartidas.filter(partida => {
-                    return partida.selecaoA.grupo === "G" && partida.fase == 1;
-                });
-                this.listaPartidasH = this.listaPartidas.filter(partida => {
-                    return partida.selecaoA.grupo === "H" && partida.fase == 1;
-                });
-                this.listaPartidas8 = this.listaPartidas.filter(partida => {
-                    return partida.fase == 2;
-                });
-                this.listaPartidas4 = this.listaPartidas.filter(partida => {
-                    return partida.fase == 3;
-                });
-                this.listaPartidasS = this.listaPartidas.filter(partida => {
-                    return partida.fase == 4;
-                });
-                this.listaPartidas1 = this.listaPartidas.filter(partida => {
-                    return partida.fase >= 5;
-                });
+                this.listaPartidasGrupo = grupoMap;
+
+                this.listaPartidas8 = this.listaPartidas.filter(p => p.fase == 2);
+                this.listaPartidas4 = this.listaPartidas.filter(p => p.fase == 3);
+                this.listaPartidasS = this.listaPartidas.filter(p => p.fase == 4);
+                this.listaPartidas1 = this.listaPartidas.filter(p => p.fase >= 5);
+
                 this.$clubApi.get("/bolao/colocacao").then((response) => {    
                     this.posicao1 = (response.data.object.campeao) ? response.data.object.campeao.nome : "";
                     this.posicao2 = (response.data.object.vice) ? response.data.object.vice.nome : "";
@@ -1381,7 +654,7 @@ export default {
             });
         },
         proximo() {
-			if (this.current >= 0 && this.current <= this.steps.length) {
+			if (this.current >= 0 && this.current < this.steps.length) {
                 this.current++;
                 return;
 			}
@@ -1413,32 +686,15 @@ export default {
                     let aposta = this.montarAposta();
                     this.$clubApi.post("/bolao/finalizar/aposta", aposta).then((response) => {
                         this.$notify({type: 'success', message: "Aposta finalizada com sucesso! Boa sorte!" })
-                        
-                        // enviar pra página inicial
-                        location.href = '/meubolao/'+ localStorage.getItem("id");
-
+                        this.$router.push('/meubolao/' + localStorage.getItem("id"));
                     }) .catch((error) => {
-                        if (error.response.data.msg.indexOf("Grupo") > 0) { //erro de partida de grupo
-                            this.current = 0;
-                        }
-                        if (error.response.data.msg.indexOf("oitavas") > 0) { //erro de oitavas
-                            this.current = 1;
-                        }
-                        if (error.response.data.msg.indexOf("quartas") > 0) { //erro de quartas
-                            this.current = 2;
-                        }
-                        if (error.response.data.msg.indexOf("semis") > 0) { //erro de semis
-                            this.current = 3;
-                        }
-                        if (error.response.data.msg.indexOf("finais") > 0) { //erro de finais
-                            this.current = 4;
-                        }
-                        if (error.response.data.msg.indexOf("rtilharia") > 0) { //erro de Colocações/Artilharia
-                            this.current = 5;
-                        }
-                        if (error.response.data.msg.indexOf("repetir") > 0) { //erro de Repetir Colocação
-                            this.current = 5;
-                        }
+                        if (error.response.data.msg.indexOf("Grupo") > 0) { this.current = 0; }
+                        if (error.response.data.msg.indexOf("oitavas") > 0) { this.current = 1; }
+                        if (error.response.data.msg.indexOf("quartas") > 0) { this.current = 2; }
+                        if (error.response.data.msg.indexOf("semis") > 0) { this.current = 3; }
+                        if (error.response.data.msg.indexOf("finais") > 0) { this.current = 4; }
+                        if (error.response.data.msg.indexOf("rtilharia") > 0) { this.current = 5; }
+                        if (error.response.data.msg.indexOf("repetir") > 0) { this.current = 5; }
                         this.$notify({type: 'warning', message: error.response.data.msg});
                     }).finally(() =>{
                         NProgress.done();
@@ -1447,25 +703,24 @@ export default {
             });
         },
         montarAposta() {
-            let listaPartidas = this.listaPartidasA.concat(
-                this.listaPartidasB.concat(this.listaPartidasC.concat(
-                    this.listaPartidasD.concat(this.listaPartidasE.concat(this.listaPartidasF.concat(
-                        this.listaPartidasG.concat(this.listaPartidasH.concat(this.listaPartidas8.concat(
-                            this.listaPartidas4.concat(this.listaPartidasS.concat(this.listaPartidas1)))))))))));
-            
-            let posicao = [ this.posicao1, this.posicao2, this.posicao3, this.posicao4, this.artilharia ]
-            
-            let aposta = {
-                listaPartidas: listaPartidas,
-                posicao: posicao
-            }
-            return aposta;
+            // Concatena todas as partidas de grupo (em ordem A–L) + fases eliminatórias
+            const partidasGrupo = this.grupos.flatMap(g => this.listaPartidasGrupo[g] || []);
+            const listaPartidas = partidasGrupo.concat(
+                this.listaPartidas8,
+                this.listaPartidas4,
+                this.listaPartidasS,
+                this.listaPartidas1
+            );
+            return {
+                listaPartidas,
+                posicao: [this.posicao1, this.posicao2, this.posicao3, this.posicao4, this.artilharia]
+            };
         },
         verificaApostaFinalizada() {
             this.$clubApi.get("/bolao/finalizada").then((response) => {
                 if (response.data.object) {
                     this.$notify({type: 'warning', message: "Aposta já finalizada!" });
-                    location.href = '/meubolao/'+ localStorage.getItem("id");
+                    this.$router.push('/meubolao/' + localStorage.getItem("id"));
                 } else {
                     this.carregarPartidas();
                 }
@@ -1476,7 +731,7 @@ export default {
 				let idSituacao = response.data.object.id;
                 if (idSituacao > 1) {
                     this.$notify({type: 'warning', message: "Período já finalizado!" });
-                    location.href = '/meubolao/'+ localStorage.getItem("id");
+                    this.$router.push('/meubolao/' + localStorage.getItem("id"));
                 }
 			});
 		}

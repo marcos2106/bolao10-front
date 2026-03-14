@@ -11,10 +11,11 @@
         <div class="container-fluid mt--6">
 			<card>
 				<h2 slot="header" class="mb-0">Partida</h2>
-                <h5 slot="header" class="mb-0">Mais detalhes da partida entre {{ partida.selecaoA.nome }} x {{ partida.selecaoB.nome }}</h5>
+                <h5 slot="header" class="mb-0">Detalhes da partida entre {{ partida.selecaoA.nome }} x {{ partida.selecaoB.nome }}</h5>
 
                 <div class="row">
-                    <div class="col-8">
+                    <!-- Em mobile: empilha (col-12). Em desktop: col-lg-8 para o conteúdo principal -->
+                    <div class="col-12 col-lg-8 order-lg-1">
 
                         <div class="janelaPartida" 
                                 :class="[{ 'aovivo' : partida.iniciada && !partida.finalizada }, { 'encerrada' : partida.finalizada }, { 'quadroPartida' : !partida.iniciada}]"
@@ -54,13 +55,13 @@
                             </div>
                             <div class="row m-2 mt-4">
                                 <div class="col-4 alinhaVert">
-                                    <img width="40" :src="partida.selecaoA.imagem">
+                                    <img width="40" :src="partida.selecaoA.imagem" loading="lazy">
                                 </div>
                                 <div class="col-4 text-center alinhaVert font-weight-bold fonte-grande">
                                     {{partida.placarA}} x {{partida.placarB}}
                                 </div>
                                 <div class="col-4 alinhaVert text-right">
-                                    <img width="40" :src="partida.selecaoB.imagem">
+                                    <img width="40" :src="partida.selecaoB.imagem" loading="lazy">
                                 </div>
                             </div>
                             <div class="row m-2 mt--4">
@@ -258,7 +259,8 @@
                         </div>
 
                     </div>
-                    <div class="col-4">
+                    <!-- Em mobile: ocupa largura toda e aparece ACIMA do carousel (order-lg-last mantém à direita no desktop) -->
+                    <div class="col-12 col-lg-4 order-lg-2 mb-3 mb-lg-0">
 				
                         <div class="quadroAposta">
                             <div class="col-12 mt-1 tituloQuadroPequeno font-weight-bold">
@@ -272,12 +274,12 @@
                             <div v-else class="col-12 mt-2 font-weight-bold fonte-media">
                                 
                                 <div class="row descricaoAposta">
-                                    <div class="col-12 text-left" style="height: 430px; overflow: scroll;">
+                                    <div class="col-12 text-left" style="max-height: 55vh; overflow-y: auto;">
 
                                         <div class="row p-1 mt-1"
                                                 v-for="aposta in apostas" :key="aposta.id">
                                             <div class="col-1 ml--2">
-                                                <img class="avatarRedondo" width="25" :src="aposta.usuario.avatar">
+                                                <img class="avatarRedondo" width="25" :src="aposta.usuario.avatar" loading="lazy">
                                             </div>
                                             <div class="col alinhaVert font-weight-bold">
                                                 <span @click="paginaUsuario(aposta.usuario.id)" class="clickable">{{aposta.usuario.nome}}</span>
@@ -495,10 +497,10 @@ export default {
 			});
 		},
         detalhePartida(idPartida) {
-            location.href = '/mundial/partida/'+ idPartida;
+            this.$router.push('/mundial/partida/'+ idPartida);
         },
         paginaUsuario(idUsuario) {
-            location.href = '/meubolao/'+ idUsuario;
+            this.$router.push('/meubolao/'+ idUsuario);
         }
     }
 };
@@ -536,6 +538,15 @@ export default {
 }
 .fonte-selecao {
     font-size: 35px;
+}
+/* Em telas pequenas, reduz o tamanho do nome da seleção e do placar */
+@media (max-width: 576px) {
+    .fonte-selecao {
+        font-size: 22px;
+    }
+    .fonte-grande {
+        font-size: 28px;
+    }
 }
 .fonte-grande {
     font-size: 42px;

@@ -14,7 +14,7 @@
                 <h5 slot="header" class="mb-0">Página inicial com informações completas do "Meu Bolão"</h5>
                 
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-12 col-lg-8">
 
                         <div class="row" v-if="dadosUsuario.usuario.id != null && usuarioIgual()">
                             <div class="col-12 text-right">
@@ -24,8 +24,8 @@
                         </div>
 
                         <div class="row mt--2" v-if="dadosUsuario.usuario.id != null">
-                            <div class="col-3">
-                                <img class="avatarRedondo" width="160" height="160" :src="dadosUsuario.usuario.avatar">
+                            <div class="col-auto">
+                                <img class="avatarRedondo avatarResponsivo" :src="dadosUsuario.usuario.avatar">
                             </div>
                             <div class="col-9 fonte-pequena">
 
@@ -78,10 +78,10 @@
                                     <v-tab title="Gráficos de Ranking">
                                         
                                         <div class="row mt-3">
-                                            <div class="col-6">
+                                            <div class="col-12 col-md-6">
                                                 <Linha v-if="loadgraficoPontuacao" :chartdata="datasetGraficoPontuacao" :options="optionsGraficoPontuacao" class="grafico-pequeno"></Linha>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-12 col-md-6 mt-3 mt-md-0">
                                                 <Linha v-if="loadgraficoPosicao" :chartdata="datasetGraficoPosicao" :options="optionsGraficoPosicao" class="grafico-pequeno"></Linha>
                                             </div>
                                         </div>
@@ -122,7 +122,8 @@
                         </div>
 
                     </div>
-                    <div class="col-4">
+                    <!-- Em mobile: empilha abaixo do conteúdo principal; no desktop: coluna lateral direita -->
+                    <div class="col-12 col-lg-4 mt-4 mt-lg-0">
 
                         <div class="quadroRanking">
                             <div class="col-12 mt-2 tituloQuadroPequeno font-weight-bold">
@@ -131,7 +132,7 @@
                             <div class="col-12 mt-2 font-weight-bold fonte-media">
                                 
                                 <div class="row ml-1 descricaoRanking">
-                                    <div class="col-11 text-left" style="height: 490px; overflow: scroll;">
+                                    <div class="col-12 text-left" style="max-height: 55vh; overflow-y: auto;">
 
                                         <div class="row p-1 mt-1 colocacaoRanking"
                                                 :class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
@@ -274,8 +275,7 @@ export default {
         },
 		carregarSituacao() {
 			this.$clubApi.get('/configuracao/situacao/ativa').then((response) => {
-				this.idSituacao = response.data.object.id;
-                console.log("idSituacao", this.idSituacao);
+			this.idSituacao = response.data.object.id;
                 if (this.idSituacao > 1) {
                     this.carregarPosicao();
                 }
@@ -305,8 +305,6 @@ export default {
                 this.idUsuario = localStorage.getItem("id");
             }
 			this.$clubApi.get("/bolao/dados/usuario/"+ this.idUsuario).then((response) => {
-                console.log("idUsuario", this.idUsuario);
-                console.log("localStorage.getItem(id)", localStorage.getItem("id"));
 				this.dadosUsuario = response.data.object;
                 this.carregarGrafico();
 			}) .catch((error) => {
@@ -425,7 +423,7 @@ export default {
             }
         },
         paginaUsuario(idUsuario) {
-            location.href = '/meubolao/'+ idUsuario;
+            this.$router.push('/meubolao/'+ idUsuario);
         }
     }
 };
@@ -434,6 +432,23 @@ export default {
 <style>
 .avatarRedondo {
     border-radius: 80px;
+}
+/* Avatar responsivo: 120px em mobile, 160px em telas maiores */
+.avatarResponsivo {
+    width: 80px;
+    height: 80px;
+}
+@media (min-width: 576px) {
+    .avatarResponsivo {
+        width: 120px;
+        height: 120px;
+    }
+}
+@media (min-width: 992px) {
+    .avatarResponsivo {
+        width: 160px;
+        height: 160px;
+    }
 }
 .linkHref {
     color: gray;

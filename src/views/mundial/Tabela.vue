@@ -24,7 +24,7 @@
                                     <v-tab title="Rodada 1">
 
                                         <div class="row">
-                                            <div class="col-3 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                            <div class="col-6 col-md-4 col-lg-3 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     style="border-left: 2px solid darkgreen; border-radius: 5px;"
                                                     v-for="partida in partidasRod1" :key="partida.id">
 
@@ -34,7 +34,7 @@
                                                     </div>
                                                     <div class="col">
 
-                                                        <h5>Grupo {{ partida.selecaoA.grupo }}<br/>{{ partida.dataHoraFmt.substring(0, 5) }} - {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <h5>Grupo {{ partida.selecaoA.grupo }}<br/><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} - {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                         <div class="row">
                                                             <div class="col-8 little-text">
                                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -57,7 +57,7 @@
                                     <v-tab title="Rodada 2">
 
                                         <div class="row">
-                                            <div class="col-3 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                            <div class="col-6 col-md-4 col-lg-3 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     v-for="partida in partidasRod2" :key="partida.id">
 
                                                 <div class="row" style="border-left: 2px solid darkgreen; border-radius: 5px;">
@@ -66,7 +66,7 @@
                                                     </div>
                                                     <div class="col">
 
-                                                        <h5>Grupo {{ partida.selecaoA.grupo }}<br/>{{ partida.dataHoraFmt.substring(0, 5) }} - {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <h5>Grupo {{ partida.selecaoA.grupo }}<br/><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} - {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                         <div class="row">
                                                             <div class="col-8 little-text">
                                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -89,7 +89,7 @@
                                     <v-tab title="Rodada 3">
 
                                         <div class="row">
-                                            <div class="col-3 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                            <div class="col-6 col-md-4 col-lg-3 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     v-for="partida in partidasRod3" :key="partida.id">
 
                                                 <div class="row" style="border-left: 2px solid darkgreen; border-radius: 5px;">
@@ -121,7 +121,7 @@
                                     <v-tab title="16 Avos">
 
                                         <div class="row">
-                                            <div class="col-3 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                            <div class="col-6 col-md-4 col-lg-3 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     style="border-left: 2px solid darkgreen; border-radius: 5px;"
                                                     v-for="partida in partidas16" :key="partida.id">
 
@@ -131,7 +131,7 @@
                                                     </div>
                                                     <div class="col">
 
-                                                        <h5>Partida #{{ partida.id }}<br/>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <h5>Partida #{{ partida.id }}<br/><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} - {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                         <div class="row">
                                                             <div class="col little-text">
                                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -154,7 +154,7 @@
                                     <v-tab title="Oitavas">
 
                                         <div class="row">
-                                            <div class="col-6 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                            <div class="col-12 col-md-6 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     style="border-left: 2px solid darkgreen; border-radius: 5px;"
                                                     v-for="partida in partidas8" :key="partida.id">
 
@@ -164,7 +164,7 @@
                                                     </div>
                                                     <div class="col">
 
-                                                        <h5>Partida #{{ partida.id }}<br/>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <h5>Partida #{{ partida.id }}<br/><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} - {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                         <div class="row">
                                                             <div class="col little-text">
                                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -187,7 +187,7 @@
                                     <v-tab title="Quartas">
 
                                         <div class="row">
-                                            <div class="col-6 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                            <div class="col-12 col-md-6 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     style="border-left: 2px solid darkgreen; border-radius: 5px;"
                                                     v-for="partida in partidas4" :key="partida.id">
 
@@ -197,7 +197,7 @@
                                                     </div>
                                                     <div class="col">
 
-                                                        <h5>Partida #{{ partida.id }}<br/>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <h5>Partida #{{ partida.id }}<br/><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} - {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                         <div class="row">
                                                             <div class="col little-text">
                                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -220,7 +220,7 @@
                                     <v-tab title="Semifinais">
 
                                         <div class="row">
-                                            <div class="col-6 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                            <div class="col-12 col-md-6 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     style="border-left: 2px solid darkgreen; border-radius: 5px;"
                                                     v-for="partida in partidasS" :key="partida.id">
 
@@ -230,7 +230,7 @@
                                                     </div>
                                                     <div class="col">
 
-                                                        <h5>Partida #{{ partida.id }}<br/>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <h5>Partida #{{ partida.id }}<br/><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} - {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                         <div class="row">
                                                             <div class="col little-text">
                                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -253,7 +253,7 @@
                                     <v-tab title="Finais">
 
                                         <div class="row">
-                                            <div class="col-6 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                            <div class="col-12 col-md-6 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     style="border-left: 2px solid darkgreen; border-radius: 5px;"
                                                     v-for="(partida, index) in partidasF" :key="partida.id">
 
@@ -265,7 +265,7 @@
 
                                                         <span v-if="index==0" class="textTerceiro">Disputa de 3º Lugar</span>
                                                         <span v-else class="textFinal">GRANDE FINAL</span>
-                                                        <h5 class="mt-3">{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <h5 class="mt-3"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} - {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                         <div class="row">
                                                             <div class="col little-text">
                                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -339,7 +339,7 @@ export default {
             })
         },
         detalhePartida(idPartida) {
-            location.href = '/mundial/partida/'+ idPartida;
+            this.$router.push('/mundial/partida/'+ idPartida);
         }
     }
 };
@@ -349,6 +349,10 @@ export default {
 .textFinal {
     color: #ad9300;
     font-weight: 600;
+}
+.little-text {
+    font-size: 13px;
+    word-break: break-word;
 }
 .tagAoVivoVertical {
     border: 1px solid #a50d0d;
