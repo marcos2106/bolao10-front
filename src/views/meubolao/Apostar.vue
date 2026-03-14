@@ -10,7 +10,7 @@
 
         <div class="container-fluid mt--6">
 			<card>
-				<h2 slot="header" class="mb-0">Fazer Apostar</h2>
+				<h2 slot="header" class="mb-0">Fazer Aposta</h2>
                 <h5 slot="header" class="mb-0">Área para realizar as apostas nas partidas do Mundial</h5>
                 
                 <a-steps :current="current" size="small">

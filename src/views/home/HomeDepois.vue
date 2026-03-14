@@ -224,14 +224,15 @@ export default {
 		},
 		carregarColocacoes() {
             // Mock para visualização
-            /*
+            
 			this.$clubApi.get("/home/depois/colocacao").then((response) => {
 				this.colocacao = response.data.object;
 			}) .catch((error) => {
 				this.$notify({type: 'warning', message: error.response.data.msg})
 			}).finally(() =>{ NProgress.done(); })
-            */
+            
             // MOCK
+			/*
             this.colocacao = {
                 campeao: { nome: "Brasil", imagem: "https://flagcdn.com/w40/br.png" },
                 vice: { nome: "França", imagem: "https://flagcdn.com/w40/fr.png" },
@@ -239,28 +240,33 @@ export default {
                 quarto: { nome: "Inglaterra", imagem: "https://flagcdn.com/w40/gb-eng.png" },
                 artilharia: { nome: "Mbappé (8 gols)", imagem: "https://flagcdn.com/w40/fr.png" }
             };
+			*/
 		},
 		carregarRanking() {
             // MOCK
+			/*
              this.ranking = Array.from({length: 20}, (_, i) => ({
                  usuario: {id: i, nome: `User ${i+1}`, avatar: 'https://i.pravatar.cc/150?img='+i},
                  pontuacao: 100 - i
              }));
-			/*this.$clubApi.get("/home/durante/ranking").then((response) => {
+			*/
+			this.$clubApi.get("/home/durante/ranking").then((response) => {
 				this.ranking = response.data.object;
 			}) .catch((error) => {
 				this.$notify({type: 'warning', message: error.response.data.msg})
-			}).finally(() =>{ NProgress.done(); })*/
+			}).finally(() =>{ NProgress.done(); })
 		},
 		carregarCuriosidades() {
              // MOCK simples
-             let mockUsers = [{usuario: {id:1, nome: "Juca", avatar: "https://i.pravatar.cc/30"}, quantidade: 3}];
+             /*
+			 let mockUsers = [{usuario: {id:1, nome: "Juca", avatar: "https://i.pravatar.cc/30"}, quantidade: 3}];
              this.curiosidades = { listaPlacarExato: mockUsers, listaColocado: [], listaNenhumPlacar: mockUsers, listaNenhumColocado: [] };
-			/*this.$clubApi.get("/home/depois/curiosidade").then((response) => {
+			 */
+			this.$clubApi.get("/home/depois/curiosidade").then((response) => {
 				this.curiosidades = response.data.object;
 			}) .catch((error) => {
 				this.$notify({type: 'warning', message: error.response.data.msg})
-			}).finally(() =>{ NProgress.done(); })*/
+			}).finally(() =>{ NProgress.done(); })
 		},
         paginaUsuario(idUsuario) { location.href = '/meubolao/'+ idUsuario; }
 	},
