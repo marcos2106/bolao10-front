@@ -260,7 +260,7 @@
 					<div class="col-12 tituloQuadroPequeno font-weight-bold">
 						<i class="fas fa-star mr-1"></i> Ranking atual
 					</div>
-					<div class="col-12 mt--2 font-weight-bold fonte-media">
+					<div class="col-12 mt-2 font-weight-bold fonte-media">
 						
 						<div class="row ml-1 descricaoRanking">
 							<div class="col-11 text-left" style="height: 510px; overflow: scroll;">
