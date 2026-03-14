@@ -25,6 +25,7 @@
 
                                         <div class="row">
                                             <div class="col-3 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                                    style="border-left: 2px solid darkgreen; border-radius: 5px;"
                                                     v-for="partida in partidasRod1" :key="partida.id">
 
                                                 <div class="row">
@@ -33,7 +34,7 @@
                                                     </div>
                                                     <div class="col">
 
-                                                        <h5>Grupo {{ partida.selecaoA.grupo }} - {{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h</h5>
+                                                        <h5>Grupo {{ partida.selecaoA.grupo }}<br/>{{ partida.dataHoraFmt.substring(0, 5) }} - {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                         <div class="row">
                                                             <div class="col-8 little-text">
                                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -59,13 +60,13 @@
                                             <div class="col-3 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     v-for="partida in partidasRod2" :key="partida.id">
 
-                                                <div class="row">
+                                                <div class="row" style="border-left: 2px solid darkgreen; border-radius: 5px;">
                                                     <div class="col-1 mt-1" v-if="partida.iniciada && !partida.finalizada">
                                                         <div class="tagAoVivoVertical"> &nbsp; <i class="fas fa-wifi mt-2"></i> AO &nbsp; VIVO &nbsp; &nbsp; </div>
                                                     </div>
                                                     <div class="col">
 
-                                                        <h5>Grupo {{ partida.selecaoA.grupo }} - {{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h</h5>
+                                                        <h5>Grupo {{ partida.selecaoA.grupo }}<br/>{{ partida.dataHoraFmt.substring(0, 5) }} - {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                         <div class="row">
                                                             <div class="col-8 little-text">
                                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -91,13 +92,13 @@
                                             <div class="col-3 mt-3 clickable" @click="detalhePartida(partida.id)"
                                                     v-for="partida in partidasRod3" :key="partida.id">
 
-                                                <div class="row">
+                                                <div class="row" style="border-left: 2px solid darkgreen; border-radius: 5px;">
                                                     <div class="col-1 mt-1" v-if="partida.iniciada && !partida.finalizada">
                                                         <div class="tagAoVivoVertical"> &nbsp; <i class="fas fa-wifi mt-2"></i> AO &nbsp; VIVO &nbsp; &nbsp; </div>
                                                     </div>
                                                     <div class="col">
 
-                                                        <h5>Grupo {{ partida.selecaoA.grupo }} - {{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h</h5>
+                                                        <h5>Grupo {{ partida.selecaoA.grupo }}<br/><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} - {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                         <div class="row">
                                                             <div class="col-8 little-text">
                                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -117,10 +118,44 @@
                                         </div>
                                         
                                     </v-tab>
+                                    <v-tab title="16 Avos">
+
+                                        <div class="row">
+                                            <div class="col-3 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                                    style="border-left: 2px solid darkgreen; border-radius: 5px;"
+                                                    v-for="partida in partidas16" :key="partida.id">
+
+                                                <div class="row">
+                                                    <div class="col-1 mt-1" v-if="partida.iniciada && !partida.finalizada">
+                                                        <div class="tagAoVivoVertical"> &nbsp; <i class="fas fa-wifi mt-2"></i> AO &nbsp; VIVO &nbsp; &nbsp; </div>
+                                                    </div>
+                                                    <div class="col">
+
+                                                        <h5>Partida #{{ partida.id }}<br/>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <div class="row">
+                                                            <div class="col little-text">
+                                                                <img width="20" :src="partida.selecaoA.imagem">
+                                                                {{partida.selecaoA.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarA}}</div>
+                                                        </div>
+                                                        <div class="row mt-2">
+                                                            <div class="col little-text">
+                                                                <img width="20" :src="partida.selecaoB.imagem">
+                                                                {{partida.selecaoB.nome}}
+                                                            </div><div class="col" :class="(partida.iniciada && !partida.finalizada) ? 'text-danger' : ''">{{partida.placarB}}</div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </v-tab>
                                     <v-tab title="Oitavas">
 
                                         <div class="row">
                                             <div class="col-6 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                                    style="border-left: 2px solid darkgreen; border-radius: 5px;"
                                                     v-for="partida in partidas8" :key="partida.id">
 
                                                 <div class="row">
@@ -129,7 +164,7 @@
                                                     </div>
                                                     <div class="col">
 
-                                                        <h5>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <h5>Partida #{{ partida.id }}<br/>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                         <div class="row">
                                                             <div class="col little-text">
                                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -153,6 +188,7 @@
 
                                         <div class="row">
                                             <div class="col-6 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                                    style="border-left: 2px solid darkgreen; border-radius: 5px;"
                                                     v-for="partida in partidas4" :key="partida.id">
 
                                                 <div class="row">
@@ -161,7 +197,7 @@
                                                     </div>
                                                     <div class="col">
 
-                                                        <h5>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <h5>Partida #{{ partida.id }}<br/>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                         <div class="row">
                                                             <div class="col little-text">
                                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -185,6 +221,7 @@
 
                                         <div class="row">
                                             <div class="col-6 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                                    style="border-left: 2px solid darkgreen; border-radius: 5px;"
                                                     v-for="partida in partidasS" :key="partida.id">
 
                                                 <div class="row">
@@ -193,7 +230,7 @@
                                                     </div>
                                                     <div class="col">
 
-                                                        <h5>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
+                                                        <h5>Partida #{{ partida.id }}<br/>{{ partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ partida.local }}</h5>
                                                         <div class="row">
                                                             <div class="col little-text">
                                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -217,6 +254,7 @@
 
                                         <div class="row">
                                             <div class="col-6 mt-3 clickable" @click="detalhePartida(partida.id)"
+                                                    style="border-left: 2px solid darkgreen; border-radius: 5px;"
                                                     v-for="(partida, index) in partidasF" :key="partida.id">
 
                                                 <div class="row">
@@ -273,6 +311,7 @@ export default {
             partidasRod1: [],
             partidasRod2: [],
             partidasRod3: [],
+            partidas16: [],
             partidas8: [],
             partidas4: [],
             partidasS: [],
@@ -287,10 +326,11 @@ export default {
                 this.partidasRod1 = partidas.filter( (p) => p.rodada == 1);
                 this.partidasRod2 = partidas.filter( (p) => p.rodada == 2);
                 this.partidasRod3 = partidas.filter( (p) => p.rodada == 3);
-                this.partidas8 = partidas.filter( (p) => p.fase == 2);
-                this.partidas4 = partidas.filter( (p) => p.fase == 3);
-                this.partidasS = partidas.filter( (p) => p.fase == 4);
-                this.partidasF = partidas.filter( (p) => p.fase == 5 || p.fase == 6);
+                this.partidas16 = partidas.filter( (p) => p.fase == 2);
+                this.partidas8 = partidas.filter( (p) => p.fase == 3);
+                this.partidas4 = partidas.filter( (p) => p.fase == 4);
+                this.partidasS = partidas.filter( (p) => p.fase == 5);
+                this.partidasF = partidas.filter( (p) => p.fase == 6 || p.fase == 7);
 
             }) .catch(() => {
                 this.$notify({type: 'warning', message: error.response.data.msg })
@@ -319,6 +359,8 @@ export default {
 	padding: 2px;
     font-size: 8px;
     writing-mode: sideways-lr;
+	margin-top: 7px;
+    margin-left: -5px;
 }
 .clickable:hover {
     cursor: pointer;
