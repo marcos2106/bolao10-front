@@ -55,8 +55,8 @@ export default {
 					localStorage.setItem("token", response.data.object);
 					location.href = '/'
 				}
-			}) .catch(() => {
-				this.$notify({type: 'warning', message: 'Login ou senha inválido!'})
+			}) .catch((error) => {
+				this.$notify({type: 'warning', message: error.response.data.msg})
 			}).finally(() =>{
 				NProgress.done() 
 			})
