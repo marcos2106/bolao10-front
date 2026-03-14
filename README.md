@@ -1,4 +1,30 @@
-# connectdoctor-backoffice
+# bolao10-front
+
+Frontend do sistema de bolão.
+
+## Commits da branch main
+
+Você pode visualizar os commits da branch **main** de diferentes formas:
+
+### No GitHub
+Acesse diretamente pelo navegador:
+```
+https://github.com/marcos2106/bolao10-front/commits/main
+```
+
+### Via Git (linha de comando)
+```bash
+# Listar commits da branch main
+git log main --oneline
+
+# Listar commits com detalhes
+git log main
+
+# Ver os últimos N commits (ex: 10)
+git log main --oneline -10
+```
+
+---
 
 ## Project setup
 ```
