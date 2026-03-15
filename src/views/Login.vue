@@ -4,7 +4,7 @@
 			<div id="formContent">
 				<!-- Icon -->
 				<div class="fadeInDown2 first mt--4 mb-2">
-					<img src="/img/logo.png" width="140" />
+					<img src="/img/logo.png" width="200" />
 				</div>
 				<!-- Login Form -->
 				<form>

@@ -156,8 +156,13 @@
 								:class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
 								v-for="(rank, index) in ranking" :key="rank.usuario.id">
 							<div class="col-2 pl-1"><img class="avatarRedondo" width="25" height="25" :src="rank.usuario.avatar"></div>
-							<div class="col-7 font-weight-bold text-truncate">
-								<span @click="paginaUsuario(rank.usuario.id)" class="clickable">{{index+1}}. {{rank.usuario.nome}}</span>
+							<div class="col-7 font-weight-bold" style="min-width:0">
+								<user-name-badges
+									:nome="(index+1) + '. ' + rank.usuario.nome"
+									:badges="badgesMap[rank.usuario.id] || []"
+									class="clickable"
+									@click.native="paginaUsuario(rank.usuario.id)"
+								/>
 							</div>
 							<div class="col-3 text-right font-weight-bold pr-1">{{rank.pontuacao}} pts</div>
 						</div>
@@ -192,6 +197,7 @@ export default {
 			countdown: 0,
 			colocacao: null,
 			ranking: [],
+			badgesMap: {},
 			curiosidades: {
 				listaPlacarExato: [],
 				listaColocado: [],
@@ -205,6 +211,7 @@ export default {
 			this.carregarColocacoes();
 			this.carregarRanking();
 			this.carregarCuriosidades();
+			this.carregarBadges();
 		},
 		iniciarContagem() {
 			this.countdown = new Date("2030-06-11T16:00:00") - new Date();
@@ -268,7 +275,14 @@ export default {
 				this.$notify({type: 'warning', message: error.response.data.msg})
 			}).finally(() =>{ NProgress.done(); })
 		},
-        paginaUsuario(idUsuario) { location.href = '/meubolao/'+ idUsuario; }
+        paginaUsuario(idUsuario) {
+			location.href = '/meubolao/' + idUsuario;
+		},
+		carregarBadges() {
+			this.$clubApi.get('/badge/ranking').then((response) => {
+				this.badgesMap = response.data.object || {};
+			}).catch(() => {});
+		}
 	},
 };
 </script>

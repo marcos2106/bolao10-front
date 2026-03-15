@@ -14,6 +14,7 @@ import BasePagination from "@/components/framework/BasePagination";
 import BaseAlert from "@/components/framework/BaseAlert";
 import BaseNav from "@/components/framework/Navbar/BaseNav";
 import BaseHeader from '@/components/framework/BaseHeader';
+import UserNameBadges from '@/components/UserNameBadges.vue';
 import { Input, Tooltip, Popover } from 'element-ui';
 import JwPagination from 'jw-vue-pagination';
 import loader from "vue-ui-preloader";
@@ -47,6 +48,7 @@ const GlobalComponents = {
     Vue.use(Popover);
     Vue.use(loader);
     Vue.use(Antd);
+    Vue.component('user-name-badges', UserNameBadges);
   }
 };
 

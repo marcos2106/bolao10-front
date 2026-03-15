@@ -5,7 +5,7 @@
        :data="backgroundColor">
     <div class="scrollbar-inner" ref="sidebarScrollArea">
       <div class="sidenav-header d-flex align-items-center ml-4">
-        <img src="/img/logo.png" class="ml-5 navbar-brand-img" title="Bolão 10 Copa">
+        <img src="/img/logo.png" class="ml-5 mt-3" width="100" title="Bolão 10 Copa">
         <div class="ml-auto">
           <!-- Sidenav toggler -->
           <div class="sidenav-toggler d-none d-xl-block"

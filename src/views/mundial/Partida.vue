@@ -281,10 +281,14 @@
                                             <div class="col-1 ml--2">
                                                 <img class="avatarRedondo" width="25" :src="aposta.usuario.avatar" loading="lazy">
                                             </div>
-                                            <div class="col alinhaVert font-weight-bold">
-                                                <span @click="paginaUsuario(aposta.usuario.id)" class="clickable">{{aposta.usuario.nome}}</span>
-                                            </div>
-                                            <div class="col-3 font-weight-bolder" v-if="idSituacao>1">{{aposta.placarA}} x {{aposta.placarB}}</div>
+                                            										<div class="col alinhaVert font-weight-bold" style="min-width:0">
+											<user-name-badges
+												:nome="aposta.usuario.nome"
+												:badges="badgesMap[aposta.usuario.id] || []"
+												class="clickable"
+												@click.native="paginaUsuario(aposta.usuario.id)"
+											/>
+										</div>                                            <div class="col-3 font-weight-bolder" v-if="idSituacao>1">{{aposta.placarA}} x {{aposta.placarB}}</div>
                                             <div class="col-3" v-if="partida.iniciada && !partida.finalizada">({{aposta.pontuacaoProvisoria}})</div>
                                             <div class="col-3" v-else-if="partida.finalizada">({{aposta.pontuacao}})</div>
                                             <div class="col-1" v-else> </div>
@@ -320,6 +324,7 @@ export default {
 		this.carregarSituacao();
         this.carregarPartida();
         this.carregarAposta();
+        this.carregarBadges();
     },
     data() {
         return {
@@ -336,7 +341,8 @@ export default {
                 dataHoraFmt: "",
                 aposta: ""
             },
-            apostas: [],
+            			apostas: [],
+				badgesMap: {},
             listaGols: [],
             listaGolsA: [],
             listaGolsB: [],
@@ -496,12 +502,17 @@ export default {
 				this.idSituacao = response.data.object.id;
 			});
 		},
-        detalhePartida(idPartida) {
+        		detalhePartida(idPartida) {
             this.$router.push('/mundial/partida/'+ idPartida);
         },
         paginaUsuario(idUsuario) {
-            this.$router.push('/meubolao/'+ idUsuario);
-        }
+            location.href = '/meubolao/' + idUsuario;
+        },
+		carregarBadges() {
+			this.$clubApi.get('/badge/ranking').then((response) => {
+				this.badgesMap = response.data.object || {};
+			}).catch(() => {});
+		}
     }
 };
 </script>

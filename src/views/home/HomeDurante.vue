@@ -269,8 +269,13 @@
 										:class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
 										v-for="(rank, index) in ranking" :key="rank.usuario.id">
 									<div class="col-1 ml--2"><img class="avatarRedondo" width="25" :src="rank.usuario.avatar"></div>
-									<div class="col alinhaVert font-weight-bold">
-										<span @click="paginaUsuario(rank.usuario.id)" class="clickable">{{index+1}}. {{rank.usuario.nome}}</span>
+									<div class="col alinhaVert font-weight-bold" style="min-width:0">
+										<user-name-badges
+											:nome="(index+1) + '. ' + rank.usuario.nome"
+											:badges="badgesMap[rank.usuario.id] || []"
+											class="clickable"
+											@click.native="paginaUsuario(rank.usuario.id)"
+										/>
 									</div>
 									<div>
 										{{ rank.pontuacao }} pts 
@@ -340,7 +345,8 @@ export default {
             jogoAoVivo: false,
 			ranking: [],
 			classificacao: [],
-			partidasAnteriores: []
+			partidasAnteriores: [],
+			badgesMap: {}
 		}
 	},
 	methods: {
@@ -356,6 +362,7 @@ export default {
 			this.carregarPartidasAnteriores();
 			this.carregarRanking();
 			this.carregarGrupos();
+			this.carregarBadges();
 		},
 		carregarPartidas() {
 			this.$clubApi.get("/home/durante/partidas").then((response) => {
@@ -396,11 +403,16 @@ export default {
 			})
 		},
 		detalharPartida(idPartida) {
-            location.href = '/mundial/partida/'+ idPartida;
+            this.$router.push('/mundial/partida/'+ idPartida);
 		},
         paginaUsuario(idUsuario) {
-            location.href = '/meubolao/'+ idUsuario;
-        }
+			location.href = '/meubolao/' + idUsuario;
+		},
+		carregarBadges() {
+			this.$clubApi.get('/badge/ranking').then((response) => {
+				this.badgesMap = response.data.object || {};
+			}).catch(() => {});
+		}
 	}
 };
 </script>

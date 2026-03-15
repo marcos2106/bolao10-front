@@ -75,7 +75,7 @@
                                 </vue-tabs>
 
                                 <vue-tabs class="mt--2" v-if="idSituacao > 1">
-                                    <v-tab title="Gráficos de Ranking">
+                                    <v-tab title="Ranking">
                                         
                                         <div class="row mt-3">
                                             <div class="col-12 col-md-6">
@@ -87,7 +87,7 @@
                                         </div>
 
                                     </v-tab>
-                                    <v-tab title="Dados do bolão">
+                                    <v-tab title="Dados do Bolão">
 
                                         <div class="row mt-3">
                                             <div class="col-6 text-right">Pontos no bolão:</div><div class="col-6"> {{ dadosUsuario.pontuacao }} pts </div>
@@ -106,17 +106,47 @@
                                         </div>
 
                                     </v-tab>
-                                    <v-tab title="Colocação e Artilharia">
-                                        
-                                        <div class="row mt-1">
-                                            <div class="col-6 mt-3 text-right">Campeão</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.campeao"><img width="20" :src="colocacao.campeao.imagem"> {{ colocacao.campeao.nome}} <span v-if="colocacao.pontosCampeao != null">({{colocacao.pontosCampeao}})</span></span></div>
-                                            <div class="col-6 mt-3 text-right">Vice</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.vice"><img width="20" :src="colocacao.vice.imagem"> {{ colocacao.vice.nome}} <span v-if="colocacao.pontosVice != null">({{colocacao.pontosVice}})</span></span></div>
-                                            <div class="col-6 mt-3 text-right">Terceiro</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.terceiro"><img width="20" :src="colocacao.terceiro.imagem"> {{ colocacao.terceiro.nome}} <span v-if="colocacao.pontosTerceiro != null">({{colocacao.pontosTerceiro}})</span></span></div>
-                                            <div class="col-6 mt-3 text-right">Quarto</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.quarto"><img width="20" :src="colocacao.quarto.imagem"> {{ colocacao.quarto.nome}} <span v-if="colocacao.pontosQuarto != null">({{colocacao.pontosQuarto}})</span></span></div>
-                                            <div class="col-6 mt-3 text-right">Artilharia</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.artilharia"><img width="20" :src="colocacao.artilharia.imagem"> {{ colocacao.artilharia.nome}} <span v-if="colocacao.pontosArtilharia != null">({{colocacao.pontosArtilharia}})</span></span></div>
-                                        </div>
+                                    <v-tab title="Palpites Classificação">
+										
+										<div class="row mt-1">
+											<div class="col-6 mt-3 text-right">Campeão</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.campeao"><img width="20" :src="colocacao.campeao.imagem"> {{ colocacao.campeao.nome}} <span v-if="colocacao.pontosCampeao != null">({{colocacao.pontosCampeao}})</span></span></div>
+											<div class="col-6 mt-3 text-right">Vice</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.vice"><img width="20" :src="colocacao.vice.imagem"> {{ colocacao.vice.nome}} <span v-if="colocacao.pontosVice != null">({{colocacao.pontosVice}})</span></span></div>
+											<div class="col-6 mt-3 text-right">Terceiro</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.terceiro"><img width="20" :src="colocacao.terceiro.imagem"> {{ colocacao.terceiro.nome}} <span v-if="colocacao.pontosTerceiro != null">({{colocacao.pontosTerceiro}})</span></span></div>
+											<div class="col-6 mt-3 text-right">Quarto</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.quarto"><img width="20" :src="colocacao.quarto.imagem"> {{ colocacao.quarto.nome}} <span v-if="colocacao.pontosQuarto != null">({{colocacao.pontosQuarto}})</span></span></div>
+											<div class="col-6 mt-3 text-right">Artilharia</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.artilharia"><img width="20" :src="colocacao.artilharia.imagem"> {{ colocacao.artilharia.nome}} <span v-if="colocacao.pontosArtilharia != null">({{colocacao.pontosArtilharia}})</span></span></div>
+										</div>
 
-                                    </v-tab>
+									</v-tab>
+									<v-tab title="🏅 Selos de Qualidade">
+										<div class="row mt-3">
+											<div class="col-12 fonte-pequena">
+												<div v-if="historicoSelos.length === 0" class="text-center text-muted mt-4">
+													<i class="fas fa-medal fa-2x mb-2"></i><br/>Nenhum selo conquistado ainda.
+												</div>
+												<div v-for="item in historicoSelos" :key="item.badge.id" class="selos-linha">
+													<!-- Cabeçalho do Badge -->
+													<div class="d-flex align-items-center mb-1">
+														<span class="badge-icon-selos mr-2" :style="{ backgroundColor: item.badge.corFundo, color: item.badge.corIcone, boxShadow: 'none', cursor: 'default' }">
+															<i :class="item.badge.iconeClasse"></i>
+														</span>
+														<div class="selos-nome" :class="{ 'selos-ativo': item.ativo }">
+															<strong>{{ item.badge.nome }}</strong> - {{ item.badge.descricao }}
+														</div>
+														<span class="selos-ativo-tag ml-2" v-if="item.ativo">✔ atual</span>
+													</div>
+													
+													<!-- Lista de conquistas como ícones -->
+													<div class="d-flex flex-wrap selos-conquistas-container">
+														<el-tooltip v-for="(dataFormatada, index) in item.conquistas" :key="index" :content="'Em ' + dataFormatada" placement="top" effect="dark">
+															<span class="badge-icon-selos" :style="{ backgroundColor: item.badge.corFundo, color: item.badge.corIcone }">
+																<i :class="item.badge.iconeClasse"></i>
+															</span> 
+														</el-tooltip>
+													</div>
+												</div>
+											</div>
+										</div>
+									</v-tab>
                                 </vue-tabs>
                             </div>
                         </div>
@@ -137,12 +167,15 @@
                                         <div class="row p-1 mt-1 colocacaoRanking"
                                                 :class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
                                                 v-for="(rank, index) in ranking" :key="rank.usuario.id">
-                                            <div class="col-1 ml--2"><img class="avatarRedondo" width="25" :src="rank.usuario.avatar"></div>
-                                            <div class="col alinhaVert font-weight-bold">
-                                                <span @click="paginaUsuario(rank.usuario.id)" class="clickable">
-                                                    {{index+1}}. {{rank.usuario.nome}}
-                                                </span>
-                                            </div>
+											<div class="col-1 ml--2"><img class="avatarRedondo" width="25" :src="rank.usuario.avatar"></div>
+											<div class="col alinhaVert font-weight-bold" style="min-width:0">
+												<user-name-badges
+													:nome="(index+1) + '. ' + rank.usuario.nome"
+													:badges="badgesMap[rank.usuario.id] || []"
+													class="clickable"
+													@click.native="paginaUsuario(rank.usuario.id)"
+												/>
+											</div>
                                             <div>
                                                 {{rank.pontuacao}} pts 
                                                 <i v-if="rank.posicaoAnterior != 999" :class="(rank.posicaoAnterior > (index+1)) ? 'fas fa-angle-up text-success' : (rank.posicaoAnterior < (index+1)) ? 'fas fa-angle-down text-danger' : 'fas fa-minus'"></i>
@@ -205,13 +238,14 @@
 </template>
 <script>
 import Linha  from "../../components/graficos/Linha.vue";
+import UserNameBadges from "../../components/UserNameBadges.vue";
 import {VueTabs, VTab} from 'vue-nav-tabs'
 import 'vue-nav-tabs/themes/vue-tabs.css'
 
 export default {
     props : ['idUsuario'],
     components: {
-        VueTabs, VTab, Linha
+        VueTabs, VTab, Linha, UserNameBadges
     },
     created(){
         this.carregarUsuario();
@@ -257,7 +291,9 @@ export default {
             },
             modals: {
                 modalTrocarSenha: false,
-            }
+            },
+            badgesMap: {},
+            historicoSelos: []
         }
     },
     methods: {
@@ -269,6 +305,8 @@ export default {
             this.carregarDemaisDados();
             this.carregarRanking();
             this.carregarRankingUsuario();
+            this.carregarBadgesRanking();
+            this.carregarHistoricoSelos();
         },
         usuarioIgual() {
             return (this.idUsuario == localStorage.getItem("id"));
@@ -316,11 +354,22 @@ export default {
 		carregarRanking() {
 			this.$clubApi.get("/home/durante/ranking").then((response) => {
 				this.ranking = response.data.object;
-			}) .catch((error) => {
+			}).catch((error) => {
 				this.$notify({type: 'warning', message: error.response.data.msg})
-			}).finally(() =>{
-				NProgress.done();
-			})
+			}).finally(() =>{ NProgress.done(); })
+		},
+		carregarBadgesRanking() {
+			this.$clubApi.get('/badge/ranking').then((response) => {
+				this.badgesMap = response.data.object || {};
+			}).catch(() => {});
+		},
+		carregarHistoricoSelos() {
+			if (this.idUsuario == null || this.idUsuario == undefined) {
+				this.idUsuario = localStorage.getItem('id');
+			}
+			this.$clubApi.get('/badge/usuario/'+ this.idUsuario +'/historico').then((response) => {
+				this.historicoSelos = response.data.object || [];
+			}).catch(() => { this.historicoSelos = []; });
 		},
         carregarRankingUsuario() {
 
@@ -423,7 +472,7 @@ export default {
             }
         },
         paginaUsuario(idUsuario) {
-            this.$router.push('/meubolao/'+ idUsuario);
+            location.href = '/meubolao/' + idUsuario;
         }
     }
 };
@@ -492,5 +541,50 @@ export default {
 .clickable:hover {
     cursor: pointer;
     background-color: #e8f5e6;
+}
+/* Aba Selos de Qualidade */
+.selos-linha {
+    border-bottom: 1px solid #eee;
+    padding: 10px 4px;
+}
+.selos-linha:last-child {
+    border-bottom: none;
+}
+.selos-nome {
+    font-size: 14px;
+    line-height: 1.3;
+}
+.selos-conquistas-container {
+	padding-left: 15px;
+	margin-top: 12px;
+}
+.selos-ativo {
+    color: #2e7d32;
+}
+.selos-ativo-tag {
+    font-size: 10px;
+    background-color: #c8e6c9;
+    color: #2e7d32;
+    border-radius: 8px;
+    padding: 1px 6px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+.badge-icon-selos {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    font-size: 12px;
+    margin: 2px 15px 2px 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    cursor: default;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.badge-icon-selos:hover {
+    transform: translateY(-3px) scale(1.15);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.35);
 }
 </style>
