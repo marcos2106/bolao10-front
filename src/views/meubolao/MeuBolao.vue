@@ -24,13 +24,18 @@
                         </div>
 
                         <div class="row mt--2" v-if="dadosUsuario.usuario.id != null">
-                            <div class="col-auto">
+                            <div class="col-2">
                                 <img class="avatarRedondo avatarResponsivo" :src="dadosUsuario.usuario.avatar">
                             </div>
-                            <div class="col-9 fonte-pequena">
+                            <div class="col-2">
+                                <el-tooltip :content="dadosUsuario.usuario.nome +' está no nível Profissional!'" placement="top" effect="dark">
+                                    <img class="nivelRedondo nivelResponsivo" src="/img/selo/05.png">
+                                </el-tooltip>
+                            </div>
+                            <div class="col-8 fonte-pequena">
 
                                 <div class="row mt-2">
-                                    <div class="col-4 text-right">Nome:</div><div class="col-8"> {{ dadosUsuario.usuario.nome }} </div>
+                                    <div class="col-4 text-right">Nome:</div><div class="col-8"> <strong>{{ dadosUsuario.usuario.nome }}</strong> </div>
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-4 text-right">Cidade:</div><div class="col-8"> {{ dadosUsuario.usuario.cidade }} </div>
@@ -482,6 +487,10 @@ export default {
 .avatarRedondo {
     border-radius: 80px;
 }
+.nivelRedondo {
+    border-radius: 80px;
+    margin-left: 15px;
+}
 /* Avatar responsivo: 120px em mobile, 160px em telas maiores */
 .avatarResponsivo {
     width: 80px;
@@ -497,6 +506,22 @@ export default {
     .avatarResponsivo {
         width: 160px;
         height: 160px;
+    }
+}
+.nivelResponsivo {
+    width: 100px;
+    height: 100px;
+}
+@media (min-width: 576px) {
+    .nivelResponsivo {
+        width: 80px;
+        height: 80px;
+    }
+}
+@media (min-width: 992px) {
+    .nivelResponsivo {
+        width: 100px;
+        height: 100px;
     }
 }
 .linkHref {
