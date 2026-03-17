@@ -278,9 +278,12 @@
 
                                         <div class="row p-1 mt-1"
                                                 v-for="aposta in apostas" :key="aposta.id">
-                                            <div class="col-1 ml--2">
-                                                <img class="avatarRedondo" width="25" :src="aposta.usuario.avatar" loading="lazy">
-                                            </div>
+                                            <el-tooltip :content="'Nível: '+ aposta.usuario.nivel" placement="top" effect="dark">
+                                                <div class="col-1 ml--1 clickable" @click.native="paginaUsuario(aposta.usuario.id)"
+                                                    :class="aposta.usuario.nivel ? 'fundo-' + aposta.usuario.nivel.toLowerCase().replace('_', '-') : ''">
+                                                    <img class="avatarRedondo" :class="aposta.usuario.nivel ? 'borda-' + aposta.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" :src="aposta.usuario.avatar" loading="lazy">
+                                                </div>
+                                            </el-tooltip>
                                             										<div class="col alinhaVert font-weight-bold" style="min-width:0">
 											<user-name-badges
 												:nome="aposta.usuario.nome"

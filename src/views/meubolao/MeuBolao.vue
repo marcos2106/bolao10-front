@@ -27,9 +27,10 @@
                             <div class="col-2">
                                 <img class="avatarRedondo avatarResponsivo" :src="dadosUsuario.usuario.avatar">
                             </div>
-                            <div class="col-2">
-                                <el-tooltip :content="dadosUsuario.usuario.nome +' está no nível Profissional!'" placement="top" effect="dark">
-                                    <img class="nivelRedondo nivelResponsivo" src="/img/selo/05.png">
+                            <div class="col-2" v-if="nivelInfo.codigo <= 0"> &nbsp; </div>
+                            <div class="col-2" v-if="nivelInfo.codigo > 0">
+                                <el-tooltip :content="dadosUsuario.usuario.nome + ' está no nível ' + nivelInfo.descricao + '!'" placement="top" effect="dark">
+                                    <img class="nivelRedondo nivelResponsivo" :src="'/img/selo/' + nivelInfo.imagem">
                                 </el-tooltip>
                             </div>
                             <div class="col-8 fonte-pequena">
@@ -45,6 +46,37 @@
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-4 text-right">Aposta:</div><div class="col-8"> <span v-if="!dadosUsuario.usuario.aposta" class="text-danger"><i class="far fa-times-circle text-danger"></i> Pendente</span> <span v-if="dadosUsuario.usuario.aposta" class="text-success"> <i class="far fa-check-circle text-success"></i> Realizado em {{ dadosUsuario.dataAposta }} </span> </div>
+                                </div>
+                                
+                                <div class="row mt-3 mb-1" v-if="nivelInfo && nivelInfo.prox">
+                                    <div class="col-12">
+                                        <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                                            <span><strong>{{ dadosUsuario.pontuacao || 0 }} pts</strong> atuais</span>
+                                            <span>Faltam <strong>{{ Math.max(0, nivelInfo.proxMin - (dadosUsuario.pontuacao || 0)) }} pts</strong> para o nível <i class="fas fa-arrow-up"></i>&nbsp;<strong>{{ nivelInfo.prox }}</strong></span>
+                                        </div>
+                                        <div class="progress" style="height: 14px; background-color: #e9ecef;">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                                 role="progressbar" 
+                                                 :style="{ width: progressoNivel + '%', backgroundColor: nivelInfo.corHex }">
+                                                <span style="font-size: 10px; font-weight: bold;">{{ Math.floor(progressoNivel) }}%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3 mb-1" v-else-if="nivelInfo && !nivelInfo.prox">
+                                    <div class="col-12">
+                                        <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                                            <span><strong>{{ dadosUsuario.pontuacao || 0 }} pts</strong> atuais</span>
+                                            <strong class="text-success"><i class="fas fa-trophy"></i> Nível Máximo!</strong>
+                                        </div>
+                                        <div class="progress" style="height: 14px; background-color: #e9ecef;">
+                                            <div class="progress-bar progress-bar-striped" 
+                                                 role="progressbar" 
+                                                 :style="{ width: '100%', backgroundColor: nivelInfo.corHex }">
+                                                <span style="font-size: 10px; font-weight: bold;">MÁXIMO</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -172,7 +204,12 @@
                                         <div class="row p-1 mt-1 colocacaoRanking"
                                                 :class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
                                                 v-for="(rank, index) in ranking" :key="rank.usuario.id">
-											<div class="col-1 ml--2"><img class="avatarRedondo" width="25" :src="rank.usuario.avatar"></div>
+											<el-tooltip :content="'Nível: '+ rank.usuario.nivel" placement="top" effect="dark">
+                                                <div class="col-1 ml--1 clickable" @click="paginaUsuario(rank.usuario.id)"
+                                                    :class="rank.usuario.nivel ? 'fundo-' + rank.usuario.nivel.toLowerCase().replace('_', '-') : ''">
+                                                    <img class="avatarRedondo" :class="rank.usuario.nivel ? 'borda-' + rank.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" :src="rank.usuario.avatar">
+                                                </div>
+                                            </el-tooltip>
 											<div class="col alinhaVert font-weight-bold" style="min-width:0">
 												<user-name-badges
 													:nome="(index+1) + '. ' + rank.usuario.nome"
@@ -301,6 +338,41 @@ export default {
             historicoSelos: []
         }
     },
+	computed: {
+		/**
+		 * Mapeia o valor do enum 'nivel' (ex: 'PROFISSIONAL') para:
+		 * - codigo: número do nível (0 = sem nível)
+		 * - descricao: texto legível
+		 * - imagem: nome do arquivo PNG (ex: '03.png')
+		 */
+		nivelInfo() {
+			const mapa = {
+				'SEM_NIVEL':    { codigo: 0, descricao: 'Sem Nível',    imagem: null,       min: 0,   max: 19,  prox: 'Amador',        proxMin: 20,  corHex: '#8a8e91' },
+				'AMADOR':       { codigo: 1, descricao: 'Amador',        imagem: '01.png',   min: 20,  max: 39,  prox: 'Juvenil',       proxMin: 40,  corHex: '#575757' },
+				'JUVENIL':      { codigo: 2, descricao: 'Juvenil',       imagem: '02.png',   min: 40,  max: 119, prox: 'Profissional',  proxMin: 120, corHex: '#643030' },
+				'PROFISSIONAL': { codigo: 3, descricao: 'Profissional',  imagem: '03.png',   min: 120, max: 144, prox: 'Beteiro',       proxMin: 145, corHex: '#28378f' },
+				'BETEIRO':      { codigo: 4, descricao: 'Beteiro',       imagem: '04.png',   min: 145, max: 169, prox: 'Lenda',         proxMin: 170, corHex: '#9e0f0f' },
+				'LENDA':        { codigo: 5, descricao: 'Lenda',         imagem: '05.png',   min: 170, max: 9999,prox: null,            proxMin: null,corHex: '#ecc517' },
+			};
+			const nivel = this.dadosUsuario && this.dadosUsuario.usuario && this.dadosUsuario.usuario.nivel;
+			return mapa[nivel] || mapa['SEM_NIVEL'];
+		},
+		progressoNivel() {
+            if (!this.dadosUsuario || this.dadosUsuario.pontuacao === undefined) return 0;
+            const pts = this.dadosUsuario.pontuacao || 0;
+            const info = this.nivelInfo;
+            if (!info || !info.prox) return 100; // Nível Máximo
+            
+            // Qual progresso do usuário dentro do nível atual:
+            const totalLevelPts = info.proxMin - info.min;
+            const userPtsInLevel = pts - info.min;
+            let percentual = (userPtsInLevel / totalLevelPts) * 100;
+            
+            if (percentual < 0) percentual = 0;
+            if (percentual > 100) percentual = 100;
+            return percentual;
+        }
+	},
     methods: {
         carregarUsuario() {
             if (this.idUsuario == null || this.idUsuario == undefined) {
@@ -546,7 +618,7 @@ export default {
 	border-left: 3px solid #96be92;
 }
 .colocacaoSemRanking {
-	border-left: 3px solid #e7f3ef;
+	border-left: 3px solid rgb(231, 243, 239, 0);
 }	
 .fonte-grande {
     font-size: 42px;

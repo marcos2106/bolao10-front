@@ -51,10 +51,14 @@
                                 <tbody>
                                     <tr v-for="(pontuacao, index) in listaPontuacao" :key="pontuacao.usuario.id"
                                             :class="(index % 2 == 0) ? 'registroImpar' : ''">
-                                        <td>
-                                            <span @click="paginaUsuario(pontuacao.usuario.id)" class="clickable">
-                                                <strong><img class="avatarRedondo" width="25" :src="pontuacao.usuario.avatar"> {{ pontuacao.usuario.nome}}</strong>
-                                            </span>
+                                        <td class="clickable align-items-center d-flex pr-3" @click="paginaUsuario(pontuacao.usuario.id)">
+                                            <el-tooltip :content="'Nível: '+ pontuacao.usuario.nivel" placement="top" effect="dark">
+                                                <div class="p-1 rounded mr-2"
+                                                    :class="pontuacao.usuario.nivel ? 'fundo-' + pontuacao.usuario.nivel.toLowerCase().replace('_', '-') : ''">
+                                                    <img class="avatarRedondo" :class="pontuacao.usuario.nivel ? 'borda-' + pontuacao.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" :src="pontuacao.usuario.avatar">
+                                                </div>
+                                            </el-tooltip>
+                                            <strong>{{ pontuacao.usuario.nome}}</strong>
                                         </td>
                                         <td class="text-center font-weight-bold fonte-pontuacao"> {{ pontuacao.pontuacao }} </td>
                                         <td v-show="idSituacao>1" class="text-center" v-for="(aposta, index) in pontuacao.listaApostas" :key="aposta.partida.id"
@@ -69,10 +73,14 @@
                                         <td class="fundoTerceiro"> <span v-if="idSituacao>1" :class="(pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosTerceiro == 0) ? 'palpiteZerado' : ''"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.terceiro.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.terceiro.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosTerceiro != null"> ({{ pontuacao.apostaColocacao.pontosTerceiro }}) </span></span></td>
                                         <td class="fundoVice"> <span v-if="idSituacao>1" :class="(pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosVice == 0) ? 'palpiteZerado' : ''"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.vice.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.vice.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosVice != null"> ({{ pontuacao.apostaColocacao.pontosVice }}) </span></span></td>
                                         <td class="fundoCampeao"> <span v-if="idSituacao>1" :class="(pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosCampeao == 0) ? 'palpiteZerado' : ''"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.campeao.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.campeao.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosCampeao != null"> ({{ pontuacao.apostaColocacao.pontosCampeao }}) </span></span></td>
-                                        <td>
-                                            <span @click="paginaUsuario(pontuacao.usuario.id)" class="clickable">
-                                                <strong><img class="avatarRedondo" width="25" :src="pontuacao.usuario.avatar"> {{ pontuacao.usuario.nome}}</strong>
-                                            </span>
+                                        <td class="clickable align-items-center d-flex pr-3" @click="paginaUsuario(pontuacao.usuario.id)" style="border-right:none">
+                                            <el-tooltip :content="'Nível: '+ pontuacao.usuario.nivel" placement="top" effect="dark">
+                                                <div class="p-1 rounded mr-2"
+                                                    :class="pontuacao.usuario.nivel ? 'fundo-' + pontuacao.usuario.nivel.toLowerCase().replace('_', '-') : ''">
+                                                    <img class="avatarRedondo" :class="pontuacao.usuario.nivel ? 'borda-' + pontuacao.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" :src="pontuacao.usuario.avatar">
+                                                </div>
+                                            </el-tooltip>
+                                            <strong>{{ pontuacao.usuario.nome}}</strong>
                                         </td>
                                     </tr>
                                 </tbody>

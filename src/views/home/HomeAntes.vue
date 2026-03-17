@@ -132,8 +132,13 @@
 			</div>
 			<div class="text-left font-weight-bold tituloJanelaPequena">
 			   <div class="d-flex align-items-center mt-1" v-for="usuario in participantes.listaApostadores" :key="usuario.id">
-				   <img class="avatarRedondo mr-2" width="25" height="25" :src="usuario.avatar">
-				   <span @click="paginaUsuario(usuario.id)" class="clickable text-truncate">
+				   <el-tooltip :content="'Nível: '+ usuario.nivel" placement="top" effect="dark">
+						<div class="clickable p-1 rounded" @click="paginaUsuario(usuario.id)"
+							:class="usuario.nivel ? 'fundo-' + usuario.nivel.toLowerCase().replace('_', '-') : ''">
+							<img class="avatarRedondo" :class="usuario.nivel ? 'borda-' + usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" height="25" :src="usuario.avatar">
+						</div>
+					</el-tooltip>
+				   <span @click="paginaUsuario(usuario.id)" class="clickable text-truncate ml-1">
 					- {{ usuario.nome }}
 				   </span>
 			  </div>
@@ -148,8 +153,13 @@
 			</div>
 			 <div class="text-left font-weight-bold tituloJanelaPequena">
 			   <div class="d-flex align-items-center mt-1" v-for="usuario in participantes.listaFaltam" :key="usuario.id">
-				  <img class="avatarRedondo mr-2" width="25" height="25" :src="usuario.avatar">
-				  <span @click="paginaUsuario(usuario.id)" class="clickable text-truncate">
+				  <el-tooltip :content="'Nível: '+ usuario.nivel" placement="top" effect="dark">
+					  <div class="clickable p-1 rounded" @click="paginaUsuario(usuario.id)"
+						  :class="usuario.nivel ? 'fundo-' + usuario.nivel.toLowerCase().replace('_', '-') : ''">
+						  <img class="avatarRedondo" :class="usuario.nivel ? 'borda-' + usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" height="25" :src="usuario.avatar">
+					  </div>
+				  </el-tooltip>
+				  <span @click="paginaUsuario(usuario.id)" class="clickable text-truncate ml-1">
 					- {{ usuario.nome }}
 				  </span>
 			  </div>
@@ -164,8 +174,13 @@
 			</div>
 			<div class="text-left font-weight-bold tituloJanelaPequena">
 			  <div class="d-flex align-items-center mt-1" v-for="usuario in participantes.listaParticipantes" :key="usuario.id">
-				  <img class="avatarRedondo mr-2" width="25" height="25" :src="usuario.avatar">
-				  <span @click="paginaUsuario(usuario.id)" class="clickable text-truncate">
+				  <el-tooltip :content="'Nível: '+ usuario.nivel" placement="top" effect="dark">
+					  <div class="clickable p-1 rounded" @click="paginaUsuario(usuario.id)"
+						  :class="usuario.nivel ? 'fundo-' + usuario.nivel.toLowerCase().replace('_', '-') : ''">
+						  <img class="avatarRedondo" :class="usuario.nivel ? 'borda-' + usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" height="25" :src="usuario.avatar">
+					  </div>
+				  </el-tooltip>
+				  <span @click="paginaUsuario(usuario.id)" class="clickable text-truncate ml-1">
 					- {{ usuario.nome }}
 				  </span>
 			  </div>

@@ -89,7 +89,7 @@
 										<div class="d-flex align-items-center justify-content-between mb-1"
 												v-for="colocacao in curiosidades.listaPlacarExato" :key="colocacao.usuario.id">
 											<div class="d-flex align-items-center text-truncate" style="max-width: 80%;">
-												<img class="avatarRedondo mr-2" width="25" height="25" :src="colocacao.usuario.avatar">
+												<img class="avatarRedondo mr-2" :class="colocacao.usuario.nivel ? 'borda-' + colocacao.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" height="25" :src="colocacao.usuario.avatar">
 												<span @click="paginaUsuario(colocacao.usuario.id)" class="clickable text-truncate small font-weight-bold">- {{ colocacao.usuario.nome }}</span>
 											</div>
 											<div class="font-weight-bold small">{{ colocacao.quantidade }}</div>
@@ -103,7 +103,7 @@
 									<div v-if="curiosidades.listaColocado.length > 0">
 										<div class="d-flex align-items-center mb-1"
 												v-for="usuario in curiosidades.listaColocado" :key="usuario.id">
-											<img class="avatarRedondo mr-2" width="25" height="25" :src="usuario.avatar">
+											<img class="avatarRedondo mr-2" :class="usuario.nivel ? 'borda-' + usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" height="25" :src="usuario.avatar">
 											<span @click="paginaUsuario(usuario.id)" class="clickable text-truncate small font-weight-bold">- {{ usuario.nome }}</span>
 										</div>
 									</div>
@@ -116,7 +116,7 @@
 										<div class="d-flex align-items-center justify-content-between mb-1"
 												v-for="colocacao in curiosidades.listaNenhumPlacar" :key="colocacao.usuario.id">
 											<div class="d-flex align-items-center text-truncate" style="max-width: 80%;">
-												<img class="avatarRedondo mr-2" width="25" height="25" :src="colocacao.usuario.avatar">
+												<img class="avatarRedondo mr-2" :class="colocacao.usuario.nivel ? 'borda-' + colocacao.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" height="25" :src="colocacao.usuario.avatar">
 												<span @click="paginaUsuario(colocacao.usuario.id)" class="clickable text-truncate small font-weight-bold">- {{ colocacao.usuario.nome }}</span>
 											</div>
 											<div class="font-weight-bold small">{{ colocacao.quantidade }}</div>
@@ -130,7 +130,7 @@
 									<div v-if="curiosidades.listaNenhumColocado.length > 0">
 										<div class="d-flex align-items-center mb-1"
 												v-for="usuario in curiosidades.listaNenhumColocado" :key="usuario.id">
-											<img class="avatarRedondo mr-2" width="25" height="25" :src="usuario.avatar">
+											<img class="avatarRedondo mr-2" :class="usuario.nivel ? 'borda-' + usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" height="25" :src="usuario.avatar">
 											<span @click="paginaUsuario(usuario.id)" class="clickable text-truncate small font-weight-bold">- {{ usuario.nome }}</span>
 										</div>
 									</div>
@@ -155,7 +155,12 @@
 						<div class="row m-0 p-2 border-bottom align-items-center"
 								:class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
 								v-for="(rank, index) in ranking" :key="rank.usuario.id">
-							<div class="col-2 pl-1"><img class="avatarRedondo" width="25" height="25" :src="rank.usuario.avatar"></div>
+							<el-tooltip :content="'Nível: '+ rank.usuario.nivel" placement="top" effect="dark">
+								<div class="col-2 pl-1 clickable" @click.native="paginaUsuario(rank.usuario.id)"
+									:class="rank.usuario.nivel ? 'fundo-' + rank.usuario.nivel.toLowerCase().replace('_', '-') : ''">
+									<img class="avatarRedondo" :class="rank.usuario.nivel ? 'borda-' + rank.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" height="25" :src="rank.usuario.avatar">
+								</div>
+							</el-tooltip>
 							<div class="col-7 font-weight-bold" style="min-width:0">
 								<user-name-badges
 									:nome="(index+1) + '. ' + rank.usuario.nome"

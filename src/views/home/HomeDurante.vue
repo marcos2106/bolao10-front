@@ -268,7 +268,12 @@
 								<div class="row p-1 mt-1 colocacaoRanking"
 										:class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
 										v-for="(rank, index) in ranking" :key="rank.usuario.id">
-									<div class="col-1 ml--2"><img class="avatarRedondo" width="25" :src="rank.usuario.avatar"></div>
+									<el-tooltip :content="'Nível: '+ rank.usuario.nivel" placement="top" effect="dark">
+										<div class="col-1 ml--1 clickable" @click.native="paginaUsuario(rank.usuario.id)"
+											:class="rank.usuario.nivel ? 'fundo-' + rank.usuario.nivel.toLowerCase().replace('_', '-') : ''">
+											<img class="avatarRedondo" :class="rank.usuario.nivel ? 'borda-' + rank.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" :src="rank.usuario.avatar">
+										</div>
+									</el-tooltip>
 									<div class="col alinhaVert font-weight-bold" style="min-width:0">
 										<user-name-badges
 											:nome="(index+1) + '. ' + rank.usuario.nome"

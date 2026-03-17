@@ -26,11 +26,14 @@
                             <tr v-for="(item, index) in listaRanking" :key="index"
                                     :class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'">
                                 <td style="text-align: center"> {{ index+1 }}. </td>
-                                <td> 
-                                    <span @click="paginaUsuario(item.usuario.id)" class="clickable">
-                                        <img class="avatarRedondo" width="25" :src="item.usuario.avatar">
-                                        {{ item.usuario.nome }}
-                                    </span>
+                                <td class="clickable align-items-center d-flex pl-2" @click="paginaUsuario(item.usuario.id)"> 
+                                    <el-tooltip :content="'Nível: '+ item.usuario.nivel" placement="top" effect="dark">
+                                        <div class="p-1 rounded mr-2"
+                                            :class="item.usuario.nivel ? 'fundo-' + item.usuario.nivel.toLowerCase().replace('_', '-') : ''">
+                                            <img class="avatarRedondo" :class="item.usuario.nivel ? 'borda-' + item.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" :src="item.usuario.avatar">
+                                        </div>
+                                    </el-tooltip>
+                                    {{ item.usuario.nome }}
                                 </td>
                                 <td style="text-align: center"> 
                                     {{ item.pontuacao }} pts 
