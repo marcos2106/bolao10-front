@@ -43,6 +43,8 @@ const ConsultaCliente = () => import('@/views/ConsultaCliente.vue');
 //Relatorio
 const RelatorioFormaPagamento = () => import('@/views/RelatorioFormaPagamento.vue');
 
+const Notificacoes = () => import('@/views/bolao10/Notificacoes.vue');
+
 let rotasLogin = {
 	path: '/login',
 	component: AreaExternaLayout,
@@ -158,6 +160,10 @@ let rotasBolao = {
 		{
 			path: 'historia',
 			component: Historia
+		},
+		{
+			path: 'notificacoes',
+			component: Notificacoes
 		}
 	]
 };
