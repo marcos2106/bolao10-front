@@ -36,6 +36,7 @@ const Pontuacao = () => import('@/views/bolao10/Pontuacao.vue');
 const Ranking = () => import('@/views/bolao10/Ranking.vue');
 const Regra = () => import('@/views/bolao10/Regra.vue');
 const Historia = () => import('@/views/bolao10/Historia.vue');
+const Notificacao = () => import('@/views/bolao10/Notificacao.vue');
 
 //cliente / titular
 const ConsultaCliente = () => import('@/views/ConsultaCliente.vue');
@@ -43,7 +44,6 @@ const ConsultaCliente = () => import('@/views/ConsultaCliente.vue');
 //Relatorio
 const RelatorioFormaPagamento = () => import('@/views/RelatorioFormaPagamento.vue');
 
-const Notificacoes = () => import('@/views/bolao10/Notificacoes.vue');
 
 let rotasLogin = {
 	path: '/login',
@@ -162,8 +162,8 @@ let rotasBolao = {
 			component: Historia
 		},
 		{
-			path: 'notificacoes',
-			component: Notificacoes
+			path: 'notificacao',
+			component: Notificacao
 		}
 	]
 };

@@ -48,9 +48,8 @@
 				}">
 					<sidebar-item :link="{ name: 'Ranking', icon: 'fas fa-chart-line text-success', path: '/bolao10/ranking' }"></sidebar-item>
 					<sidebar-item :link="{ name: 'Pontuação', path: '/bolao10/pontuacao' }"></sidebar-item>
-					<sidebar-item :link="{ name: 'Pontuacao', path: '/bolao10/pontuacao' }"></sidebar-item>
+					<sidebar-item :link="{ name: 'Notificações', path: '/bolao10/notificacao' }"></sidebar-item>
 					<sidebar-item :link="{ name: 'Regras', path: '/bolao10/regras' }"></sidebar-item>
-					<sidebar-item :link="{ name: 'Notificações', path: '/bolao10/notificacoes' }"></sidebar-item>
 					<sidebar-item :link="{ name: 'História', path: '/bolao10/historia' }"></sidebar-item>
 				</sidebar-item>
 

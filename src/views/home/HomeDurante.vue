@@ -5,17 +5,16 @@
 			<div class="col-8 mt--3">
 
 		  		<!-- WIDGET DE NOTIFICAÇÃO GLOBAL -->
-		  		<div class="janelaSituacaoUsuario d-flex align-items-center p-3 mb-3" 
-		       		v-if="notificacao"
-		       		:style="`border-left: 4px solid ${getEstiloNotificacao(notificacao.tipoEvento).borda}; background-color: #fCfCfC;`">
+		  		<div class="janelaNotificacao d-flex align-items-center p-3 mt-3" v-if="notificacao"
+		       			:style="`border-left: 4px solid ${getEstiloNotificacao(notificacao.tipoEvento).borda}; background-color: ${getEstiloNotificacao(notificacao.tipoEvento).fundo};`">
 		    		<div class="mr-3 d-flex align-items-center justify-content-center" 
-		         		:style="`width: 40px; height: 40px; border-radius: 50%; background-color: ${getEstiloNotificacao(notificacao.tipoEvento).fundo}; color: ${getEstiloNotificacao(notificacao.tipoEvento).borda};`">
+		         		:style="`width: 40px; height: 40px; border-radius: 50%; background-color: ${getEstiloNotificacao(notificacao.tipoEvento).fundoIcone}; color: ${getEstiloNotificacao(notificacao.tipoEvento).borda};`">
 		      			<i :class="getEstiloNotificacao(notificacao.tipoEvento).icone" class="fa-lg"></i>
 		    		</div>
 		    		<div class="flex-grow-1 text-left">
 		      			<div class="font-weight-bold" style="color: #333; font-size: 14px;">{{ notificacao.mensagem }}</div>
 		      			<div style="color: #777; font-size: 11px; margin-top: 2px;">
-		        			<strong>Em</strong> {{ new Date(notificacao.dataCriacao).toLocaleString('pt-BR') }}
+		        			<strong>Em</strong> {{ notificacao.dataCriacao }}
 		      			</div>
 		    		</div>
 		  		</div>
@@ -26,7 +25,7 @@
 					</div>
 				-->
 
-				<div class="row mb-3 mt-3">
+				<div class="row mb-3 mt-1">
 					<div class="col" v-for="partida in partidasAnteriores" :key="partida.id">
 
 						<div class="janelaPartida clickable" @click="detalharPartida(partida.id)">
@@ -445,12 +444,12 @@ export default {
 		},
 		getEstiloNotificacao(tipo) {
 		    const estilos = {
-		        'SUBIU_NIVEL': { icone: 'fas fa-arrow-up', borda: '#6ea204', fundo: '#d4edda' },
-		        'NOVO_LIDER_RANKING': { icone: 'fas fa-crown', borda: '#e0a800', fundo: '#fff3cd' },
-		        'NOVO_BADGE': { icone: 'fas fa-shield-alt', borda: '#007bff', fundo: '#cce5ff' },
-		        'PARTIDA_FINALIZADA': { icone: 'far fa-futbol', borda: '#17a2b8', fundo: '#d1ecf1' },
-		        'APOSTA_FINALIZADA': { icone: 'fas fa-receipt', borda: '#6c757d', fundo: '#e2e3e5' },
-		        'MUDANCA_ARTILHARIA': { icone: 'fas fa-star', borda: '#fd7e14', fundo: '#f8d7da' }
+		        'SUBIU_NIVEL': { icone: 'fas fa-arrow-up', borda: '#6ea204', fundo: '#d4edda', fundoIcone: '#6ea204' },
+		        'NOVO_LIDER_RANKING': { icone: 'fas fa-crown', borda: '#e0a800', fundo: '#fff0c3', fundoIcone: '#fbd86f' },
+		        'NOVO_BADGE': { icone: 'fas fa-shield-alt', borda: '#007bff', fundo: '#cce5ff', fundoIcone: '#007bff' },
+		        'PARTIDA_FINALIZADA': { icone: 'far fa-check-circle', borda: '#17a2b8', fundo: '#dbf6fb', fundoIcone: '#71e4f6' },
+		        'APOSTA_FINALIZADA': { icone: 'fas fa-receipt', borda: '#6c757d', fundo: '#f0f0f0', fundoIcone: '#bbc1c7' },
+		        'MUDANCA_ARTILHARIA': { icone: 'fas fa-futbol', borda: '#fd7e14', fundo: '#ffe6d1', fundoIcone: '#ffc18e' }
 		    };
 		    return estilos[tipo] || { icone: 'fas fa-bell', borda: '#6c757d', fundo: '#e2e3e5' };
 		}
@@ -554,5 +553,11 @@ export default {
 	letter-spacing: 4px;
 	font-size: 13px;
 	font-style: italic;
+}
+
+.janelaNotificacao {
+	border-radius: 5px;
+	box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important; 
+	border: 1px solid #C0C0C0;
 }
 </style>
