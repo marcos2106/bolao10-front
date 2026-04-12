@@ -155,7 +155,7 @@
 						<div class="row m-0 p-2 border-bottom align-items-center"
 								:class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
 								v-for="(rank, index) in ranking" :key="rank.usuario.id">
-							<el-tooltip :content="'Nível: '+ rank.usuario.nivel" placement="top" effect="dark">
+							<el-tooltip :content="'Nível: '+ rank.usuario.nivelDescricao" placement="top" effect="dark">
 								<div class="col-2 pl-1 clickable" @click.native="paginaUsuario(rank.usuario.id)"
 									:class="rank.usuario.nivel ? 'fundo-' + rank.usuario.nivel.toLowerCase().replace('_', '-') : ''">
 									<img class="avatarRedondo" :class="rank.usuario.nivel ? 'borda-' + rank.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" height="25" :src="rank.usuario.avatar">
@@ -189,7 +189,6 @@
 </template>
 
 <script>
-// O Script permanece igual, apenas adicionei o nome para debug
 export default {
 	name: 'HomeDepoisResponsive',
 	created(){

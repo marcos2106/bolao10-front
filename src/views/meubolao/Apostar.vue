@@ -69,8 +69,55 @@
                         </div>
                     </div>
 
-                    <!-- STEP 1: OITAVAS -->
+                    <!-- STEP 1: 16 Avos -->
                     <div class="row d-flex justify-content-center" v-if="current == 1">
+                        <div class="row ml-4"> 
+                            <div v-if="listaPartidas16.length==0" class="loading">Carregando partidas...</div>
+                            
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-5 m-2 separacaoTabela" 
+                                                v-for="partida in listaPartidas16" :key="partida.id">
+                                            <div class="col-12 mt-2" style="justify-content: space-around; display: flex;">
+                                                <div class="badge badge-secondary"><i class="fas fa-futbol"></i>&nbsp; Partida {{ partida.id }} </div>
+                                                <div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} </div>
+                                                <div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida.dataHoraFmt.substring(6, 8) }}h </div>
+                                                <div class="badge badge-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida.local }}</div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-7 mt-2 little-text">
+                                                    <el-tooltip :content=partida.selecaoA.nome placement="top">
+                                                        <input v-model=partida.selecaoA.nome />
+                                                    </el-tooltip>
+                                                </div>
+                                                <div class="col-5">
+                                                    <el-select filterable v-model="partida.placarA" placeholder="Selecione">
+                                                        <el-option v-for="gol in gols" :key="gol" :label="gol" :value="gol">{{ gol }}</el-option>
+                                                    </el-select>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-7 mt-2 little-text">
+                                                    <el-tooltip :content=partida.selecaoB.nome placement="top">
+                                                        <input v-model=partida.selecaoB.nome />
+                                                    </el-tooltip>
+                                                </div>
+                                                <div class="col-5">
+                                                    <el-select filterable v-model="partida.placarB" placeholder="Selecione">
+                                                        <el-option v-for="gol in gols" :key="gol" :label="gol" :value="gol">{{ gol }}</el-option>
+                                                    </el-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div> 
+                            </div> 
+                        </div>     
+                    </div>
+
+                    <!-- STEP 2: OITAVAS -->
+                    <div class="row d-flex justify-content-center" v-if="current == 2">
                         <div class="row ml-4"> 
                             <div v-if="listaPartidas8.length==0" class="loading">Carregando partidas...</div>
                             
@@ -116,8 +163,8 @@
                         </div>     
                     </div>
 
-                    <!-- STEP 2: QUARTAS -->
-                    <div class="row d-flex justify-content-center" v-if="current == 2">
+                    <!-- STEP 3: QUARTAS -->
+                    <div class="row d-flex justify-content-center" v-if="current == 3">
                         <div class="row ml-4"> 
                             <div v-if="listaPartidas4.length==0" class="loading">Carregando partidas...</div>
                             
@@ -163,8 +210,8 @@
                         </div>     
                     </div>
 
-                    <!-- STEP 3: SEMIS -->
-                    <div class="row d-flex justify-content-center" v-if="current == 3">
+                    <!-- STEP 4: SEMIS -->
+                    <div class="row d-flex justify-content-center" v-if="current == 4">
                         <div class="row ml-4"> 
                             <div v-if="listaPartidasS.length==0" class="loading">Carregando partidas...</div>
                             
@@ -210,8 +257,8 @@
                         </div>     
                     </div>
 
-                    <!-- STEP 4: FINAIS -->
-                    <div class="row d-flex justify-content-center" v-if="current == 4">
+                    <!-- STEP 5: FINAIS -->
+                    <div class="row d-flex justify-content-center" v-if="current == 5">
                         <div class="row ml-4"> 
                             <div v-if="listaPartidas1.length==0" class="loading">Carregando partidas...</div>
                             
@@ -221,8 +268,8 @@
                                         <div class="col-5 separacaoTabela" 
                                                 v-for="partida in listaPartidas1" :key="partida.id">
                                             <div class="col-12 mt-2" style="justify-content: space-around; display: flex;">
-                                                <div class="badge badge-secondary descricaoFinal" v-if="partida.id == 63"><i class="fas fa-futbol"></i>&nbsp; Terceiro lugar </div>
-                                                <div class="badge badge-secondary descricaoFinal" v-if="partida.id == 64"><i class="fas fa-trophy"></i>&nbsp; FINAL </div>
+                                                <div class="badge badge-secondary descricaoFinal" v-if="partida.id == 103"><i class="fas fa-futbol"></i>&nbsp; Terceiro lugar </div>
+                                                <div class="badge badge-secondary descricaoFinal" v-if="partida.id == 104"><i class="fas fa-trophy"></i>&nbsp; FINAL </div>
                                                 <div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida.dataHoraFmt.substring(0, 5) }} </div>
                                                 <div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida.dataHoraFmt.substring(6, 8) }}h </div>
                                                 <div class="badge badge-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida.local }}</div>
@@ -258,10 +305,11 @@
                         </div>     
                     </div>
 
-                    <!-- STEP 5: POSIÇÕES -->
-                    <div class="row d-flex justify-content-center" v-if="current == 5">
+                    <!-- STEP 6: POSIÇÕES E ARTILHARIA -->
+                    <div class="row d-flex justify-content-center" v-if="current == 6">
                         <div class="row mt-4"> 
-                            <div class="col separacaoTabela">
+
+                            <div class="col separacaoTabela mr-4">
                                 <div class="row mt-2">
                                     <div class="col-6 mt-2 descricaoFinal">
                                         Campeão
@@ -315,19 +363,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> 
-                    </div>
 
-                    <!-- STEP 6: ARTILHARIA -->
-                    <div class="row d-flex justify-content-center" v-if="current == 6">
-                        <div class="row mt-4"> 
-                            <div class="col separacaoTabela">
+                            <div class="col separacaoTabela ml-4">
                                 <div class="row mt-2">
-                                    <div class="col-6 mt-2">
-                                        Seleção do Artilheiro
+                                    <div class="col-7 mt-2">
+                                        <i class="fas fa-futbol mr-2"></i>Seleção do Artilheiro
                                         <p class="little-text">({{pontuacao.pontosArtilharia}} pontos)</p>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-5">
                                         <el-select filterable v-model="artilharia" placeholder="Artilharia">
                                             <el-option v-for="selecao in listaSelecao" :key="selecao.id" :label="selecao.nome" :value="selecao.nome">
                                                 <img width="20" class="m-2" :src=selecao.imagem loading="lazy"> &nbsp; {{ selecao.nome}}
@@ -336,7 +379,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            
+                        </div> 
                     </div>
 
                     <!-- STEP 7: FINALIZAÇÃO (resumo de tudo) -->
@@ -369,6 +413,25 @@
                             </div>
 
                         </div>
+                        <div class="row" style="width: 90%"> <!-- 16 AVOS -->
+                            <div class="col-12 mt-4"> 
+                                <h4 class="little-text">16 Avos</h4>
+                                <div class="row">
+                                    <div class="col-6 separacaoTabelaFinaliza" 
+                                            :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
+                                            v-for="partida in listaPartidas16" :key="partida.id">
+                                        <div class="row p-2 little-text">
+                                            <div class="col-10">{{ partida.selecaoA.nome }}</div>
+                                            <div class="col">{{ partida.placarA }}</div>
+                                        </div>
+                                        <div class="row p-2 little-text">
+                                            <div class="col-10">{{ partida.selecaoB.nome }}</div>
+                                            <div class="col">{{ partida.placarB }}</div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div> 
                         <div class="row" style="width: 90%"> <!-- OITAVAS -->
                             <div class="col-12 mt-4"> 
                                 <h4 class="little-text">Oitavas de Final</h4>
@@ -428,7 +491,7 @@
                         </div>   
                         <div class="row" style="width: 90%"> <!-- FINAL -->
                             <div class="col-12 mt-4">
-                                <h4 class="little-text">Final</h4>
+                                <h4 class="little-text">3º Lugar e Final</h4>
                                 <div class="row">
                                     <div class="col-6 separacaoTabelaFinaliza" 
                                             :class="[{ 'partidaFaltando': (partida.placarA == null || partida.placarB == null) }]"
@@ -446,37 +509,35 @@
                             </div> 
                         </div>     
                         <div class="row" style="width: 90%"> <!-- COLOCAÇÕES -->
-                            <div class="col-12 mt-4">
+                            <div class="col-6 mt-4">
                                 <h4 class="little-text">Colocações</h4>
                                 <div class="row"> 
                                     <div class="col separacaoTabela little-text">
-                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (posicao1 == null) }]">
-                                            <div class="col-6 mt-2" :class="[{ 'descricaoFinal': (posicao1 != null) }]">Campeão</div>
+                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (posicao1 == '') }]">
+                                            <div class="col-6 mt-2" :class="[{ 'descricaoFinal': (posicao1 != '') }]">Campeão</div>
                                             <div class="col-6">{{ posicao1 }}</div>
                                         </div>
-                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (posicao2 == null) }]">
+                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (posicao2 == '') }]">
                                             <div class="col-6 mt-2">2º Colocado</div>
                                             <div class="col-6">{{ posicao2 }}</div>
                                         </div>
-                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (posicao3 == null) }]">
+                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (posicao3 == '') }]">
                                             <div class="col-6 mt-2">3º Colocado</div>
                                             <div class="col-6">{{ posicao3 }}</div>
                                         </div>
-                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (posicao4 == null) }]">
+                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (posicao4 == '') }]">
                                             <div class="col-6 mt-2">4º Colocado</div>
                                             <div class="col-6">{{ posicao4 }}</div>
                                         </div>
                                     </div>
                                 </div> 
                             </div> 
-                        </div>
-                        <div class="row" style="width: 90%"> <!-- ARTILHARIA -->
-                            <div class="col-12 mt-4">
+                            <div class="col-6 mt-4">
                                 <h4 class="little-text">Artilharia</h4>
                                 <div class="row"> 
                                     <div class="col separacaoTabela little-text">
-                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (artilharia == null) }]">
-                                            <div class="col-6 mt-2">Seleção do Artilheiro</div>
+                                        <div class="row mt-2" :class="[{ 'partidaFaltando': (artilharia == '') }]">
+                                            <div class="col-6 mt-2"><i class="fas fa-futbol mr-2"></i>Seleção do Artilheiro</div>
                                             <div class="col-6">{{ artilharia }}</div>
                                         </div>
                                     </div>
@@ -563,6 +624,7 @@ export default {
             grupos: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'],
             listaPartidas: [],
             listaPartidasGrupo: {},
+            listaPartidas16: [],
             listaPartidas8: [],
             listaPartidas4: [],
             listaPartidasS: [],
@@ -578,6 +640,10 @@ export default {
 			current: 0,
 			steps: [{
 					title: "Fase de Grupos",
+					content: "",
+				},
+				{
+					title: "16 Avos",
 					content: "",
 				},
 				{
@@ -600,10 +666,6 @@ export default {
                     title: "Colocações",
                     content: "",
                 },
-				{
-					title: "Artilharia",
-					content: "",
-				},
 				{
 					title: "Finalizar",
 					content: "Last-content",
@@ -629,10 +691,11 @@ export default {
                 });
                 this.listaPartidasGrupo = grupoMap;
 
-                this.listaPartidas8 = this.listaPartidas.filter(p => p.fase == 2);
-                this.listaPartidas4 = this.listaPartidas.filter(p => p.fase == 3);
-                this.listaPartidasS = this.listaPartidas.filter(p => p.fase == 4);
-                this.listaPartidas1 = this.listaPartidas.filter(p => p.fase >= 5);
+                this.listaPartidas16 = this.listaPartidas.filter(p => p.fase == 2);
+                this.listaPartidas8 = this.listaPartidas.filter(p => p.fase == 3);
+                this.listaPartidas4 = this.listaPartidas.filter(p => p.fase == 4);
+                this.listaPartidasS = this.listaPartidas.filter(p => p.fase == 5);
+                this.listaPartidas1 = this.listaPartidas.filter(p => p.fase >= 6);
 
                 this.$clubApi.get("/bolao/colocacao").then((response) => {    
                     this.posicao1 = (response.data.object.campeao) ? response.data.object.campeao.nome : "";
@@ -689,12 +752,13 @@ export default {
                         this.$router.push('/meubolao/' + localStorage.getItem("id"));
                     }) .catch((error) => {
                         if (error.response.data.msg.indexOf("Grupo") > 0) { this.current = 0; }
-                        if (error.response.data.msg.indexOf("oitavas") > 0) { this.current = 1; }
-                        if (error.response.data.msg.indexOf("quartas") > 0) { this.current = 2; }
-                        if (error.response.data.msg.indexOf("semis") > 0) { this.current = 3; }
-                        if (error.response.data.msg.indexOf("finais") > 0) { this.current = 4; }
-                        if (error.response.data.msg.indexOf("rtilharia") > 0) { this.current = 5; }
-                        if (error.response.data.msg.indexOf("repetir") > 0) { this.current = 5; }
+                        if (error.response.data.msg.indexOf("Avos") > 0) { this.current = 1; }
+                        if (error.response.data.msg.indexOf("oitavas") > 0) { this.current = 2; }
+                        if (error.response.data.msg.indexOf("quartas") > 0) { this.current = 3; }
+                        if (error.response.data.msg.indexOf("semis") > 0) { this.current = 4; }
+                        if (error.response.data.msg.indexOf("finais") > 0) { this.current = 5; }
+                        if (error.response.data.msg.indexOf("rtilharia") > 0) { this.current = 6; }
+                        if (error.response.data.msg.indexOf("repetir") > 0) { this.current = 6; }
                         this.$notify({type: 'warning', message: error.response.data.msg});
                     }).finally(() =>{
                         NProgress.done();
@@ -706,6 +770,7 @@ export default {
             // Concatena todas as partidas de grupo (em ordem A–L) + fases eliminatórias
             const partidasGrupo = this.grupos.flatMap(g => this.listaPartidasGrupo[g] || []);
             const listaPartidas = partidasGrupo.concat(
+                this.listaPartidas16,
                 this.listaPartidas8,
                 this.listaPartidas4,
                 this.listaPartidasS,

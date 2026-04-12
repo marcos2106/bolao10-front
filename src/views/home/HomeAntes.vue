@@ -47,20 +47,20 @@
   
 		<div class="col-12 col-lg-8 order-2 order-lg-1">
 
-		  <!-- WIDGET DE NOTIFICAÇÃO GLOBAL -->
-		  <div class="janelaSituacaoUsuario d-flex align-items-center p-3 mb-3" v-if="notificacao"
-		       :style="`border-left: 4px solid ${getEstiloNotificacao(notificacao.tipoEvento).borda}; background-color: ${getEstiloNotificacao(notificacao.tipoEvento).fundo};`">
-		    <div class="mr-3 d-flex align-items-center justify-content-center" 
-		         :style="`width: 40px; height: 40px; border-radius: 50%; background-color: ${getEstiloNotificacao(notificacao.tipoEvento).fundo}; color: ${getEstiloNotificacao(notificacao.tipoEvento).borda};`">
-		      <i :class="getEstiloNotificacao(notificacao.tipoEvento).icone" class="fa-lg"></i>
-		    </div>
-		    <div class="flex-grow-1 text-left">
-		      <div class="font-weight-bold" style="color: #333; font-size: 14px;">{{ notificacao.mensagem }}</div>
-		      <div style="color: #777; font-size: 11px; margin-top: 2px;">
-		        <strong>Em</strong> {{ new Date(notificacao.dataCriacao).toLocaleString('pt-BR') }}
-		      </div>
-		    </div>
-		  </div>
+			<!-- WIDGET DE NOTIFICAÇÃO GLOBAL -->
+			<div class="janelaNotificacao d-flex align-items-center p-3 mb-3 clickable" v-if="notificacao"
+					:style="`border-left: 4px solid ${getEstiloNotificacao(notificacao.tipoEvento).borda}; background-color: ${getEstiloNotificacao(notificacao.tipoEvento).fundo};`" @click="irParaNotificacao">
+				<div class="mr-3 d-flex align-items-center justify-content-center" 
+					:style="`width: 40px; height: 40px; border-radius: 50%; background-color: ${getEstiloNotificacao(notificacao.tipoEvento).fundoIcone}; color: ${getEstiloNotificacao(notificacao.tipoEvento).borda};`">
+					<i :class="getEstiloNotificacao(notificacao.tipoEvento).icone" class="fa-lg"></i>
+				</div>
+				<div class="flex-grow-1 text-left">
+					<div class="font-weight-bold" style="color: #333; font-size: 14px;">{{ notificacao.mensagem }}</div>
+					<div style="color: #777; font-size: 11px; margin-top: 2px;">
+						<strong>Em</strong> {{ notificacao.dataCriacao }}
+					</div>
+				</div>
+			</div>
 
 		  <div class="janelaSituacaoUsuario p-3 mb-3"
 			   v-if="getPerfil()=='USER' && dadosUsuario!=null && (!dadosUsuario.aposta || !dadosUsuario.pagamento)">
@@ -147,7 +147,7 @@
 			</div>
 			<div class="text-left font-weight-bold tituloJanelaPequena">
 			   <div class="d-flex align-items-center mt-1" v-for="usuario in participantes.listaApostadores" :key="usuario.id">
-				   <el-tooltip :content="'Nível: '+ usuario.nivel" placement="top" effect="dark">
+				   <el-tooltip :content="'Nível: '+ usuario.nivelDescricao" placement="top" effect="dark">
 						<div class="clickable p-1 rounded" @click="paginaUsuario(usuario.id)"
 							:class="usuario.nivel ? 'fundo-' + usuario.nivel.toLowerCase().replace('_', '-') : ''">
 							<img class="avatarRedondo" :class="usuario.nivel ? 'borda-' + usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" height="25" :src="usuario.avatar">
@@ -168,7 +168,7 @@
 			</div>
 			 <div class="text-left font-weight-bold tituloJanelaPequena">
 			   <div class="d-flex align-items-center mt-1" v-for="usuario in participantes.listaFaltam" :key="usuario.id">
-				  <el-tooltip :content="'Nível: '+ usuario.nivel" placement="top" effect="dark">
+				  <el-tooltip :content="'Nível: '+ usuario.nivelDescricao" placement="top" effect="dark">
 					  <div class="clickable p-1 rounded" @click="paginaUsuario(usuario.id)"
 						  :class="usuario.nivel ? 'fundo-' + usuario.nivel.toLowerCase().replace('_', '-') : ''">
 						  <img class="avatarRedondo" :class="usuario.nivel ? 'borda-' + usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" height="25" :src="usuario.avatar">
@@ -189,7 +189,7 @@
 			</div>
 			<div class="text-left font-weight-bold tituloJanelaPequena">
 			  <div class="d-flex align-items-center mt-1" v-for="usuario in participantes.listaParticipantes" :key="usuario.id">
-				  <el-tooltip :content="'Nível: '+ usuario.nivel" placement="top" effect="dark">
+				  <el-tooltip :content="'Nível: '+ usuario.nivelDescricao" placement="top" effect="dark">
 					  <div class="clickable p-1 rounded" @click="paginaUsuario(usuario.id)"
 						  :class="usuario.nivel ? 'fundo-' + usuario.nivel.toLowerCase().replace('_', '-') : ''">
 						  <img class="avatarRedondo" :class="usuario.nivel ? 'borda-' + usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" height="25" :src="usuario.avatar">
@@ -231,88 +231,92 @@
 		  }
 	  },
 	  methods: {
-		  getPerfil() { return localStorage.getItem("perfil") },
-		  carregarDados() {
-			  this.carregarNotificacaoSorteada();
-			  this.carregarDadosUsuarios();
-			  this.carregarJogoEstreia();
-			  this.carregarDadosIniciais();
-			  this.carregarParticipantes();
-		  },
-		  iniciarContagem() {
-			  this.countdown = new Date("2026-06-11T16:00:00") - new Date(); // Use formato ISO para segurança cross-browser
-			  setInterval(() => { this.contagemRegressiva() }, 1000);
-		  },
-		  contagemRegressiva() {
-			  this.countdown = this.countdown - 1000;
-			  let days = Math.floor(this.countdown / (1000 * 60 * 60 * 24));
-			  let hours = Math.floor(this.countdown % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
-			  let minutes = Math.floor(this.countdown % (1000 * 60 * 60) / (1000 * 60));
-			  let seconds = Math.floor(this.countdown % (1000 * 60) / 1000);
-			  days = (days == "0") ? "" : (days == "1") ? days +" dia " : days +" dias ";
-			  hours = (hours < 10) ? "0"+ hours : hours;
-			  minutes = (minutes < 10) ? "0"+ minutes : minutes;
-			  seconds = (seconds < 10) ? "0"+ seconds : seconds;
-			  this.contagem = days +""+ hours +" : "+ minutes +" : "+ seconds;
-		  },
-		  fazerAposta(idUsuario) { location.href = '/meubolao/apostar'; },
-		  verPagamento() { location.href = '/bolao10/regras#pagamento'; },
-		  carregarNotificacaoSorteada() {
-		     this.$clubApi.get("/notificacao/sorteada").then((response) => {
-		         this.notificacao = response.data.object;
-		     }).catch((error) => {
-		         console.warn("Erro ao buscar notificação: ", error);
-		     });
-		  },		
-		  getEstiloNotificacao(tipo) {
-		    const estilos = {
-		        'SUBIU_NIVEL': { icone: 'fas fa-arrow-up', borda: '#6ea204', fundo: '#d4edda', fundoIcone: '#6ea204' },
-		        'NOVO_LIDER_RANKING': { icone: 'fas fa-crown', borda: '#e0a800', fundo: '#fff0c3', fundoIcone: '#fbd86f' },
-		        'NOVO_BADGE': { icone: 'fas fa-shield-alt', borda: '#007bff', fundo: '#cce5ff', fundoIcone: '#007bff' },
-		        'PARTIDA_FINALIZADA': { icone: 'far fa-check-circle', borda: '#17a2b8', fundo: '#dbf6fb', fundoIcone: '#71e4f6' },
-		        'APOSTA_FINALIZADA': { icone: 'fas fa-receipt', borda: '#6c757d', fundo: '#f0f0f0', fundoIcone: '#bbc1c7' },
-		        'MUDANCA_ARTILHARIA': { icone: 'fas fa-futbol', borda: '#fd7e14', fundo: '#ffe6d1', fundoIcone: '#ffc18e' }
-		    };
-		    return estilos[tipo] || { icone: 'fas fa-bell', borda: '#6c757d', fundo: '#e2e3e5' };
+		getPerfil() { return localStorage.getItem("perfil") },
+		carregarDados() {
+			this.carregarNotificacaoSorteada();
+			this.carregarDadosUsuarios();
+			this.carregarJogoEstreia();
+			this.carregarDadosIniciais();
+			this.carregarParticipantes();
 		},
-		  carregarDadosUsuarios() {
-			  			  this.$clubApi.get("/user/data/complete").then((response) => {
-				  this.dadosUsuario = response.data.object;
-			  }) .catch((error) => {
-				  this.$notify({type: 'warning', message: error.response.data.msg})
-			  }).finally(() =>{
+		iniciarContagem() {
+			this.countdown = new Date("2026-06-11T16:00:00") - new Date(); // Use formato ISO para segurança cross-browser
+			setInterval(() => { this.contagemRegressiva() }, 1000);
+		},
+		contagemRegressiva() {
+			this.countdown = this.countdown - 1000;
+			let days = Math.floor(this.countdown / (1000 * 60 * 60 * 24));
+			let hours = Math.floor(this.countdown % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+			let minutes = Math.floor(this.countdown % (1000 * 60 * 60) / (1000 * 60));
+			let seconds = Math.floor(this.countdown % (1000 * 60) / 1000);
+			days = (days == "0") ? "" : (days == "1") ? days +" dia " : days +" dias ";
+			hours = (hours < 10) ? "0"+ hours : hours;
+			minutes = (minutes < 10) ? "0"+ minutes : minutes;
+			seconds = (seconds < 10) ? "0"+ seconds : seconds;
+			this.contagem = days +""+ hours +" : "+ minutes +" : "+ seconds;
+		},
+		fazerAposta(idUsuario) { location.href = '/meubolao/apostar'; },
+		verPagamento() { location.href = '/bolao10/regras#pagamento'; },
+		carregarNotificacaoSorteada() {
+			this.$clubApi.get("/notificacao/sorteada").then((response) => {
+				this.notificacao = response.data.object;
+			}).catch((error) => {
+				console.warn("Erro ao buscar notificação: ", error);
+			});
+		},		
+		getEstiloNotificacao(tipo) {
+			const estilos = {
+		        'SUBIU_NIVEL': { icone: 'fas fa-arrow-up', borda: '#6ea204', fundo: '#d4edda', fundoIcone: '#ECFFF1' },
+		        'NOVO_LIDER_RANKING': { icone: 'fas fa-crown', borda: '#e0a800', fundo: '#fff0c3', fundoIcone: '#fbd86f' },
+		        'NOVO_BADGE': { icone: 'fas fa-shield-alt', borda: '#007bff', fundo: '#cce5ff', fundoIcone: '#f0f7ff' },
+		        'PARTIDA_FINALIZADA': { icone: 'far fa-check-circle', borda: '#17a2b8', fundo: '#dbf6fb', fundoIcone: '#FEFFFF' },
+				'APOSTA_FINALIZADA': { icone: 'fas fa-fire-alt', borda: '#ac0404', fundo: '#ffc2c2', fundoIcone: '#FF7C7C' },
+		        'MUDANCA_ARTILHARIA': { icone: 'fas fa-futbol', borda: '#fd7e14', fundo: '#ffe6d1', fundoIcone: '#ffc18e' },
+				'PAGAMENTO_REALIZADO': { icone: 'fas fa-dollar-sign', borda: '#32CA8A', fundo: '#cdfbcc', fundoIcone: '#97FF94' },
+			};
+			return estilos[tipo] || { icone: 'fas fa-bell', borda: '#6c757d', fundo: '#e2e3e5' };
+		},
+		carregarDadosUsuarios() {
+						this.$clubApi.get("/user/data/complete").then((response) => {
+				this.dadosUsuario = response.data.object;
+			}) .catch((error) => {
+				this.$notify({type: 'warning', message: error.response.data.msg})
+			}).finally(() =>{
+			NProgress.done();
+		})
+					},
+		carregarJogoEstreia() {
+						this.$clubApi.get("/home/antes/estreia").then((response) => {
+				this.jogoEstreia = response.data.object;
+			}) .catch((error) => {
+				this.$notify({type: 'warning', message: error.response.data.msg})
+			}).finally(() =>{
+			NProgress.done();
+		})
+					},
+		carregarDadosIniciais() {
+						this.$clubApi.get("/home/antes/inicio").then((response) => {
+				this.dadosIniciais = response.data.object;
+			}) .catch((error) => {
+				this.$notify({type: 'warning', message: error.response.data.msg})
+			}).finally(() =>{
+			NProgress.done();
+		})
+					},
+		carregarParticipantes() {
+						this.$clubApi.get("/home/antes/participantes").then((response) => {
+				this.participantes = response.data.object;
+			}) .catch((error) => {
+				this.$notify({type: 'warning', message: error.response.data.msg})
+			}).finally(() =>{
 				NProgress.done();
 			})
-			  		  },
-		  carregarJogoEstreia() {
-			   			  this.$clubApi.get("/home/antes/estreia").then((response) => {
-				  this.jogoEstreia = response.data.object;
-			  }) .catch((error) => {
-				  this.$notify({type: 'warning', message: error.response.data.msg})
-			  }).finally(() =>{
-				NProgress.done();
-			})
-			  		  },
-		  carregarDadosIniciais() {
-			   			  this.$clubApi.get("/home/antes/inicio").then((response) => {
-				  this.dadosIniciais = response.data.object;
-			  }) .catch((error) => {
-				  this.$notify({type: 'warning', message: error.response.data.msg})
-			  }).finally(() =>{
-				NProgress.done();
-			})
-			  		  },
-		  carregarParticipantes() {
-			  			  this.$clubApi.get("/home/antes/participantes").then((response) => {
-				  this.participantes = response.data.object;
-			  }) .catch((error) => {
-				  this.$notify({type: 'warning', message: error.response.data.msg})
-			  }).finally(() =>{
-				NProgress.done();
-			})
-		  },
-		  paginaUsuario(idUsuario) { location.href = '/meubolao/'+ idUsuario; },
-		  detalharPartida(idPartida) { location.href = '/mundial/partida/'+ idPartida; }
+		},
+		paginaUsuario(idUsuario) { location.href = '/meubolao/'+ idUsuario; },
+		detalharPartida(idPartida) { location.href = '/mundial/partida/'+ idPartida; },
+		irParaNotificacao() {
+			this.$router.push('/bolao10/notificacao');
+		},
 	  }
   };
   </script>

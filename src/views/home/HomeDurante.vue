@@ -5,8 +5,8 @@
 			<div class="col-8 mt--3">
 
 		  		<!-- WIDGET DE NOTIFICAÇÃO GLOBAL -->
-		  		<div class="janelaNotificacao d-flex align-items-center p-3 mt-3" v-if="notificacao"
-		       			:style="`border-left: 4px solid ${getEstiloNotificacao(notificacao.tipoEvento).borda}; background-color: ${getEstiloNotificacao(notificacao.tipoEvento).fundo};`">
+		  		<div class="janelaNotificacao d-flex align-items-center p-3 mt-3 clickable" v-if="notificacao"
+		       			:style="`border-left: 4px solid ${getEstiloNotificacao(notificacao.tipoEvento).borda}; background-color: ${getEstiloNotificacao(notificacao.tipoEvento).fundo};`" @click="irParaNotificacao">
 		    		<div class="mr-3 d-flex align-items-center justify-content-center" 
 		         		:style="`width: 40px; height: 40px; border-radius: 50%; background-color: ${getEstiloNotificacao(notificacao.tipoEvento).fundoIcone}; color: ${getEstiloNotificacao(notificacao.tipoEvento).borda};`">
 		      			<i :class="getEstiloNotificacao(notificacao.tipoEvento).icone" class="fa-lg"></i>
@@ -283,7 +283,7 @@
 								<div class="row p-1 mt-1 colocacaoRanking"
 										:class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
 										v-for="(rank, index) in ranking" :key="rank.usuario.id">
-									<el-tooltip :content="'Nível: '+ rank.usuario.nivel" placement="top" effect="dark">
+									<el-tooltip :content="'Nível: '+ rank.usuario.nivelDescricao" placement="top" effect="dark">
 										<div class="col-1 ml--1 clickable" @click.native="paginaUsuario(rank.usuario.id)"
 											:class="rank.usuario.nivel ? 'fundo-' + rank.usuario.nivel.toLowerCase().replace('_', '-') : ''">
 											<img class="avatarRedondo" :class="rank.usuario.nivel ? 'borda-' + rank.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" :src="rank.usuario.avatar">
@@ -442,14 +442,18 @@ export default {
 		       console.warn("Erro ao buscar notificação: ", error);
 		   });
 		},
+		irParaNotificacao() {
+			this.$router.push('/bolao10/notificacao');
+		},
 		getEstiloNotificacao(tipo) {
 		    const estilos = {
-		        'SUBIU_NIVEL': { icone: 'fas fa-arrow-up', borda: '#6ea204', fundo: '#d4edda', fundoIcone: '#6ea204' },
+		        'SUBIU_NIVEL': { icone: 'fas fa-arrow-up', borda: '#6ea204', fundo: '#d4edda', fundoIcone: '#ECFFF1' },
 		        'NOVO_LIDER_RANKING': { icone: 'fas fa-crown', borda: '#e0a800', fundo: '#fff0c3', fundoIcone: '#fbd86f' },
-		        'NOVO_BADGE': { icone: 'fas fa-shield-alt', borda: '#007bff', fundo: '#cce5ff', fundoIcone: '#007bff' },
-		        'PARTIDA_FINALIZADA': { icone: 'far fa-check-circle', borda: '#17a2b8', fundo: '#dbf6fb', fundoIcone: '#71e4f6' },
-		        'APOSTA_FINALIZADA': { icone: 'fas fa-receipt', borda: '#6c757d', fundo: '#f0f0f0', fundoIcone: '#bbc1c7' },
-		        'MUDANCA_ARTILHARIA': { icone: 'fas fa-futbol', borda: '#fd7e14', fundo: '#ffe6d1', fundoIcone: '#ffc18e' }
+		        'NOVO_BADGE': { icone: 'fas fa-shield-alt', borda: '#007bff', fundo: '#cce5ff', fundoIcone: '#f0f7ff' },
+		        'PARTIDA_FINALIZADA': { icone: 'far fa-check-circle', borda: '#17a2b8', fundo: '#dbf6fb', fundoIcone: '#FEFFFF' },
+				'APOSTA_FINALIZADA': { icone: 'fas fa-fire-alt', borda: '#ac0404', fundo: '#ffc2c2', fundoIcone: '#FF7C7C' },
+		        'MUDANCA_ARTILHARIA': { icone: 'fas fa-futbol', borda: '#fd7e14', fundo: '#ffe6d1', fundoIcone: '#ffc18e' },
+				'PAGAMENTO_REALIZADO': { icone: 'fas fa-dollar-sign', borda: '#32CA8A', fundo: '#cdfbcc', fundoIcone: '#97FF94' },
 		    };
 		    return estilos[tipo] || { icone: 'fas fa-bell', borda: '#6c757d', fundo: '#e2e3e5' };
 		}

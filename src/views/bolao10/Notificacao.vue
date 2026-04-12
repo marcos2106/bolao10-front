@@ -30,6 +30,7 @@
 											{{ notificacao.dataCriacao }} 
 										</td>
 										<td class="text-left"> 
+											<i :class="getEstiloNotificacao(notificacao.tipoEvento).icone"></i>&nbsp;  
 											{{ getEstiloNotificacao(notificacao.tipoEvento).titulo }}
 										</td>
 										<td class="text-left"> 
@@ -99,8 +100,9 @@ export default {
 				'NOVO_LIDER_RANKING': { titulo: 'Novo Líder do Ranking', icone: 'fas fa-crown', borda: '#e0a800', fundo: '#fff0c3', fundoIcone: '#fbd86f' },
 				'NOVO_BADGE': { titulo: 'Novo Badge', icone: 'fas fa-shield-alt', borda: '#007bff', fundo: '#cce5ff', fundoIcone: '#007bff' },
 				'PARTIDA_FINALIZADA': { titulo: 'Partida Finalizada', icone: 'far fa-check-circle', borda: '#17a2b8', fundo: '#dbf6fb', fundoIcone: '#71e4f6' },
-				'APOSTA_FINALIZADA': { titulo: 'Aposta Finalizada', icone: 'fas fa-receipt', borda: '#6c757d', fundo: '#f0f0f0', fundoIcone: '#bbc1c7' },
-				'MUDANCA_ARTILHARIA': { titulo: 'Mudança na Artilharia', icone: 'fas fa-futbol', borda: '#fd7e14', fundo: '#ffe6d1', fundoIcone: '#ffc18e' }
+				'APOSTA_FINALIZADA': { titulo: 'Aposta Finalizada', icone: 'fas fa-fire-alt', borda: '#6c757d', fundo: '#f0f0f0', fundoIcone: '#bbc1c7' },
+				'MUDANCA_ARTILHARIA': { titulo: 'Mudança na Artilharia', icone: 'fas fa-futbol', borda: '#fd7e14', fundo: '#ffe6d1', fundoIcone: '#ffc18e' },
+				'PAGAMENTO_REALIZADO': { titulo: 'Pagamento realizado!', icone: 'fas fa-dollar-sign', borda: '#9E4C4C', fundo: '#FFD2D2', fundoIcone: '#E19898' },
 			};
 			return estilos[tipo] || { icone: 'fas fa-bell', borda: '#6c757d', fundo: '#e2e3e5' };
 		}

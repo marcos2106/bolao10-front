@@ -38,9 +38,6 @@ const Regra = () => import('@/views/bolao10/Regra.vue');
 const Historia = () => import('@/views/bolao10/Historia.vue');
 const Notificacao = () => import('@/views/bolao10/Notificacao.vue');
 
-//cliente / titular
-const ConsultaCliente = () => import('@/views/ConsultaCliente.vue');
-
 //Relatorio
 const RelatorioFormaPagamento = () => import('@/views/RelatorioFormaPagamento.vue');
 

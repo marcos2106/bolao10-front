@@ -27,7 +27,7 @@
                                     :class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'">
                                 <td style="text-align: center"> {{ index+1 }}. </td>
                                 <td class="clickable align-items-center d-flex pl-2" @click="paginaUsuario(item.usuario.id)"> 
-                                    <el-tooltip :content="'Nível: '+ item.usuario.nivel" placement="top" effect="dark">
+                                    <el-tooltip :content="'Nível: '+ item.usuario.nivelDescricao" placement="top" effect="dark">
                                         <div class="p-1 rounded mr-2"
                                             :class="item.usuario.nivel ? 'fundo-' + item.usuario.nivel.toLowerCase().replace('_', '-') : ''">
                                             <img class="avatarRedondo" :class="item.usuario.nivel ? 'borda-' + item.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" :src="item.usuario.avatar">

@@ -52,7 +52,7 @@
                                     <tr v-for="(pontuacao, index) in listaPontuacao" :key="pontuacao.usuario.id"
                                             :class="(index % 2 == 0) ? 'registroImpar' : ''">
                                         <td class="clickable align-items-center d-flex pr-3" @click="paginaUsuario(pontuacao.usuario.id)">
-                                            <el-tooltip :content="'Nível: '+ pontuacao.usuario.nivel" placement="top" effect="dark">
+                                            <el-tooltip :content="'Nível: '+ pontuacao.usuario.nivelDescricao" placement="top" effect="dark">
                                                 <div class="p-1 rounded mr-2"
                                                     :class="pontuacao.usuario.nivel ? 'fundo-' + pontuacao.usuario.nivel.toLowerCase().replace('_', '-') : ''">
                                                     <img class="avatarRedondo" :class="pontuacao.usuario.nivel ? 'borda-' + pontuacao.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" :src="pontuacao.usuario.avatar">
@@ -65,7 +65,7 @@
                                                 :class="(index == 0 || index == 48 || index == 56 || index == 60 || index == 62) ? 'borderFase' : (index == 63) ? 'fundoFinal' : ''"> 
                                             {{ aposta.placarA }} x {{ aposta.placarB }} <span v-if="aposta.partida.iniciada && !aposta.partida.finalizada"> ({{ aposta.pontuacaoProvisoria }}) </span><span v-if="aposta.partida.iniciada && aposta.partida.finalizada"> ({{ aposta.pontuacao }}) </span>
                                         </td>
-                                        <td v-show="idSituacao==1" class="borderFase fonteApostas" colspan="64"> 
+                                        <td v-show="idSituacao==1" class="borderFase fonteApostas" colspan="104"> 
                                             Apostas ainda não podem ser divulgadas
                                         </td>
                                         <td class="borderFase"> <span v-if="idSituacao>1" :class="(pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosArtilharia == 0) ? 'palpiteZerado' : ''"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.artilharia.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.artilharia.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosArtilharia != null"> ({{ pontuacao.apostaColocacao.pontosArtilharia }}) </span></span></td>
@@ -74,7 +74,7 @@
                                         <td class="fundoVice"> <span v-if="idSituacao>1" :class="(pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosVice == 0) ? 'palpiteZerado' : ''"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.vice.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.vice.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosVice != null"> ({{ pontuacao.apostaColocacao.pontosVice }}) </span></span></td>
                                         <td class="fundoCampeao"> <span v-if="idSituacao>1" :class="(pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosCampeao == 0) ? 'palpiteZerado' : ''"><el-tooltip v-if="pontuacao.apostaColocacao != null" :content="pontuacao.apostaColocacao.campeao.nome" placement="top"><img width="20" :src="pontuacao.apostaColocacao.campeao.imagem"></el-tooltip> <span v-if="pontuacao.apostaColocacao != null && pontuacao.apostaColocacao.pontosCampeao != null"> ({{ pontuacao.apostaColocacao.pontosCampeao }}) </span></span></td>
                                         <td class="clickable align-items-center d-flex pr-3" @click="paginaUsuario(pontuacao.usuario.id)" style="border-right:none">
-                                            <el-tooltip :content="'Nível: '+ pontuacao.usuario.nivel" placement="top" effect="dark">
+                                            <el-tooltip :content="'Nível: '+ pontuacao.usuario.nivelDescricao" placement="top" effect="dark">
                                                 <div class="p-1 rounded mr-2"
                                                     :class="pontuacao.usuario.nivel ? 'fundo-' + pontuacao.usuario.nivel.toLowerCase().replace('_', '-') : ''">
                                                     <img class="avatarRedondo" :class="pontuacao.usuario.nivel ? 'borda-' + pontuacao.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" :src="pontuacao.usuario.avatar">
