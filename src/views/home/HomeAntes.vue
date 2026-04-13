@@ -62,38 +62,46 @@
 				</div>
 			</div>
 
-		  <div class="janelaSituacaoUsuario p-3 mb-3"
-			   v-if="getPerfil()=='USER' && dadosUsuario!=null && (!dadosUsuario.aposta || !dadosUsuario.pagamento)">
-			<div class="tituloJanelaPequena mb-3">
-			  Olá, <strong>{{ dadosUsuario.nome }}</strong>, bem vindo! Sua situação:
-			</div>
-			<div class="d-flex flex-column flex-sm-row justify-content-between mb-2">
-			  <div class="tituloJanelaPequena alinhaVert mb-2 mb-sm-0">
-				<strong>Apostas:</strong>
-				<span class="ml-1 text-danger" v-if="!dadosUsuario.aposta"> <i class="far fa-times-circle"></i> Pendente </span>
-				<span class="ml-1 text-success" v-if="dadosUsuario.aposta"> <i class="far fa-check-circle"></i> Realizada </span>
-			  </div>
-			</div>
-			<div class="d-flex flex-column flex-sm-row justify-content-between mb-2">
-				<div class="tituloJanelaPequena alinhaVert mb-2 mb-sm-0">
-					<button v-if="!dadosUsuario.aposta" type="button" @click="fazerAposta(dadosUsuario.id)"
-						class="btn btn-outline-secondary btn-sm">
-						<i class="fas fa-rocket mr-1"></i> Fazer aposta
-					</button>
+			<div class="janelaSituacaoUsuario p-3 mb-3"
+					v-if="getPerfil()=='USER' && dadosUsuario!=null && (!dadosUsuario.aposta || !dadosUsuario.pagamento)">
+				<div class="tituloJanelaPequena mb-3">
+					Olá, <strong>{{ dadosUsuario.nome }}</strong>, bem vindo! Sua situação:
 				</div>
+
+				<div class="row">
+					<div class="col-6">
+
+						<div class="d-flex flex-column flex-sm-row justify-content-between">
+							<div class="tituloJanelaPequena alinhaVert mb-2 mb-sm-0">
+								<strong>Apostas:</strong>
+								<span class="ml-1 text-danger" v-if="!dadosUsuario.aposta"> <i class="far fa-times-circle"></i> Pendente <br/><br/></span>
+								<span class="ml-1 text-success" v-if="dadosUsuario.aposta"> <i class="far fa-check-circle"></i> Realizada </span>
+								<button v-if="!dadosUsuario.aposta" type="button" @click="fazerAposta()"
+										class="btn btn-outline-secondary btn-sm">
+									<i class="fas fa-rocket mr-1"></i> Fazer aposta
+								</button>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-6">
+
+						<div class="d-flex flex-column flex-sm-row justify-content-between">
+							<div class="tituloJanelaPequena alinhaVert mb-2 mb-sm-0">
+								<strong>Pagamento:</strong>
+								<span class="ml-1 text-danger" v-if="!dadosUsuario.pagamento"> <i class="far fa-times-circle"></i> Pendente <br/><br/></span>
+								<span class="ml-1 text-success" v-if="dadosUsuario.pagamento"> <i class="far fa-check-circle"></i> Realizado </span>
+								<button v-if="!dadosUsuario.pagamento" type="button" @click="verPagamento()"
+										class="btn btn-outline-secondary btn-sm">
+									<i class="fas fa-donate mr-1"></i> Ver Pagamento
+								</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				
 			</div>
-			<div class="d-flex flex-column flex-sm-row justify-content-between">
-			  <div class="tituloJanelaPequena alinhaVert mb-2 mb-sm-0">
-				<strong>Pagamento:</strong>
-				<span class="ml-1 text-danger" v-if="!dadosUsuario.pagamento"> <i class="far fa-times-circle"></i> Pendente </span>
-				<span class="ml-1 text-success" v-if="dadosUsuario.pagamento"> <i class="far fa-check-circle"></i> Realizado </span>
-			  </div>
-			   <button v-if="!dadosUsuario.pagamento" type="button" @click="verPagamento()"
-						class="btn btn-outline-secondary btn-sm">
-				<i class="fas fa-donate mr-1"></i> Ver Pagamento
-			  </button>
-			</div>
-		  </div>
   
 		  <div class="janelaContagem mb-3 py-3 text-center">
 			<div class="tituloJanelaPequena mb-2">
@@ -255,7 +263,7 @@
 			seconds = (seconds < 10) ? "0"+ seconds : seconds;
 			this.contagem = days +""+ hours +" : "+ minutes +" : "+ seconds;
 		},
-		fazerAposta(idUsuario) { location.href = '/meubolao/apostar'; },
+		fazerAposta() { location.href = '/meubolao/apostar'; },
 		verPagamento() { location.href = '/bolao10/regras#pagamento'; },
 		carregarNotificacaoSorteada() {
 			this.$clubApi.get("/notificacao/sorteada").then((response) => {

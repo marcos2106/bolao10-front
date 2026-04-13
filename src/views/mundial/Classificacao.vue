@@ -25,7 +25,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-center"><strong>CAMPEÃO</strong></td>
+                                        <td class="text-center"><strong><i class="fas fa-trophy mr-2"></i> CAMPEÃO</strong></td>
                                         <td><strong>{{ classificacao.campeao.nome }}</strong> ({{ pontuacao.pontosCampeao }} pts)</td>
                                     </tr>
                                     <tr>
@@ -41,7 +41,7 @@
                                         <td>{{ classificacao.quarto.nome }} ({{ pontuacao.pontosQuarto }} pts)</td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center">ARTILHARIA</td>
+                                        <td class="text-center"><i class="fas fa-futbol mr-2"></i> ARTILHARIA</td>
                                         <td>{{ classificacao.artilharia.nome }} ({{ pontuacao.pontosArtilharia }} pts)</td>
                                     </tr>
                                 </tbody>

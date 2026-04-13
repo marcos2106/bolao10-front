@@ -25,7 +25,7 @@
 					</div>
 				-->
 
-				<div class="row mb-3 mt-1">
+				<div class="row mb-3 mt-3">
 					<div class="col" v-for="partida in partidasAnteriores" :key="partida.id">
 
 						<div class="janelaPartida clickable" @click="detalharPartida(partida.id)">
@@ -86,17 +86,18 @@
 							</div>
 						</div>
 					</div>
-                    <div class="row m-2 mt-4">
-						<div class="col-4 text-left alinhaVert">
-							<img width="40" :src="partida1.selecaoA.imagem">
+                    <div class="row m-2 mt-2">
+						<div class="col-4 text-left alinhaVert font-weight-bold fonte-media">
+							<img width="40" :src="partida1.selecaoA.imagem"> {{partida1.selecaoA.nome}}
 						</div>
 						<div class="col-4 text-center alinhaVert font-weight-bold fonte-grande">
 							{{partida1.placarA}} x {{partida1.placarB}}
 						</div>
-						<div class="col-4 text-right alinhaVert">
-							<img width="40" :src="partida1.selecaoB.imagem">
+						<div class="col-4 text-right alinhaVert font-weight-bold fonte-media">
+							{{partida1.selecaoB.nome}} <img width="40" :src="partida1.selecaoB.imagem">
 						</div>
 					</div>
+					<!--
 					<div class="row m-2 mt--3">
 						<div class="col-6 text-left alinhaVert font-weight-bold fonte-media">
 							{{partida1.selecaoA.nome}}
@@ -105,6 +106,7 @@
 							{{partida1.selecaoB.nome}}
 						</div>
 					</div>
+					-->
 					<div class="row m-2">
 						<div class="col text-center">
 							<button type="button"  @click="detalharPartida(partida1.id)"

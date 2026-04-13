@@ -20,7 +20,8 @@
                                     <tr class="font-weight-bold">
                                         <th class="text-center alinhaVert" rowspan="2">Nome </th> 
                                         <th class="text-center alinhaVert font-weight-bold" rowspan="2">Pontuação </th>
-                                        <th colspan="48" class="borderFase"> F A S E &nbsp; D E &nbsp; G R U P O S</th>
+                                        <th colspan="72" class="borderFase"> F A S E &nbsp; D E &nbsp; G R U P O S</th>
+                                        <th colspan="16" class="borderFase"> 1 6 &nbsp; A V O S</th>
                                         <th colspan="8" class="borderFase"> O I T A V A S</th>
                                         <th colspan="4" class="borderFase"> Q U A R T A S</th>
                                         <th colspan="2" class="borderFase"> S E M I - F I N A L</th>
@@ -31,7 +32,7 @@
                                     <tr>
                                         <th scope="col" v-for="(partida, index) in listaPartidas" :key="partida.id" @click="detalharPartida(partida.id)"
                                                 class="clickable"
-                                                :class="(index == 0 || index == 48 || index == 56 || index == 60 || index == 62) ? 'borderFase' : (index == 63) ? 'fundoFinal' : ''">
+                                                :class="(index == 0 || index == 72 || index == 88 || index == 96 || index == 100 || index == 102) ? 'borderFase' : (index == 103) ? 'fundoFinal' : ''">
                                             <div class="tagAoVivo mb-2" v-if="partida.iniciada && !partida.finalizada"> <i class="fas fa-wifi ml-1 mr-1"></i> AO VIVO</div>
                                             <el-tooltip :content="partida.selecaoA.nome" placement="top">
                                                 <img width="20" :src="partida.selecaoA.imagem">
@@ -62,7 +63,7 @@
                                         </td>
                                         <td class="text-center font-weight-bold fonte-pontuacao"> {{ pontuacao.pontuacao }} </td>
                                         <td v-show="idSituacao>1" class="text-center" v-for="(aposta, index) in pontuacao.listaApostas" :key="aposta.partida.id"
-                                                :class="(index == 0 || index == 48 || index == 56 || index == 60 || index == 62) ? 'borderFase' : (index == 63) ? 'fundoFinal' : ''"> 
+                                                :class="(index == 0 || index == 72 || index == 88 || index == 96 || index == 100 || index == 102) ? 'borderFase' : (index == 103) ? 'fundoFinal' : ''"> 
                                             {{ aposta.placarA }} x {{ aposta.placarB }} <span v-if="aposta.partida.iniciada && !aposta.partida.finalizada"> ({{ aposta.pontuacaoProvisoria }}) </span><span v-if="aposta.partida.iniciada && aposta.partida.finalizada"> ({{ aposta.pontuacao }}) </span>
                                         </td>
                                         <td v-show="idSituacao==1" class="borderFase fonteApostas" colspan="104"> 
