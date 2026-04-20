@@ -29,7 +29,7 @@
                                         <table width="100%" style="">
                                             <tr class="font-weight-bold text-center"><td class="p-3" width="50%"> </td><td width="6%">P</td><td width="6%">J</td><td width="6%">V</td><td width="6%">E</td><td width="6%">D</td><td width="6%">GP</td><td width="6%">GC</td><td width="6%">S</td><td width="6%">%</td></tr>
                                             <tr class="linhaGrupo text-center"
-                                                :class="(index <= 1) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
+                                                :class="(index <= 1) ? 'colocacaoRanking' : (index == 2) ? 'colocacao3Ranking' : 'colocacaoSemRanking'"
                                                     v-for="(pontuacao, index) in c.listaClassificacao" :key="pontuacao.selecao.id">
                                                 <td class="font-weight-bold alinhaVert text-left p-2"> <img class="ml-2 mr-1" width="20" :src="pontuacao.selecao.imagem"> {{ pontuacao.selecao.nome }}</td>
                                                 <td class="font-weight-bold p-2">{{pontuacao.pontos}}</td><td>{{pontuacao.partidas}}</td><td>{{pontuacao.vitoria}}</td><td>{{pontuacao.empate}}</td><td>{{pontuacao.derrota}}</td><td>{{pontuacao.golspro}}</td><td>{{pontuacao.golscontra}}</td><td>{{pontuacao.saldogols}}</td><td>{{ (pontuacao.aproveitamento == null) ? "-" : pontuacao.aproveitamento}}</td>
@@ -81,6 +81,9 @@ export default {
 <style>
 .colocacaoRanking {
 	border-left: 3px solid #96be92;
+}
+.colocacao3Ranking {
+    border-left: 3px solid #d6cd76;
 }
 .colocacaoSemRanking {
 	border-left: 3px solid #e7f3ef;

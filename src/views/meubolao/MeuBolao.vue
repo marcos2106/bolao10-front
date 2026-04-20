@@ -163,9 +163,6 @@
 												<div v-for="item in historicoSelos" :key="item.badge.id" class="selos-linha">
 													<!-- Cabeçalho do Badge -->
 													<div class="d-flex align-items-center mb-1">
-														<span class="badge-icon-selos mr-2" :style="{ backgroundColor: item.badge.corFundo, color: item.badge.corIcone, boxShadow: 'none', cursor: 'default' }">
-															<i :class="item.badge.iconeClasse"></i>
-														</span>
 														<div class="selos-nome" :class="{ 'selos-ativo': item.ativo }">
 															<strong>{{ item.badge.nome }}</strong> - {{ item.badge.descricao }}
 														</div>
@@ -174,7 +171,7 @@
 													
 													<!-- Lista de conquistas como ícones -->
 													<div class="d-flex flex-wrap selos-conquistas-container">
-														<el-tooltip v-for="(dataFormatada, index) in item.conquistas" :key="index" :content="'Em ' + dataFormatada" placement="top" effect="dark">
+														<el-tooltip v-for="(conquista, index) in item.conquistas" :key="index" :content="'Em ' + conquista.data " placement="top" effect="dark">
 															<span class="badge-icon-selos" :style="{ backgroundColor: item.badge.corFundo, color: item.badge.corIcone }">
 																<i :class="item.badge.iconeClasse"></i>
 															</span> 

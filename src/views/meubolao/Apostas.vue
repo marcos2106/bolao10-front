@@ -25,7 +25,7 @@
                                     <v-tab title="Rodada 1">
 
                                         <div class="row">
-                                            <div class="col-3 mt-3 ml--1 clickable" @click="detalhePartida(aposta.partida.id)"
+                                            <div class="col-3 mt-3 ml--1 clickable lateralPartida" @click="detalhePartida(aposta.partida.id)"
                                                     v-for="aposta in apostasRod1" :key="aposta.partida.id">
 
                                                 <div class="row">
@@ -57,7 +57,7 @@
                                     <v-tab title="Rodada 2">
 
                                         <div class="row">
-                                            <div class="col-3 mt-3 ml--1 clickable" @click="detalhePartida(aposta.partida.id)"
+                                            <div class="col-3 mt-3 ml--1 clickable lateralPartida" @click="detalhePartida(aposta.partida.id)"
                                                     v-for="aposta in apostasRod2" :key="aposta.partida.id">
 
                                                 <div class="row">
@@ -89,7 +89,7 @@
                                     <v-tab title="Rodada 3">
 
                                         <div class="row">
-                                            <div class="col-3 mt-3 ml--1 clickable" @click="detalhePartida(aposta.partida.id)"
+                                            <div class="col-3 mt-3 ml--1 clickable lateralPartida" @click="detalhePartida(aposta.partida.id)"
                                                     v-for="aposta in apostasRod3" :key="aposta.partida.id">
 
                                                 <div class="row">
@@ -121,7 +121,7 @@
                                     <v-tab title="Oitavas">
 
                                         <div class="row">
-                                            <div class="col-6 mt-3 clickable" @click="detalhePartida(aposta.partida.id)"
+                                            <div class="col-6 mt-3 clickable lateralPartida" @click="detalhePartida(aposta.partida.id)"
                                                     v-for="aposta in apostas8" :key="aposta.partida.id">
 
                                                 <div class="row">
@@ -153,7 +153,7 @@
                                     <v-tab title="Quartas">
 
                                         <div class="row">
-                                            <div class="col-6 mt-3 clickable" @click="detalhePartida(aposta.partida.id)"
+                                            <div class="col-6 mt-3 clickable lateralPartida" @click="detalhePartida(aposta.partida.id)"
                                                     v-for="aposta in apostas4" :key="aposta.partida.id">
 
                                                 <div class="row">
@@ -185,7 +185,7 @@
                                     <v-tab title="Semifinais">
 
                                         <div class="row">
-                                            <div class="col-6 mt-3 clickable" @click="detalhePartida(aposta.partida.id)"
+                                            <div class="col-6 mt-3 clickable lateralPartida" @click="detalhePartida(aposta.partida.id)"
                                                     v-for="aposta in apostasS" :key="aposta.partida.id">
 
                                                 <div class="row">
@@ -217,7 +217,7 @@
                                     <v-tab title="Finais">
 
                                         <div class="row">
-                                            <div class="col-6 mt-3 clickable" @click="detalhePartida(aposta.partida.id)"
+                                            <div class="col-6 mt-3 clickable lateralPartida" @click="detalhePartida(aposta.partida.id)"
                                                     v-for="(aposta, index) in apostasF" :key="aposta.partida.id">
 
                                                 <span v-if="index==0" class="textTerceiro">Disputa de 3º Lugar</span>
@@ -385,5 +385,9 @@ export default {
 }
 .alinhaVert {
 	margin: auto;
+}
+.lateralPartida {
+    border-left: 2px dotted #a0a0a0;
+    border-bottom: 2px dotted #a0a0a0;
 }
 </style>

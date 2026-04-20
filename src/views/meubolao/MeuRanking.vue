@@ -22,7 +22,7 @@
                                     <div class="col-12 mt-1 tituloQuadroPequeno font-weight-bold">
                                         <i class="fas fa-star mr-1"></i> Ranking original
                                     </div>
-                                    <div class="col-12 mt-2 font-weight-bold">
+                                    <div class="mt-2 font-weight-bold">
                                         
                                         <div class="row ml-1 descricaoRanking">
                                             <div class="col-11 text-left" style="height: 370px; overflow: scroll;">
@@ -36,8 +36,13 @@
                                                             <img class="avatarRedondo" :class="rank.usuario.nivel ? 'borda-' + rank.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" :src="rank.usuario.avatar">
                                                         </div>
                                                     </el-tooltip>
-                                                    <div class="col alinhaVert font-weight-bold">
-                                                        <span @click="paginaUsuario(rank.usuario.id)" class="clickable">{{index+1}}. {{rank.usuario.nome}}</span>
+                                                    <div class="col alinhaVert font-weight-bold" style="min-width:0">
+                                                        <user-name-badges
+                                                            :nome="(index+1) + '. ' + rank.usuario.nome"
+                                                            :badges="badgesMap[rank.usuario.id] || []"
+                                                            class="clickable"
+                                                            @click.native="paginaUsuario(rank.usuario.id)"
+                                                        />
                                                     </div>
                                                     <div>
                                                         {{ rank.pontuacao }} pts 
@@ -71,7 +76,7 @@
                                             </a>
                                         </el-tooltip>
                                     </div>
-                                    <div class="col-12 mt-2 font-weight-bold">
+                                    <div class="ml-1 mt-2 font-weight-bold">
                                         
                                         <div class="row descricaoRankingCustomizado">
                                             <div class="col-11 text-left" style="height: 365px; overflow: scroll;">
@@ -84,8 +89,13 @@
                                                             <img class="avatarRedondo" :class="rank.usuario.nivel ? 'borda-' + rank.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" :src="rank.usuario.avatar">
                                                         </div>
                                                     </el-tooltip>
-                                                    <div class="col alinhaVert font-weight-bold">
-                                                        <span @click="paginaUsuario(rank.usuario.id)" class="clickable">{{index+1}}. {{rank.usuario.nome}}</span>
+                                                    <div class="col alinhaVert font-weight-bold" style="min-width:0">
+                                                        <user-name-badges
+                                                            :nome="(index+1) + '. ' + rank.usuario.nome"
+                                                            :badges="badgesMap[rank.usuario.id] || []"
+                                                            class="clickable"
+                                                            @click.native="paginaUsuario(rank.usuario.id)"
+                                                        />
                                                     </div>
                                                     <div>
                                                         {{ rank.pontuacao }} pts 
@@ -157,8 +167,13 @@
 </template>
 
 <script>
+import UserNameBadges from "../../components/UserNameBadges.vue";
+
 export default {
 	name: 'MeuRanking',
+	components: {
+		UserNameBadges
+	},
 	created(){
 		this.carregarDados();
 	},
@@ -177,6 +192,7 @@ export default {
 			listaParticipantesFiltro: [],
             jogoAoVivo: false,
             opcao: "",
+            badgesMap: {},
             modals: {
                 modalRanking: false
             }
@@ -190,6 +206,7 @@ export default {
 				this.jogoAoVivo = (response.data.object > 0);
                 this.carregarRanking();
                 this.carregarRankings();
+                this.carregarBadges();
 			}) .catch((error) => {
 				this.$notify({type: 'warning', message: error.response.data.msg})
 			});
@@ -223,6 +240,11 @@ export default {
 		},
         paginaUsuario(idUsuario) {
             location.href = '/meubolao/'+ idUsuario;
+        },
+        carregarBadges() {
+            this.$clubApi.get('/badge/ranking').then((response) => {
+                this.badgesMap = response.data.object || {};
+            }).catch(() => {});
         },
         modalAlterarRanking(ranking) {
             this.ranking = ranking;

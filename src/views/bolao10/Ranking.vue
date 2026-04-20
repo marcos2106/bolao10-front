@@ -26,14 +26,17 @@
                             <tr v-for="(item, index) in listaRanking" :key="index"
                                     :class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'">
                                 <td style="text-align: center"> {{ index+1 }}. </td>
-                                <td class="clickable align-items-center d-flex pl-2" @click="paginaUsuario(item.usuario.id)"> 
+                                <td class="clickable align-items-center d-flex pl-2" @click="paginaUsuario(item.usuario.id)" style="min-width:0"> 
                                     <el-tooltip :content="'Nível: '+ item.usuario.nivelDescricao" placement="top" effect="dark">
                                         <div class="p-1 rounded mr-2"
                                             :class="item.usuario.nivel ? 'fundo-' + item.usuario.nivel.toLowerCase().replace('_', '-') : ''">
                                             <img class="avatarRedondo" :class="item.usuario.nivel ? 'borda-' + item.usuario.nivel.toLowerCase().replace('_', '-') : ''" width="25" :src="item.usuario.avatar">
                                         </div>
                                     </el-tooltip>
-                                    {{ item.usuario.nome }}
+                                    <user-name-badges
+                                        :nome="item.usuario.nome"
+                                        :badges="badgesMap[item.usuario.id] || []"
+                                    />
                                 </td>
                                 <td style="text-align: center"> 
                                     {{ item.pontuacao }} pts 
@@ -51,16 +54,23 @@
 </template>
 
 <script>
+import UserNameBadges from "../../components/UserNameBadges.vue";
+
 export default {
+    components: {
+        UserNameBadges
+    },
     data() {
         return {
             listaRanking: [],
             jogoAoVivo: false,
+            badgesMap: {}
         }
     },
     created(){
         this.carregarRanking(),
-        this.carregarDemaisDados()
+        this.carregarDemaisDados(),
+        this.carregarBadges()
     },
     methods:{
         carregarRanking() {
@@ -80,6 +90,11 @@ export default {
 			}).finally(() =>{
 				NProgress.done();
 			});
+        },
+        carregarBadges() {
+            this.$clubApi.get('/badge/ranking').then((response) => {
+                this.badgesMap = response.data.object || {};
+            }).catch(() => {});
         },
         paginaUsuario(idUsuario) {
             location.href = '/meubolao/'+ idUsuario;

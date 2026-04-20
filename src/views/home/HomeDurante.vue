@@ -87,13 +87,13 @@
 						</div>
 					</div>
                     <div class="row m-2 mt-2">
-						<div class="col-4 text-left alinhaVert font-weight-bold fonte-media">
+						<div class="col-4 text-left alinhaVert font-weight-bold fonte-media" style="text-wrap: nowrap;">
 							<img width="40" :src="partida1.selecaoA.imagem"> {{partida1.selecaoA.nome}}
 						</div>
 						<div class="col-4 text-center alinhaVert font-weight-bold fonte-grande">
 							{{partida1.placarA}} x {{partida1.placarB}}
 						</div>
-						<div class="col-4 text-right alinhaVert font-weight-bold fonte-media">
+						<div class="col-4 text-right alinhaVert font-weight-bold fonte-media" style="text-wrap: nowrap;">
 							{{partida1.selecaoB.nome}} <img width="40" :src="partida1.selecaoB.imagem">
 						</div>
 					</div>
