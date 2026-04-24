@@ -16,7 +16,7 @@
 		"@fullcalendar/vue": "^4.0.2-beta",
 		"ant-design-vue": "^1.7.6",
 		"axios": "^0.18.1",
-		"bootstrap": "^4.3.1",
+		"bootstrap": "^4.6.2",
 		"chart.js": "^2.9.4",
 		"d3": "^5.7.0",
 		"datamaps": "^0.5.9",
