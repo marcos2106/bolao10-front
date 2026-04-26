@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.c304121589b19fc72ab6c6debcecdcdd.js"
+  "/precache-manifest.120279ba10fbcf1e5424eb0bf41b47f9.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "bolao10"});
