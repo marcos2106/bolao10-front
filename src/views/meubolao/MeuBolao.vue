@@ -109,6 +109,15 @@
                                         </div>
 
                                     </v-tab>
+									<v-tab title="🏅 Selos de Qualidade">
+                                        
+                                        <div class="row mt-4">
+                                            <div class="col-12 text-center">
+                                                Aguardando início do Mundial
+                                            </div>
+                                        </div>
+
+                                    </v-tab>
                                 </vue-tabs>
 
                                 <vue-tabs class="mt--2" v-if="idSituacao > 1">
