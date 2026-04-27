@@ -100,7 +100,7 @@
                                         </div>
 
                                     </v-tab>
-                                    <v-tab title="Colocação e Artilharia">
+                                    <v-tab title="Colocação">
                                         
                                         <div class="row mt-4">
                                             <div class="col-12 text-center">
@@ -152,7 +152,7 @@
                                         </div>
 
                                     </v-tab>
-                                    <v-tab title="Palpites Classificação">
+                                    <v-tab title="Classificação">
 										
 										<div class="row mt-1">
 											<div class="col-6 mt-3 text-right">Campeão</div><div class="col-6 mt-3 text-left"> <span v-if="colocacao.campeao"><img width="20" :src="colocacao.campeao.imagem"> {{ colocacao.campeao.nome}} <span v-if="colocacao.pontosCampeao != null">({{colocacao.pontosCampeao}})</span></span></div>
