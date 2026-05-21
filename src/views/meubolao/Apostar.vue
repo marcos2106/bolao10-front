@@ -636,7 +636,7 @@ export default {
             posicao2: null,
             posicao1: null,
             artilharia: null,
-            gols: [null, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            gols: [null, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
 			current: 0,
 			steps: [{
 					title: "Fase de Grupos",
