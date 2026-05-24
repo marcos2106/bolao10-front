@@ -118,6 +118,38 @@
                                         </div>
                                         
                                     </v-tab>
+                                    <v-tab title="16avos">
+
+                                        <div class="row">
+                                            <div class="col-6 mt-3 clickable lateralPartida" @click="detalhePartida(aposta.partida.id)"
+                                                    v-for="aposta in apostas16" :key="aposta.partida.id">
+
+                                                <div class="row">
+                                                    <div class="col-8 little-text"> <h5>{{ aposta.partida.dataHoraFmt.substring(0, 5) }} <i class="far fa-clock ml-1"></i> {{ aposta.partida.dataHoraFmt.substring(6, 8) }}h <i class="fas fa-map-marker-alt ml-1"></i> {{ aposta.partida.local }} <span class="fonte-partida">Partida #{{ aposta.partida.id }}</span> </h5></div>
+                                                    <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>P</h5></el-tooltip></div>
+                                                    <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>A</h5></el-tooltip></div>
+                                                </div> 
+                                                <div class="row">
+                                                    <div class="col-8 little-text">
+                                                        <img width="20" :src="aposta.partida.selecaoA.imagem">
+                                                        {{aposta.partida.selecaoA.nome}}
+                                                    </div>
+                                                    <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarA) ? aposta.partida.placarA : '-'}}</h5></el-tooltip></div>
+                                                    <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarA}}</h5></el-tooltip></div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <div class="col-8 little-text">
+                                                        <img width="20" :src="aposta.partida.selecaoB.imagem">
+                                                        {{aposta.partida.selecaoB.nome}}
+                                                    </div>
+                                                    <div class="col"><el-tooltip content="Placar da Partida" placement="top"><h5>{{ (aposta.partida.placarB) ? aposta.partida.placarB : '-'}}</h5></el-tooltip></div>
+                                                    <div class="col"><el-tooltip content="Sua Aposta" placement="top"><h5>{{aposta.placarB}}</h5></el-tooltip></div>
+                                                </div>
+                                                <span class="text-right" v-if="aposta.partida.finalizada"><h5>{{ (aposta.pontuacao>0) ? '+' : ''}}{{ aposta.pontuacao }} ponto{{ (aposta.pontuacao>1) ? 's' : ''}}</h5></span>
+                                            </div>
+                                        </div>
+
+                                    </v-tab>
                                     <v-tab title="Oitavas">
 
                                         <div class="row">
@@ -318,6 +350,7 @@ export default {
             apostasRod1: [],
             apostasRod2: [],
             apostasRod3: [],
+            apostas16: [],
             apostas8: [],
             apostas4: [],
             apostasS: [],
@@ -349,10 +382,11 @@ export default {
                 this.apostasRod1 = apostas.filter( (aposta) => aposta.partida.rodada == 1);
                 this.apostasRod2 = apostas.filter( (aposta) => aposta.partida.rodada == 2);
                 this.apostasRod3 = apostas.filter( (aposta) => aposta.partida.rodada == 3);
-                this.apostas8 = apostas.filter( (aposta) => aposta.partida.fase == 2);
-                this.apostas4 = apostas.filter( (aposta) => aposta.partida.fase == 3);
-                this.apostasS = apostas.filter( (aposta) => aposta.partida.fase == 4);
-                this.apostasF = apostas.filter( (aposta) => aposta.partida.fase == 5 || aposta.partida.fase == 6);
+                this.apostas16 = apostas.filter( (aposta) => aposta.partida.fase == 2);
+                this.apostas8 = apostas.filter( (aposta) => aposta.partida.fase == 3);
+                this.apostas4 = apostas.filter( (aposta) => aposta.partida.fase == 4);
+                this.apostasS = apostas.filter( (aposta) => aposta.partida.fase == 5);
+                this.apostasF = apostas.filter( (aposta) => aposta.partida.fase == 6 || aposta.partida.fase == 7);
             }) .catch((error) => {
                 this.$notify({type: 'warning', message: error.response.data.msg})
             }).finally(() =>{
