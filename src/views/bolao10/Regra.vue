@@ -33,7 +33,7 @@
                         <br/>
                         &nbsp;&nbsp; &nbsp;&nbsp; 8ª: Artilharia: País de origem do jogador artilheiro da copa do mundo.<br/>
                         <br/>
-                        &nbsp;&nbsp; 2ª) O valor de cada aposta é de <strong>R$ 100,00 (cem reais)</strong> para o Bolão completo (todas as fases), cuja data <strong>limite para as apostas e pagamento do bolão é <span class="text-danger">05/06/2022 às 23h59</span></strong>. Aquele apostador que não concluir a aposta até o final do prazo e/ou não efetivar o depósito até a data citada estará <U><strong>automaticamente excluído do Bolão 10</strong></U>.<br/>
+                        &nbsp;&nbsp; 2ª) O valor de cada aposta é de <strong>R$ 100,00 (cem reais)</strong> para o Bolão completo (todas as fases), cuja data <strong>limite para as apostas e pagamento do bolão é <span class="text-danger">05/06/2026 às 23h59</span></strong>. Aquele apostador que não concluir a aposta até o final do prazo e/ou não efetivar o depósito até a data citada estará <U><strong>automaticamente excluído do Bolão 10</strong></U>.<br/>
                         <br/>
                         &nbsp;&nbsp; 3ª) Os passos para ser incluído como usuário apostador do Bolão 10 são os seguintes:<br/>
                         <br/>
