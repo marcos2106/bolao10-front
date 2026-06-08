@@ -433,7 +433,7 @@ export default {
 			})
         },
 		carregarRanking() {
-			this.$clubApi.get("/home/durante/ranking-completo").then((response) => {
+			this.$clubApi.get("/home/durante/ranking-completo-teste").then((response) => {
 				this.ranking = response.data.object;
 			}).catch((error) => {
 				this.$notify({type: 'warning', message: error.response.data.msg})
