@@ -294,7 +294,7 @@
 									<div class="col alinhaVert font-weight-bold" style="min-width:0">
 										<user-name-badges
 											:nome="(index+1) + '. ' + rank.usuario.nome"
-											:badges="badgesMap[rank.usuario.id] || []"
+										:badges="rank.badges || []"
 											class="clickable"
 											@click.native="paginaUsuario(rank.usuario.id)"
 										/>
@@ -368,8 +368,7 @@ export default {
             jogoAoVivo: false,
 			ranking: [],
 			classificacao: [],
-			partidasAnteriores: [],
-			badgesMap: {}
+			partidasAnteriores: []
 		}
 	},
 	methods: {
@@ -386,7 +385,6 @@ export default {
 			this.carregarPartidasAnteriores();
 			this.carregarRanking();
 			this.carregarGrupos();
-			this.carregarBadges();
 		},
 		carregarPartidas() {
 			this.$clubApi.get("/home/durante/partidas").then((response) => {
@@ -409,7 +407,7 @@ export default {
 			})
 		},
 		carregarRanking() {
-			this.$clubApi.get("/home/durante/ranking").then((response) => {
+			this.$clubApi.get("/home/durante/ranking-completo").then((response) => {
 				this.ranking = response.data.object;
 			}) .catch((error) => {
 				this.$notify({type: 'warning', message: error.response.data.msg})
@@ -431,11 +429,6 @@ export default {
 		},
         paginaUsuario(idUsuario) {
 			location.href = '/meubolao/' + idUsuario;
-		},
-		carregarBadges() {
-			this.$clubApi.get('/badge/ranking').then((response) => {
-				this.badgesMap = response.data.object || {};
-			}).catch(() => {});
 		},
 		carregarNotificacaoSorteada() {
 		   this.$clubApi.get("/notificacao/sorteada").then((response) => {

@@ -164,7 +164,7 @@
 							<div class="col-7 font-weight-bold" style="min-width:0">
 								<user-name-badges
 									:nome="(index+1) + '. ' + rank.usuario.nome"
-									:badges="badgesMap[rank.usuario.id] || []"
+								:badges="rank.badges || []"
 									class="clickable"
 									@click.native="paginaUsuario(rank.usuario.id)"
 								/>
@@ -201,7 +201,6 @@ export default {
 			countdown: 0,
 			colocacao: null,
 			ranking: [],
-			badgesMap: {},
 			curiosidades: {
 				listaPlacarExato: [],
 				listaColocado: [],
@@ -215,7 +214,6 @@ export default {
 			this.carregarColocacoes();
 			this.carregarRanking();
 			this.carregarCuriosidades();
-			this.carregarBadges();
 		},
 		iniciarContagem() {
 			this.countdown = new Date("2030-06-11T16:00:00") - new Date();
@@ -261,7 +259,7 @@ export default {
                  pontuacao: 100 - i
              }));
 			*/
-			this.$clubApi.get("/home/durante/ranking").then((response) => {
+			this.$clubApi.get("/home/durante/ranking-completo").then((response) => {
 				this.ranking = response.data.object;
 			}) .catch((error) => {
 				this.$notify({type: 'warning', message: error.response.data.msg})
@@ -281,11 +279,6 @@ export default {
 		},
         paginaUsuario(idUsuario) {
 			location.href = '/meubolao/' + idUsuario;
-		},
-		carregarBadges() {
-			this.$clubApi.get('/badge/ranking').then((response) => {
-				this.badgesMap = response.data.object || {};
-			}).catch(() => {});
 		}
 	},
 };
