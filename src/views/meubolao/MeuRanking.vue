@@ -39,7 +39,7 @@
                                                     <div class="col alinhaVert font-weight-bold" style="min-width:0">
                                                         <user-name-badges
                                                             :nome="(index+1) + '. ' + rank.usuario.nome"
-                                                            :badges="badgesMap[rank.usuario.id] || []"
+                                                            :badges="rank.badges || []"
                                                             class="clickable"
                                                             @click.native="paginaUsuario(rank.usuario.id)"
                                                         />
@@ -92,7 +92,7 @@
                                                     <div class="col alinhaVert font-weight-bold" style="min-width:0">
                                                         <user-name-badges
                                                             :nome="(index+1) + '. ' + rank.usuario.nome"
-                                                            :badges="badgesMap[rank.usuario.id] || []"
+                                                            :badges="rank.badges || []"
                                                             class="clickable"
                                                             @click.native="paginaUsuario(rank.usuario.id)"
                                                         />
@@ -192,7 +192,6 @@ export default {
 			listaParticipantesFiltro: [],
             jogoAoVivo: false,
             opcao: "",
-            badgesMap: {},
             modals: {
                 modalRanking: false
             }
@@ -206,13 +205,12 @@ export default {
 				this.jogoAoVivo = (response.data.object > 0);
                 this.carregarRanking();
                 this.carregarRankings();
-                this.carregarBadges();
 			}) .catch((error) => {
 				this.$notify({type: 'warning', message: error.response.data.msg})
 			});
         },
 		carregarRanking() {
-			this.$clubApi.get("/home/durante/ranking").then((response) => {
+			this.$clubApi.get("/home/durante/ranking-completo").then((response) => {
 				this.listaRanking = response.data.object;
 			}) .catch((error) => {
 				this.$notify({type: 'warning', message: error.response.data.msg})
@@ -240,11 +238,6 @@ export default {
 		},
         paginaUsuario(idUsuario) {
             location.href = '/meubolao/'+ idUsuario;
-        },
-        carregarBadges() {
-            this.$clubApi.get('/badge/ranking').then((response) => {
-                this.badgesMap = response.data.object || {};
-            }).catch(() => {});
         },
         modalAlterarRanking(ranking) {
             this.ranking = ranking;
