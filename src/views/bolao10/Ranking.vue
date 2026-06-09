@@ -35,7 +35,7 @@
                                     </el-tooltip>
                                     <user-name-badges
                                         :nome="item.usuario.nome"
-                                        :badges="badgesMap[item.usuario.id] || []"
+                                        :badges="item.badges || []"
                                     />
                                 </td>
                                 <td style="text-align: center"> 
@@ -63,18 +63,16 @@ export default {
     data() {
         return {
             listaRanking: [],
-            jogoAoVivo: false,
-            badgesMap: {}
+            jogoAoVivo: false
         }
     },
     created(){
         this.carregarRanking(),
-        this.carregarDemaisDados(),
-        this.carregarBadges()
+        this.carregarDemaisDados()
     },
     methods:{
         carregarRanking() {
-            this.$clubApi.get('/bolao/ranking').then((response) => {
+            this.$clubApi.get('/home/durante/ranking-completo').then((response) => {
                 this.listaRanking = response.data.object
             }) .catch((error) => {
                 this.$notify({type: 'warning', message: error.response.data.msg})
@@ -90,11 +88,6 @@ export default {
 			}).finally(() =>{
 				NProgress.done();
 			});
-        },
-        carregarBadges() {
-            this.$clubApi.get('/badge/ranking').then((response) => {
-                this.badgesMap = response.data.object || {};
-            }).catch(() => {});
         },
         paginaUsuario(idUsuario) {
             location.href = '/meubolao/'+ idUsuario;

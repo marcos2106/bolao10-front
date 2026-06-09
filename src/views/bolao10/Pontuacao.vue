@@ -115,14 +115,14 @@ export default {
     },
     methods: {
         carregarPontuacao(){
-            this.$clubApi.get('/partida').then((response) => {
+            this.$clubApi.get('/partida/otimizado').then((response) => {
                 this.listaPartidas = response.data.object
             }) .catch(() => {
                 this.$notify({type: 'warning', message: 'Erro ao carregar as partidas do Bolão.'})
             }).finally(() =>{
                 NProgress.done() 
             })
-            this.$clubApi.get('/bolao/pontuacao').then((response) => {
+            this.$clubApi.get('/bolao/pontuacao/otimizado').then((response) => {
                 this.listaPontuacao = response.data.object
             }) .catch(() => {
                 this.$notify({type: 'warning', message: 'Erro ao carregar a pontuação do Bolão.'})
