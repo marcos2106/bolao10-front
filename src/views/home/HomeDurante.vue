@@ -387,7 +387,7 @@ export default {
 			this.carregarGrupos();
 		},
 		carregarPartidas() {
-			this.$clubApi.get("/home/durante/partidas").then((response) => {
+			this.$clubApi.get("/home/durante/partidas/otimizado").then((response) => {
 				this.partida1 = response.data.object.partida1;
 				this.partida2 = response.data.object.partida2;
 				this.partida3 = response.data.object.partida3;
@@ -416,7 +416,7 @@ export default {
 			})
 		},
 		carregarGrupos() {
-			this.$clubApi.get("/home/durante/grupo").then((response) => {
+			this.$clubApi.get("/home/durante/grupo/otimizado").then((response) => {
 				this.classificacao = response.data.object;
 			}) .catch((error) => {
 				this.$notify({type: 'warning', message: error.response.data.msg})
