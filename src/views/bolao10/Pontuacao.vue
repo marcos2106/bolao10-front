@@ -15,7 +15,8 @@
                 
                 <div class="row">
                     <div class="col-12">
-                            <table class="table table-responsive font-tabela-peq">
+                        <div class="pontuacao-scroll-container">
+                            <table class="table font-tabela-peq">
                                 <thead class="thead">
                                     <tr class="font-weight-bold">
                                         <th class="text-center alinhaVert" rowspan="2">Nome </th> 
@@ -52,7 +53,8 @@
                                 <tbody>
                                     <tr v-for="(pontuacao, index) in listaPontuacao" :key="pontuacao.usuario.id"
                                             :class="(index % 2 == 0) ? 'registroImpar' : ''">
-                                        <td class="clickable align-items-center d-flex pr-3" @click="paginaUsuario(pontuacao.usuario.id)">
+                                        <td class="clickable pr-3" @click="paginaUsuario(pontuacao.usuario.id)">
+                                            <div class="d-flex align-items-center">
                                             <el-tooltip :content="'Nível: '+ pontuacao.usuario.nivelDescricao" placement="top" effect="dark">
                                                 <div class="p-1 rounded mr-2"
                                                     :class="pontuacao.usuario.nivel ? 'fundo-' + pontuacao.usuario.nivel.toLowerCase().replace('_', '-') : ''">
@@ -60,6 +62,7 @@
                                                 </div>
                                             </el-tooltip>
                                             <strong>{{ pontuacao.usuario.nome}}</strong>
+                                            </div>
                                         </td>
                                         <td class="text-center font-weight-bold fonte-pontuacao"> {{ pontuacao.pontuacao }} </td>
                                         <td v-show="idSituacao>1" class="text-center" v-for="(aposta, index) in pontuacao.listaApostas" :key="aposta.partida.id"
@@ -86,6 +89,7 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
                     </div>
                 </div>		
 
@@ -117,6 +121,7 @@ export default {
         carregarPontuacao(){
             this.$clubApi.get('/partida/otimizado').then((response) => {
                 this.listaPartidas = response.data.object
+                this.$nextTick(() => { this.ajustarCabecalho(); })
             }) .catch(() => {
                 this.$notify({type: 'warning', message: 'Erro ao carregar as partidas do Bolão.'})
             }).finally(() =>{
@@ -139,6 +144,14 @@ export default {
         },
         paginaUsuario(idUsuario) {
             location.href = '/meubolao/'+ idUsuario;
+        },
+		ajustarCabecalho() {
+            const firstRow = this.$el.querySelector('thead tr:first-child');
+            if (firstRow) {
+                const height = firstRow.offsetHeight;
+                const secondRowCells = this.$el.querySelectorAll('thead tr:nth-child(2) th');
+                secondRowCells.forEach(th => { th.style.top = height + 'px'; });
+            }
         },
 		detalharPartida(idPartida) {
             location.href = '/mundial/partida/'+ idPartida;
@@ -204,5 +217,79 @@ tbody tr:hover {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
     filter: gray;
+}
+
+/* Scroll container para rolagem horizontal e vertical */
+.pontuacao-scroll-container {
+    overflow: auto;
+    max-height: 80vh;
+}
+
+/* border-collapse:collapse quebra position:sticky em todos os browsers - obrigatório usar separate */
+.pontuacao-scroll-container table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Cabeçalho fixo na rolagem vertical - sticky aplicado em cada th diretamente */
+.pontuacao-scroll-container thead tr:first-child th {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 2;
+}
+.pontuacao-scroll-container thead tr:nth-child(2) th {
+    position: sticky;
+    background-color: #fff;
+    z-index: 2;
+}
+
+/* Largura fixa da coluna Nome para usar como referência do left da coluna Pontuação */
+.pontuacao-scroll-container thead tr:first-child th:first-child,
+.pontuacao-scroll-container tbody tr td:first-child {
+    min-width: 160px;
+}
+
+/* Coluna Nome (cabeçalho): fixa em ambos os eixos */
+.pontuacao-scroll-container thead tr:first-child th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+}
+
+/* Coluna Pontuação (cabeçalho): fixa na horizontal, left = largura da coluna Nome */
+.pontuacao-scroll-container thead tr:first-child th:nth-child(2) {
+    position: sticky;
+    left: 160px;
+    z-index: 3;
+    background-color: #fff;
+}
+
+/* Primeira coluna do corpo (Nome): fixa na rolagem horizontal */
+.pontuacao-scroll-container tbody tr td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: #fff;
+}
+.pontuacao-scroll-container tbody tr.registroImpar td:first-child {
+    background-color: #f1f1f1;
+}
+.pontuacao-scroll-container tbody tr:hover td:first-child {
+    background-color: #dadada !important;
+}
+
+/* Segunda coluna do corpo (Pontuação): fixa na rolagem horizontal */
+.pontuacao-scroll-container tbody tr td:nth-child(2) {
+    position: sticky;
+    left: 160px;
+    z-index: 1;
+    background-color: #fff;
+}
+.pontuacao-scroll-container tbody tr.registroImpar td:nth-child(2) {
+    background-color: #f1f1f1;
+}
+.pontuacao-scroll-container tbody tr:hover td:nth-child(2) {
+    background-color: #dadada !important;
 }
 </style>

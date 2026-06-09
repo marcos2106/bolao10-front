@@ -1,8 +1,8 @@
 <template>
-	<div>
+	<div class="home-durante-container container-fluid p-2 p-md-3">
 
 		<div class="row">
-			<div class="col-8 mt--3">
+			<div class="col-12 col-lg-8 order-1 order-lg-1 mt-2 mt-lg-0">
 
 		  		<!-- WIDGET DE NOTIFICAÇÃO GLOBAL -->
 		  		<div class="janelaNotificacao d-flex align-items-center p-3 mt-3 clickable" v-if="notificacao"
@@ -25,10 +25,10 @@
 					</div>
 				-->
 
-				<div class="row mb-3 mt-3">
-					<div class="col" v-for="partida in partidasAnteriores" :key="partida.id">
+				<div class="row mb-3">
+					<div class="col-12 col-sm-6 col-md-4" v-for="partida in partidasAnteriores" :key="partida.id">
 
-						<div class="janelaPartida clickable" @click="detalharPartida(partida.id)">
+						<div class="janelaPartida clickable mb-3 mb-md-0" @click="detalharPartida(partida.id)">
 							<div class="col fonte-minima">
 								<i class="fas fa-futbol mr-1"></i> Jogo Anterior
 							</div>
@@ -59,7 +59,7 @@
 					</div>
 				</div>
 
-				<div class="janelaPartida" 
+				<div class="janelaPartida mb-3" 
 						:class="(partida1.iniciada) ? 'aovivo': ''"
 						v-if="partida1 != null">
 					<div class="row">
@@ -71,7 +71,7 @@
 								<i class="fas fa-futbol mr-1"></i> Próxima partida
 							</div>
 						</div>
-						<div class="col-2" v-if="partida1.iniciada">
+						<div class="col-auto" v-if="partida1.iniciada">
 							<div class="ml-2 mt-1">
 								<span class="tagAoVivo"> <i class="fas fa-wifi mr-1"></i> AO VIVO</span>
 							</div>
@@ -79,22 +79,30 @@
 					</div>
 					<div class="row mt-2">
 						<div class="col text-center">
-							<div class="col mt-2" style="justify-content: space-around; display: flex;">
-								<div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida1.dataHoraFmt.substring(0, 5) }} </div>
-								<div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida1.dataHoraFmt.substring(6, 8) }}h </div>
-								<div class="badge badge-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida1.local }}</div>
+							<div class="d-flex flex-wrap justify-content-center gap-1">
+								<div class="badge badge-secondary mb-1"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida1.dataHoraFmt.substring(0, 5) }} </div>
+								<div class="badge badge-secondary mb-1"><i class="far fa-clock"></i>&nbsp; {{ partida1.dataHoraFmt.substring(6, 8) }}h </div>
+								<div class="badge badge-secondary mb-1 text-truncate" style="max-width: 200px;"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida1.local }}</div>
 							</div>
 						</div>
 					</div>
-                    <div class="row m-2 mt-2">
-						<div class="col-4 text-left alinhaVert font-weight-bold fonte-media" style="text-wrap: nowrap;">
-							<img width="40" :src="partida1.selecaoA.imagem"> {{partida1.selecaoA.nome}}
+                    <div class="row m-2 mt-3 align-items-center">
+						<div class="col-12 col-md-4 text-center text-md-left mb-2 mb-md-0">
+							<div class="d-flex align-items-center justify-content-center justify-content-md-start flex-wrap">
+								<img width="30" class="mb-1 mb-md-0" :src="partida1.selecaoA.imagem">
+								<span class="font-weight-bold fonte-time ml-2">{{partida1.selecaoA.nome}}</span>
+							</div>
 						</div>
-						<div class="col-4 text-center alinhaVert font-weight-bold fonte-grande">
-							{{partida1.placarA}} x {{partida1.placarB}}
+						<div class="col-12 col-md-4 text-center mb-2 mb-md-0">
+							<div class="font-weight-bold fonte-placar">
+								{{partida1.placarA}} x {{partida1.placarB}}
+							</div>
 						</div>
-						<div class="col-4 text-right alinhaVert font-weight-bold fonte-media" style="text-wrap: nowrap;">
-							{{partida1.selecaoB.nome}} <img width="40" :src="partida1.selecaoB.imagem">
+						<div class="col-12 col-md-4 text-center text-md-right">
+							<div class="d-flex align-items-center justify-content-center justify-content-md-end flex-wrap">
+								<span class="font-weight-bold fonte-time mr-2">{{partida1.selecaoB.nome}}</span>
+								<img width="30" class="mb-1 mb-md-0" :src="partida1.selecaoB.imagem">
+							</div>
 						</div>
 					</div>
 					<!--
@@ -110,12 +118,12 @@
 					<div class="row m-2">
 						<div class="col text-center">
 							<button type="button"  @click="detalharPartida(partida1.id)"
-									class="btn btn-outline-secondary btn-sm">
+									class="btn btn-outline-secondary btn-sm btn-block-xs">
 								<i class="fas fa-eye mr-1"></i> Detalhes da Partida
 							</button>
 						</div>
 					</div>
-					<div class="row m-2">
+					<div class="row m-2 d-none d-md-flex">
 						<div class="col-4">
 							<div class="font-weight-bold fonte-minima" :style="`color: `+ partida1.selecaoA.cor +`;`"> {{ partida1.selecaoA.nome }}: {{ partida1.aposta.porcSelecaoA }}% ({{partida1.aposta.numSelecaoA}}) </div>
 						</div>
@@ -124,6 +132,17 @@
 						</div>
 						<div class="col-4">
 							<div class="text-right font-weight-bold fonte-minima" :style="`color: `+ partida1.selecaoB.cor +`;`"> {{ partida1.selecaoB.nome }}: {{ partida1.aposta.porcSelecaoB }}% ({{partida1.aposta.numSelecaoB}}) </div>
+						</div>
+					</div>
+					<div class="row m-2 d-md-none">
+						<div class="col-12 mb-1">
+							<div class="font-weight-bold fonte-minima text-center" :style="`color: `+ partida1.selecaoA.cor +`;`"> {{ partida1.selecaoA.nome }}: {{ partida1.aposta.porcSelecaoA }}% ({{partida1.aposta.numSelecaoA}}) </div>
+						</div>
+						<div class="col-12 mb-1">
+							<div class="text-center font-weight-bold fonte-minima" style="color: #4d4d4a;"> Empate: {{ partida1.aposta.porcEmpate }}% ({{partida1.aposta.numEmpate}}) </div>
+						</div>
+						<div class="col-12 mb-1">
+							<div class="text-center font-weight-bold fonte-minima" :style="`color: `+ partida1.selecaoB.cor +`;`"> {{ partida1.selecaoB.nome }}: {{ partida1.aposta.porcSelecaoB }}% ({{partida1.aposta.numSelecaoB}}) </div>
 						</div>
 					</div>
 					<div class="row m-2">
@@ -138,7 +157,7 @@
 				</div>
 				
 				<div class="row mt-3">
-					<div class="col-6">
+					<div class="col-12 col-md-6 mb-3 mb-md-0">
 
 						<div class="janelaPartida" v-if="partida2 != null">
 							<div class="row">
@@ -148,28 +167,24 @@
 							</div>
 							<div class="row">
 								<div class="col text-center">
-									<div class="col mt-2" style="justify-content: space-around; display: flex;">
-										<div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida2.dataHoraFmt.substring(0, 5) }} </div>
-										<div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida2.dataHoraFmt.substring(6, 8) }}h </div>
-										<div class="badge badge-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida2.local }}</div>
+									<div class="d-flex flex-wrap justify-content-center gap-1 mt-2">
+										<div class="badge badge-secondary mb-1"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida2.dataHoraFmt.substring(0, 5) }} </div>
+										<div class="badge badge-secondary mb-1"><i class="far fa-clock"></i>&nbsp; {{ partida2.dataHoraFmt.substring(6, 8) }}h </div>
+										<div class="badge badge-secondary mb-1 text-truncate" style="max-width: 150px;"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida2.local }}</div>
 									</div>
 								</div>
 							</div>
-							<div class="row m-1">
-								<div class="col-4 text-left alinhaVert">
-									<img width="20" :src="partida2.selecaoA.imagem">
+							<div class="row m-2 mt-2">
+								<div class="col-4 text-center">
+									<img width="20" class="mb-1" :src="partida2.selecaoA.imagem">
+									<div class="font-weight-bold fonte-pequena text-truncate">{{partida2.selecaoA.nome}}</div>
 								</div>
-								<div class="col-4 text-center alinhaVert font-weight-bold fonte-pequena">x</div>
-								<div class="col-4 text-right alinhaVert">
-									<img width="20" :src="partida2.selecaoB.imagem">
+								<div class="col-4 text-center font-weight-bold fonte-pequena d-flex align-items-center justify-content-center">
+									x
 								</div>
-							</div>
-							<div class="row m-1 mt--1">
-								<div class="col-6 text-left alinhaVert font-weight-bold fonte-pequena">
-									{{partida2.selecaoA.nome}}
-								</div>
-								<div class="col-6 text-right alinhaVert font-weight-bold fonte-pequena">
-									{{partida2.selecaoB.nome}}
+								<div class="col-4 text-center">
+									<img width="20" class="mb-1" :src="partida2.selecaoB.imagem">
+									<div class="font-weight-bold fonte-pequena text-truncate">{{partida2.selecaoB.nome}}</div>
 								</div>
 							</div>
 							<div class="row">
@@ -203,7 +218,7 @@
 						</div>
 
 					</div>
-					<div class="col-6">
+					<div class="col-12 col-md-6">
 
 						<div class="janelaPartida" v-if="partida3 != null">
 							<div class="row">
@@ -213,28 +228,24 @@
 							</div>
 							<div class="row">
 								<div class="col text-center">
-									<div class="col mt-2" style="justify-content: space-around; display: flex;">
-										<div class="badge badge-secondary"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida3.dataHoraFmt.substring(0, 5) }} </div>
-										<div class="badge badge-secondary"><i class="far fa-clock"></i>&nbsp; {{ partida3.dataHoraFmt.substring(6, 8) }}h </div>
-										<div class="badge badge-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida3.local }}</div>
+									<div class="d-flex flex-wrap justify-content-center gap-1 mt-2">
+										<div class="badge badge-secondary mb-1"><i class="fas fa-calendar-alt"></i>&nbsp; {{ partida3.dataHoraFmt.substring(0, 5) }} </div>
+										<div class="badge badge-secondary mb-1"><i class="far fa-clock"></i>&nbsp; {{ partida3.dataHoraFmt.substring(6, 8) }}h </div>
+										<div class="badge badge-secondary mb-1 text-truncate" style="max-width: 150px;"><i class="fas fa-map-marker-alt"></i>&nbsp; {{ partida3.local }}</div>
 									</div>
 								</div>
 							</div>
-							<div class="row m-1">
-								<div class="col-4 text-left alinhaVert">
-									<img width="20" :src="partida3.selecaoA.imagem">
+							<div class="row m-2 mt-2">
+								<div class="col-4 text-center">
+									<img width="20" class="mb-1" :src="partida3.selecaoA.imagem">
+									<div class="font-weight-bold fonte-pequena text-truncate">{{partida3.selecaoA.nome}}</div>
 								</div>
-								<div class="col-4 text-center alinhaVert font-weight-bold fonte-pequena">x</div>
-								<div class="col-4 text-right alinhaVert">
-									<img width="20" :src="partida3.selecaoB.imagem">
+								<div class="col-4 text-center font-weight-bold fonte-pequena d-flex align-items-center justify-content-center">
+									x
 								</div>
-							</div>
-							<div class="row m-1 mt--1">
-								<div class="col-6 text-left alinhaVert font-weight-bold fonte-pequena">
-									{{partida3.selecaoA.nome}}
-								</div>
-								<div class="col-6 text-right alinhaVert font-weight-bold fonte-pequena">
-									{{partida3.selecaoB.nome}}
+								<div class="col-4 text-center">
+									<img width="20" class="mb-1" :src="partida3.selecaoB.imagem">
+									<div class="font-weight-bold fonte-pequena text-truncate">{{partida3.selecaoB.nome}}</div>
 								</div>
 							</div>
 							<div class="row">
@@ -271,16 +282,16 @@
 				</div>
 
 			</div>
-			<div class="col-4">
+			<div class="col-12 col-lg-4 order-2 order-lg-2 mb-3">
 				
 				<div class="quadroRanking">
-					<div class="col-12 tituloQuadroPequeno font-weight-bold">
+					<div class="col-12 tituloQuadroPequeno font-weight-bold pt-2">
 						<i class="fas fa-star mr-1"></i> Ranking atual
 					</div>
-					<div class="col-12 mt-2 font-weight-bold fonte-media">
+					<div class="col-12 mt-2 font-weight-bold fonte-media ranking-scroll">
 						
 						<div class="row ml-1 descricaoRanking">
-							<div class="col-11 text-left" style="height: 510px; overflow: scroll;">
+							<div class="col-11 text-left">
 
 								<div class="row p-1 mt-1 colocacaoRanking"
 										:class="(index <= 5) ? 'colocacaoRanking' : 'colocacaoSemRanking'"
@@ -315,9 +326,9 @@
 		</div>
 		
 		<div class="row mt-3">
-			<div class="col">
+			<div class="col-12">
 
-				<hooper :itemsToShow="2" :infiniteScroll="true" :autoPlay="true" :playSpeed="3000"  style="height: 150px">
+				<hooper :itemsToShow="itemsToShowGrupos" :infiniteScroll="true" :autoPlay="true" :playSpeed="3000" class="hooper-grupos">
 					<slide 
 							v-for="c in classificacao" :key="c.grupo">
 						<div class="row m-1">
@@ -368,10 +379,25 @@ export default {
             jogoAoVivo: false,
 			ranking: [],
 			classificacao: [],
-			partidasAnteriores: []
+			partidasAnteriores: [],
+			windowWidth: window.innerWidth
 		}
 	},
+	computed: {
+		itemsToShowGrupos() {
+			return this.windowWidth < 768 ? 1 : 2;
+		}
+	},
+	mounted() {
+		window.addEventListener('resize', this.handleResize);
+	},
+	beforeDestroy() {
+		window.removeEventListener('resize', this.handleResize);
+	},
 	methods: {
+		handleResize() {
+			this.windowWidth = window.innerWidth;
+		},
 		carregarDados() {
 			this.$clubApi.get("/configuracao/jogo/aovivo").then((response) => {
 				this.jogoAoVivo = (response.data.object > 0);
@@ -455,108 +481,265 @@ export default {
 	}
 };
 </script>
-<style>
-.janelaPartida {
-    border: 1px solid white;
-    border-bottom: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    box-shadow: 0 0 4px #00000020,0 2px 4px #00000033;
-    border-radius: 5px;
-	background-color: #fcfcfc;
-	/*background-image: linear-gradient(30deg, #d3a9ba, #fCfCfC, #fCfCfC, #fCfCfC, #ffffaa);*/
+<style scoped>
+/* Classes Utilitárias */
+.home-durante-container {
+	max-width: 100%;
+	overflow-x: hidden;
 }
-.aovivo {
-	border: 1px solid #58dd4c;
-}
+
 .alinhaVert {
 	margin: auto;
 }
+
+.text-truncate {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* Cards e Janelas */
+.janelaPartida {
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-radius: 5px;
+	background-color: #fcfcfc;
+	padding: 10px;
+}
+
+.aovivo {
+	border: 1px solid #58dd4c;
+}
+
 .quadroPequeno {
     border: 1px solid #a1bd9e;
     background-color: #d3f3d0;
     border-radius: 6px;
-    height: 90px;
+	padding: 10px;
 }
-.tagAoVivo {
-    border: 1px solid #a50d0d;
-    background-color: #fd3434;
-	color: white;
-    border-radius: 4px;
-	font-weight: bold;
-	padding: 2px;
-    font-size: 11px;
-}
+
 .janelaPequena {
     border: 1px solid white;
     border-bottom: 1px solid #ccc;
     border-right: 1px solid #ccc;
     box-shadow: 0 0 4px rgba(0,0,0,.125),0 2px 4px rgba(0,0,0,.2);
     border-radius: 5px;
-    height: 110px;
 	background-color: #fCfCfC;
-}
-.tituloJanelaPequena {
-    font-size: 11px;
-}
-.tituloQuadroPequeno {
-    font-size: 11px;
-}
-.fonte-grande {
-    font-size: 42px;
-}
-.fonte-media {
-    font-size: 21px;
-}
-.fonte-pequena {
-	font-size: 15px;
-}
-.fonte-minima {
-	font-size: 12px;
-}
-.avatarRedondo {
-    border-radius: 80px;
-}
-.barraPorcentagem {
-	height: 4px;
-    border-radius: 4px;
-}
-.quadroRanking {
-    border: 1px solid #a1bd9e;
-    background-color: #d3f3d0;
-    border-radius: 6px;
-}
-.descricaoRanking {
-    font-size: 12px;
-}
-.colocacaoRanking {
-	border-left: 3px solid #96be92;
-}
-.colocacaoSemRanking {
-	border-left: 3px solid #e7f3ef;
-}	
-.tabelaGrupo {
-	font-size: 14px;
-    background-color: #e7f3ef;
-    border-radius: 6px;
-	margin: 5px;
-	padding: 5px;
-}
-.linhaGrupo {
-	border-bottom: 1px dashed #838383;
-}
-.clickable:hover {
-    cursor: pointer;
-    background-color: #e8f5e6;
-}
-.fraseInicio {
-	letter-spacing: 4px;
-	font-size: 13px;
-	font-style: italic;
+	padding: 10px;
 }
 
 .janelaNotificacao {
 	border-radius: 5px;
 	box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important; 
 	border: 1px solid #C0C0C0;
+}
+
+/* Tags e Badges */
+.tagAoVivo {
+    border: 1px solid #a50d0d;
+    background-color: #fd3434;
+	color: white;
+    border-radius: 4px;
+	font-weight: bold;
+	padding: 3px 6px;
+    font-size: 10px;
+}
+
+/* Tipografia Base */
+.tituloJanelaPequena {
+    font-size: 12px;
+}
+
+.tituloQuadroPequeno {
+    font-size: 12px;
+}
+
+.fonte-grande {
+    font-size: 32px;
+}
+
+.fonte-media {
+    font-size: 18px;
+}
+
+.fonte-pequena {
+	font-size: 14px;
+}
+
+.fonte-minima {
+	font-size: 11px;
+}
+
+.fonte-placar {
+	font-size: 28px;
+}
+
+.fonte-time {
+	font-size: 16px;
+}
+
+/* Avatar */
+.avatarRedondo {
+    border-radius: 50%;
+	object-fit: cover;
+}
+
+/* Barra de Apostas */
+.barraPorcentagem {
+	height: 4px;
+    border-radius: 4px;
+}
+
+/* Ranking */
+.quadroRanking {
+    border: 1px solid #a1bd9e;
+    background-color: #d3f3d0;
+    border-radius: 6px;
+	padding: 10px;
+}
+
+.descricaoRanking {
+    font-size: 12px;
+}
+
+.ranking-scroll {
+	max-height: 510px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.colocacaoRanking {
+	border-left: 3px solid #96be92;
+}
+
+.colocacaoSemRanking {
+	border-left: 3px solid #e7f3ef;
+}
+
+/* Tabelas de Grupos */	
+.tabelaGrupo {
+	font-size: 12px;
+    background-color: #e7f3ef;
+    border-radius: 6px;
+	margin: 5px;
+	padding: 10px;
+	overflow-x: auto;
+}
+
+.tabelaGrupo table {
+	min-width: 100%;
+}
+
+.linhaGrupo {
+	border-bottom: 1px dashed #838383;
+}
+
+/* Hooper Carousel */
+.hooper-grupos {
+	height: auto;
+	min-height: 180px;
+}
+
+/* Interações */
+.clickable:hover {
+    cursor: pointer;
+    background-color: #e8f5e6;
+	border-radius: 4px;
+	transition: background-color 0.2s;
+}
+
+.fraseInicio {
+	letter-spacing: 4px;
+	font-size: 13px;
+	font-style: italic;
+}
+
+/* Utilitário para botões mobile */
+@media (max-width: 576px) {
+	.btn-block-xs {
+		width: 100%;
+		display: block;
+	}
+}
+
+/* Media Queries - Mobile First */
+@media (max-width: 576px) {
+	.fonte-grande {
+		font-size: 24px;
+	}
+	
+	.fonte-media {
+		font-size: 16px;
+	}
+	
+	.fonte-placar {
+		font-size: 24px;
+	}
+	
+	.fonte-time {
+		font-size: 14px;
+	}
+	
+	.fonte-pequena {
+		font-size: 12px;
+	}
+	
+	.fonte-minima {
+		font-size: 10px;
+	}
+	
+	.tabelaGrupo {
+		font-size: 10px;
+	}
+	
+	.ranking-scroll {
+		max-height: 300px;
+	}
+	
+	.quadroRanking {
+		margin-bottom: 15px;
+	}
+	
+	.hooper-grupos {
+		min-height: 200px;
+	}
+}
+
+/* Tablets */
+@media (min-width: 577px) and (max-width: 991px) {
+	.fonte-grande {
+		font-size: 28px;
+	}
+	
+	.fonte-media {
+		font-size: 18px;
+	}
+	
+	.fonte-placar {
+		font-size: 26px;
+	}
+	
+	.ranking-scroll {
+		max-height: 350px;
+	}
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+	.fonte-grande {
+		font-size: 32px;
+	}
+	
+	.fonte-media {
+		font-size: 21px;
+	}
+	
+	.fonte-placar {
+		font-size: 32px;
+	}
+	
+	.ranking-scroll {
+		max-height: 510px;
+	}
 }
 </style>
