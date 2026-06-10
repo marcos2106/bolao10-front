@@ -448,7 +448,7 @@ export default {
             })
         },
         carregarGrupo() {
-			this.$clubApi.get("/home/durante/grupo").then((response) => {
+			this.$clubApi.get("/home/durante/grupo/otimizado").then((response) => {
 				let grupoResponse = response.data.object;
                 this.grupo = grupoResponse.filter((grupo) => {
                     return (grupo.grupo==this.partida.selecaoA.grupo);
