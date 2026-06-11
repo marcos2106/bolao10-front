@@ -25,8 +25,12 @@
 					</div>
 				-->
 
-				<div class="row mb-3">
-					<div class="col-12 col-sm-6 col-md-4" v-for="partida in partidasAnteriores" :key="partida.id">
+				<div class="row mb-3 mt-3">
+					<div
+						class="col-12"
+						:class="classePartidaAnterior"
+						v-for="partida in partidasAnteriores"
+						:key="partida.id">
 
 						<div class="janelaPartida clickable mb-3 mb-md-0" @click="detalharPartida(partida.id)">
 							<div class="col fonte-minima">
@@ -386,6 +390,15 @@ export default {
 	computed: {
 		itemsToShowGrupos() {
 			return this.windowWidth < 768 ? 1 : 2;
+		},
+		classePartidaAnterior() {
+			const classesPorQuantidade = {
+				1: 'col-sm-12',
+				2: 'col-sm-6',
+				3: 'col-sm-4'
+			};
+
+			return classesPorQuantidade[this.partidasAnteriores.length] || 'col-sm-4';
 		}
 	},
 	mounted() {
