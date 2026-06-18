@@ -294,7 +294,7 @@
 					</div>
 					<div class="col-12 mt-2 font-weight-bold fonte-media ranking-scroll">
 						
-						<div class="row ml-1 descricaoRanking">
+						<div class="row ml-1 descricaoRanking" style="margin-left: -7px !important;">
 							<div class="col-11 text-left">
 
 								<div class="row p-1 mt-1 colocacaoRanking"
@@ -608,7 +608,7 @@ export default {
     border: 1px solid #a1bd9e;
     background-color: #d3f3d0;
     border-radius: 6px;
-	padding: 10px;
+	padding-top: 10px;
 }
 
 .descricaoRanking {
