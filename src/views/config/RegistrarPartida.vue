@@ -606,6 +606,17 @@ export default {
         montarLinhasPontuacaoProvisoria(apostas) {
             const apostasPontuando = (apostas || []).filter(aposta => {
                 return this.valorNumero(aposta.pontuacaoProvisoria) > 0;
+            }).sort((apostaA, apostaB) => {
+                const pontuacaoA = this.valorNumero(apostaA.pontuacaoProvisoria);
+                const pontuacaoB = this.valorNumero(apostaB.pontuacaoProvisoria);
+
+                if (pontuacaoA != pontuacaoB) {
+                    return pontuacaoB - pontuacaoA;
+                }
+
+                const usuarioA = apostaA.usuario || {};
+                const usuarioB = apostaB.usuario || {};
+                return this.valorTexto(usuarioA.nome).localeCompare(this.valorTexto(usuarioB.nome));
             });
 
             if (apostasPontuando.length == 0) {
