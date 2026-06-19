@@ -90,7 +90,7 @@
                                             <i class="fas fa-play"></i>
                                         </a>
                                     </el-tooltip>
-                                    <el-tooltip content="Gerar Palpites" placement="top" v-if="partida.iniciada==false">
+                                    <el-tooltip content="Palpites" placement="top" v-if="partida.iniciada==false">
                                         <a href="#!" @click.prevent="gerarPalpites(partida)" class="table-action table-action-success" data-toggle="tooltip" data-original-title="Gerar Palpites">
                                             <i class="fas fa-clipboard-list"></i>
                                         </a>
@@ -100,7 +100,7 @@
                                             <i class="fas fa-flag-checkered"></i>
                                         </a>
                                     </el-tooltip>
-                                    <el-tooltip content="Gerar Pontuação Provisória" placement="top" v-if="partida.iniciada==true && partida.finalizada==false">
+                                    <el-tooltip content="Pontuação Provisória" placement="top" v-if="partida.iniciada==true && partida.finalizada==false">
                                         <a href="#!" @click.prevent="gerarPontuacaoProvisoria(partida)" class="table-action table-action-success" data-toggle="tooltip" data-original-title="Gerar Pontuação Provisória">
                                             <i class="fas fa-chart-line"></i>
                                         </a>
