@@ -23,6 +23,14 @@
                     </jw-pagination>
                 </div>
 
+                <div class="col-12 text-right mb-2">
+                    <el-tooltip content="Gerar Ranking Atualizado" placement="top">
+                        <button type="button" class="btn btn-outline-primary btn-sm" @click="gerarRankingAtualizado">
+                            <i class="fas fa-list-ol mr-1"></i> Ranking
+                        </button>
+                    </el-tooltip>
+                </div>
+
                 <div class="form-row">
                     <table class="table font-tabela-peq">
                         <thead class="thead">
@@ -82,9 +90,19 @@
                                             <i class="fas fa-play"></i>
                                         </a>
                                     </el-tooltip>
+                                    <el-tooltip content="Gerar Palpites" placement="top" v-if="partida.iniciada==false">
+                                        <a href="#!" @click.prevent="gerarPalpites(partida)" class="table-action table-action-success" data-toggle="tooltip" data-original-title="Gerar Palpites">
+                                            <i class="fas fa-clipboard-list"></i>
+                                        </a>
+                                    </el-tooltip>
                                     <el-tooltip content="Finalizar Partida" placement="top" v-if="partida.iniciada==true && partida.finalizada==false">
                                         <a href="#!" @click.prevent="finalizarPartida(partida)" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Finalizar Partida">
                                             <i class="fas fa-flag-checkered"></i>
+                                        </a>
+                                    </el-tooltip>
+                                    <el-tooltip content="Gerar Pontuação Provisória" placement="top" v-if="partida.iniciada==true && partida.finalizada==false">
+                                        <a href="#!" @click.prevent="gerarPontuacaoProvisoria(partida)" class="table-action table-action-success" data-toggle="tooltip" data-original-title="Gerar Pontuação Provisória">
+                                            <i class="fas fa-chart-line"></i>
                                         </a>
                                     </el-tooltip>
                                     <el-tooltip content="Ver os gols" placement="top" v-if="partida.iniciada==true">
@@ -218,6 +236,30 @@
             </form> 
         </modal>
 
+        <!-- Modal Palpites -->
+        <modal :show.sync="modals.modalPalpites">
+            <form class="ml-3 mt-3 mr-3 mb-3">
+                <h4 class="text-center">{{ tituloModalPalpites }}</h4>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <textarea class="form-control mensagem-palpite-whatsapp"
+                            readonly
+                            v-model="mensagemPalpites">
+                        </textarea>
+                    </div>
+                </div>
+                <br class="clear"/>
+                <div class="col-md-12 text-center">
+                    <button type="button" class="btn btn-primary" @click="copiarPalpites"
+                            :disabled="carregandoPalpites || !mensagemPalpites">
+                        <i :class="carregandoPalpites ? 'fas fa-spinner fa-spin mr-1' : 'fas fa-copy mr-1'"></i>
+                        {{ carregandoPalpites ? 'Carregando' : 'Copiar' }}
+                    </button>
+                    <button type="button" class="btn btn-secundary ml-4" @click="fecharModalPalpites">Fechar</button>
+                </div>
+            </form>
+        </modal>
+
 	</div>
 </template>
 <script>
@@ -284,6 +326,9 @@ export default {
             listaGols: [],
             listaGolsA: [],
             listaGolsB: [],
+            mensagemPalpites: "",
+            tituloModalPalpites: "Palpites da Partida",
+            carregandoPalpites: false,
             gol: {
                 partida: null,
                 jogador: null,
@@ -293,7 +338,8 @@ export default {
             },
             modals : {
                 modalAdicionarGol: false,
-                modalGols: false
+                modalGols: false,
+                modalPalpites: false
             },
         }
     },
@@ -405,6 +451,389 @@ export default {
         verPartida(idPartida) {
             location.href = '/mundial/partida/'+ idPartida;
         },
+        gerarPalpites(partida) {
+            this.partida = partida;
+            this.tituloModalPalpites = "Palpites da Partida";
+            this.mensagemPalpites = "Carregando palpites...";
+            this.carregandoPalpites = true;
+            this.modals.modalPalpites = true;
+
+            Promise.all([
+                this.$clubApi.get('/configuracao/partida/'+ partida.id),
+                this.$clubApi.get('/bolao/aposta/partida/'+ partida.id)
+            ]).then((responses) => {
+                const partidaDetalhe = responses[0].data.object;
+                const apostas = responses[1].data.object || [];
+                this.mensagemPalpites = this.montarMensagemPalpites(partidaDetalhe, apostas);
+            }) .catch((error) => {
+                this.mensagemPalpites = "";
+                this.$notify({type: 'warning', message: error.response.data.msg})
+            }).finally(() =>{
+                this.carregandoPalpites = false;
+                NProgress.done();
+            })
+        },
+        gerarPontuacaoProvisoria(partida) {
+            this.partida = partida;
+            this.tituloModalPalpites = "Pontuação Provisória";
+            this.mensagemPalpites = "Carregando pontuação provisória...";
+            this.carregandoPalpites = true;
+            this.modals.modalPalpites = true;
+
+            Promise.all([
+                this.$clubApi.get('/configuracao/partida/'+ partida.id),
+                this.$clubApi.get('/bolao/aposta/partida/'+ partida.id)
+            ]).then((responses) => {
+                const partidaDetalhe = responses[0].data.object;
+                const apostas = responses[1].data.object || [];
+                this.mensagemPalpites = this.montarMensagemPontuacaoProvisoria(partidaDetalhe, apostas);
+            }) .catch((error) => {
+                this.mensagemPalpites = "";
+                this.$notify({type: 'warning', message: error.response.data.msg})
+            }).finally(() =>{
+                this.carregandoPalpites = false;
+                NProgress.done();
+            })
+        },
+        gerarRankingAtualizado() {
+            this.tituloModalPalpites = "Ranking Atualizado";
+            this.mensagemPalpites = "Carregando ranking atualizado...";
+            this.carregandoPalpites = true;
+            this.modals.modalPalpites = true;
+
+            this.$clubApi.get('/home/durante/ranking-completo').then((response) => {
+                const ranking = response.data.object || [];
+                this.mensagemPalpites = this.montarMensagemRankingAtualizado(ranking);
+            }) .catch((error) => {
+                this.mensagemPalpites = "";
+                this.$notify({type: 'warning', message: error.response.data.msg})
+            }).finally(() =>{
+                this.carregandoPalpites = false;
+                NProgress.done();
+            })
+        },
+        montarMensagemPalpites(partida, apostas) {
+            const selecaoA = partida.selecaoA || {};
+            const selecaoB = partida.selecaoB || {};
+            const aposta = partida.aposta || {};
+            const dataHora = this.formatarDataHoraPalpite(partida.dataHoraFmt);
+            const linhasPlacares = this.montarLinhasPlacares(apostas);
+            const nomeSelecaoA = this.valorTexto(selecaoA.nome);
+            const nomeSelecaoB = this.valorTexto(selecaoB.nome);
+            const bandeiraA = this.emojiBandeira(selecaoA);
+            const bandeiraB = this.emojiBandeira(selecaoB);
+            const tituloSelecaoA = (bandeiraA ? bandeiraA +" " : "") + nomeSelecaoA;
+            const tituloSelecaoB = nomeSelecaoB + (bandeiraB ? " "+ bandeiraB : "");
+
+            return [
+                "*Partida 🚨*",
+                "",
+                "*"+ tituloSelecaoA +" x "+ tituloSelecaoB +"*",
+                "",
+                "🗓️ "+ dataHora.data +"      🕒 "+ dataHora.hora +"      📍 "+ this.valorTexto(partida.local),
+                "",
+                "*Palpites 📊*",
+                "",
+                this.valorPercentual(aposta.porcSelecaoA) +"% "+ nomeSelecaoA,
+                this.valorPercentual(aposta.porcEmpate) +"% Empate",
+                this.valorPercentual(aposta.porcSelecaoB) +"% "+ nomeSelecaoB,
+                "",
+                "*Placares ⚽*",
+                "",
+                linhasPlacares
+            ].join("\n");
+        },
+        montarMensagemPontuacaoProvisoria(partida, apostas) {
+            const selecaoA = partida.selecaoA || {};
+            const selecaoB = partida.selecaoB || {};
+            const nomeSelecaoA = this.valorTexto(selecaoA.nome);
+            const nomeSelecaoB = this.valorTexto(selecaoB.nome);
+            const bandeiraA = this.emojiBandeira(selecaoA);
+            const bandeiraB = this.emojiBandeira(selecaoB);
+            const tituloSelecaoA = (bandeiraA ? bandeiraA +" " : "") + nomeSelecaoA;
+            const tituloSelecaoB = nomeSelecaoB + (bandeiraB ? " "+ bandeiraB : "");
+            const linhasPontuacao = this.montarLinhasPontuacaoProvisoria(apostas);
+
+            return [
+                "*"+ tituloSelecaoA +"  "+ this.valorPlacar(partida.placarA) +" x "+ this.valorPlacar(partida.placarB) +"  "+ tituloSelecaoB +"*",
+                "",
+                linhasPontuacao
+            ].join("\n");
+        },
+        montarMensagemRankingAtualizado(ranking) {
+            const linhas = ["*RANKING ATUALIZADO*", ""];
+
+            if (!ranking || ranking.length == 0) {
+                linhas.push("Nenhum usuário encontrado no ranking.");
+                return linhas.join("\n");
+            }
+
+            ranking.forEach((item, index) => {
+                if (index == 6) {
+                    linhas.push("");
+                }
+
+                linhas.push(this.montarLinhaRankingAtualizado(item, index, ranking.length));
+            });
+
+            return linhas.join("\n");
+        },
+        montarLinhaRankingAtualizado(item, index, totalRanking) {
+            const posicao = index + 1;
+            const usuario = item.usuario || {};
+            const nomeUsuario = this.valorTexto(usuario.nome);
+            const pontuacao = this.valorNumero(item.pontuacao);
+            const seta = this.emojiVariacaoRanking(item.posicaoAnterior, posicao);
+            const badges = this.emojisBadgesRanking(item.badges || []);
+            const emojiPrimeiro = posicao == 1 ? " 👑" : "";
+            const emojiUltimo = posicao == totalRanking && badges.indexOf("🔦") < 0 ? " 🔦" : "";
+            const emojis = (emojiPrimeiro + (badges ? " "+ badges : "") + emojiUltimo).trim();
+            const textoUsuario = pontuacao +" - "+ nomeUsuario;
+            const textoRanking = posicao <= 6 ? "*"+ textoUsuario +"*" : textoUsuario;
+
+            return "`"+ posicao + ".` "+ seta +" "+ textoRanking + (emojis ? " "+ emojis : "");
+        },
+        montarLinhasPlacares(apostas) {
+            if (!apostas || apostas.length == 0) {
+                return "> Nenhum palpite encontrado";
+            }
+
+            return apostas.map(aposta => {
+                const usuario = aposta.usuario || {};
+                return "> "+ this.valorTexto(usuario.nome) +"\n> "+ this.valorPlacar(aposta.placarA) +" x "+ this.valorPlacar(aposta.placarB);
+            }).join("\n\n");
+        },
+        montarLinhasPontuacaoProvisoria(apostas) {
+            const apostasPontuando = (apostas || []).filter(aposta => {
+                return this.valorNumero(aposta.pontuacaoProvisoria) > 0;
+            });
+
+            if (apostasPontuando.length == 0) {
+                return "> Nenhum usuário pontuando no momento";
+            }
+
+            return apostasPontuando.map(aposta => {
+                const usuario = aposta.usuario || {};
+                return "> "+ this.valorTexto(usuario.nome) +"\n> "+ this.valorPlacar(aposta.placarA) +" x "+ this.valorPlacar(aposta.placarB) +" ("+ this.valorPontuacao(aposta.pontuacaoProvisoria) +")";
+            }).join("\n\n");
+        },
+        formatarDataHoraPalpite(dataHoraFmt) {
+            if (!dataHoraFmt) {
+                return { data: "--/--", hora: "--h" };
+            }
+
+            return {
+                data: dataHoraFmt.substring(0, 5),
+                hora: dataHoraFmt.substring(6, 8) +"h"
+            };
+        },
+        valorTexto(valor) {
+            return valor || "-";
+        },
+        valorPlacar(valor) {
+            return valor == null ? "-" : valor;
+        },
+        valorPercentual(valor) {
+            return valor == null ? 0 : valor;
+        },
+        valorNumero(valor) {
+            return valor == null ? 0 : Number(valor);
+        },
+        valorPontuacao(valor) {
+            const pontuacao = this.valorNumero(valor);
+            return pontuacao > 0 ? "+"+ pontuacao : pontuacao;
+        },
+        emojiVariacaoRanking(posicaoAnterior, posicaoAtual) {
+            if (posicaoAnterior == null || posicaoAnterior == 999) {
+                return "–";
+            }
+            if (posicaoAnterior > posicaoAtual) {
+                return "↑";
+            }
+            if (posicaoAnterior < posicaoAtual) {
+                return "↓";
+            }
+            return "–";
+        },
+        emojisBadgesRanking(badges) {
+            const emojis = [];
+
+            (badges || []).forEach(badge => {
+                const emoji = this.emojiBadgeRanking(badge);
+                if (emoji && emojis.indexOf(emoji) < 0) {
+                    emojis.push(emoji);
+                }
+            });
+
+            return emojis.join(" ");
+        },
+        emojiBadgeRanking(badge) {
+            const id = badge ? Number(badge.id) : null;
+            const nome = this.normalizarNomeSelecao(badge ? badge.nome : "");
+            const icone = badge && badge.iconeClasse ? badge.iconeClasse : "";
+
+            if (id == 5 || nome.indexOf("foguete") >= 0 || icone.indexOf("rocket") >= 0) {
+                return "🚀";
+            }
+            if (id == 4 || nome.indexOf("gato preto") >= 0) {
+                return "";
+            }
+            if (nome.indexOf("coco") >= 0 || icone.indexOf("poop") >= 0) {
+                return "💩";
+            }
+            if (id == 2 || nome.indexOf("lanterna") >= 0 || icone.indexOf("flashlight") >= 0) {
+                return "🔦";
+            }
+
+            return "";
+        },
+        emojiBandeira(selecao) {
+            const nome = this.normalizarNomeSelecao(selecao ? selecao.nome : "");
+            const bandeiras = {
+                "africa do sul": "🇿🇦",
+                "albania": "🇦🇱",
+                "alemanha": "🇩🇪",
+                "arabia saudita": "🇸🇦",
+                "argelia": "🇩🇿",
+                "argentina": "🇦🇷",
+                "australia": "🇦🇺",
+                "austria": "🇦🇹",
+                "bahrein": "🇧🇭",
+                "belgica": "🇧🇪",
+                "bolivia": "🇧🇴",
+                "bosnia": "🇧🇦",
+                "bosnia e herzegovina": "🇧🇦",
+                "brasil": "🇧🇷",
+                "burkina faso": "🇧🇫",
+                "cabo verde": "🇨🇻",
+                "camaroes": "🇨🇲",
+                "canada": "🇨🇦",
+                "catar": "🇶🇦",
+                "chile": "🇨🇱",
+                "colombia": "🇨🇴",
+                "coreia": "🇰🇷",
+                "coreia do sul": "🇰🇷",
+                "costa do marfim": "🇨🇮",
+                "costa rica": "🇨🇷",
+                "croacia": "🇭🇷",
+                "curacao": "🇨🇼",
+                "dinamarca": "🇩🇰",
+                "egito": "🇪🇬",
+                "equador": "🇪🇨",
+                "emirados arabes": "🇦🇪",
+                "el salvador": "🇸🇻",
+                "escocia": "🏴",
+                "eslovaquia": "🇸🇰",
+                "eslovenia": "🇸🇮",
+                "espanha": "🇪🇸",
+                "estados unidos": "🇺🇸",
+                "eua": "🇺🇸",
+                "finlandia": "🇫🇮",
+                "franca": "🇫🇷",
+                "gabao": "🇬🇦",
+                "gana": "🇬🇭",
+                "georgia": "🇬🇪",
+                "grecia": "🇬🇷",
+                "guatemala": "🇬🇹",
+                "haiti": "🇭🇹",
+                "holanda": "🇳🇱",
+                "honduras": "🇭🇳",
+                "hungria": "🇭🇺",
+                "indonesia": "🇮🇩",
+                "inglaterra": "🏴",
+                "ira": "🇮🇷",
+                "iraque": "🇮🇶",
+                "irlanda": "🇮🇪",
+                "islandia": "🇮🇸",
+                "israel": "🇮🇱",
+                "italia": "🇮🇹",
+                "jamaica": "🇯🇲",
+                "japao": "🇯🇵",
+                "jordania": "🇯🇴",
+                "kosovo": "🇽🇰",
+                "kuwait": "🇰🇼",
+                "libia": "🇱🇾",
+                "macedonia do norte": "🇲🇰",
+                "mali": "🇲🇱",
+                "marrocos": "🇲🇦",
+                "mexico": "🇲🇽",
+                "nigeria": "🇳🇬",
+                "noruega": "🇳🇴",
+                "nova zelandia": "🇳🇿",
+                "oma": "🇴🇲",
+                "panama": "🇵🇦",
+                "pais de gales": "🏴",
+                "paises baixos": "🇳🇱",
+                "palestina": "🇵🇸",
+                "paraguai": "🇵🇾",
+                "peru": "🇵🇪",
+                "polonia": "🇵🇱",
+                "portugal": "🇵🇹",
+                "qatar": "🇶🇦",
+                "quirguistao": "🇰🇬",
+                "rd congo": "🇨🇩",
+                "republica da irlanda": "🇮🇪",
+                "republica democratica do congo": "🇨🇩",
+                "republica tcheca": "🇨🇿",
+                "romenia": "🇷🇴",
+                "senegal": "🇸🇳",
+                "servia": "🇷🇸",
+                "suica": "🇨🇭",
+                "suecia": "🇸🇪",
+                "tailandia": "🇹🇭",
+                "tchequia": "🇨🇿",
+                "tunisia": "🇹🇳",
+                "turquia": "🇹🇷",
+                "ucrania": "🇺🇦",
+                "uganda": "🇺🇬",
+                "uruguai": "🇺🇾",
+                "uzbequistao": "🇺🇿",
+                "venezuela": "🇻🇪",
+                "zambia": "🇿🇲"
+            };
+
+            return bandeiras[nome] || "";
+        },
+        normalizarNomeSelecao(nome) {
+            return (nome || "").toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/ç/g, "c")
+                .trim();
+        },
+        copiarPalpites() {
+            if (this.carregandoPalpites || !this.mensagemPalpites) {
+                return;
+            }
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(this.mensagemPalpites).then(() => {
+                    this.$notify({type: 'success', message: "Palpites copiados!"})
+                    this.fecharModalPalpites();
+                }).catch(() => {
+                    this.copiarPalpitesFallback();
+                });
+                return;
+            }
+
+            this.copiarPalpitesFallback();
+        },
+        copiarPalpitesFallback() {
+            const textarea = document.createElement("textarea");
+            textarea.value = this.mensagemPalpites;
+            textarea.setAttribute("readonly", "");
+            textarea.style.position = "absolute";
+            textarea.style.left = "-9999px";
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            this.$notify({type: 'success', message: "Palpites copiados!"})
+            this.fecharModalPalpites();
+        },
+        fecharModalPalpites() {
+            this.modals.modalPalpites = false;
+        },
         invalidoForm() {
             if (this.gol.idJogador == null) {
                 this.$notify({type: 'warning', message: "Jogador é obrigatório"})
@@ -445,5 +874,13 @@ export default {
 }
 .partidaFinalizada {
     background-color: #edfded;
+}
+.mensagem-palpite-whatsapp {
+    min-height: 420px;
+    resize: vertical;
+    white-space: pre-wrap;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
 }
 </style>
