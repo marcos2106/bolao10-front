@@ -1,4 +1,4 @@
-<template>
+﻿<template>
 	<div>
 		<base-header class="pb-1">
 			<div class="row align-items-center py-4">
@@ -298,14 +298,20 @@ export default {
             return false;
         },
         filtrar() {
-            if ((this.filtro.nome == null || this.filtro.nome == "") 
-                    && (this.filtro.selecao == null || this.filtro.selecao == "")) {
+            const nomeFiltro = this.filtro.nome ? this.filtro.nome.toUpperCase() : null;
+            const selecaoFiltro = this.filtro.selecao;
+
+            if ((nomeFiltro == null || nomeFiltro == "") 
+                    && (selecaoFiltro == null || selecaoFiltro == "")) {
                 this.jogadores = this.jogadoresFiltro;
             } else {
-                this.jogadores = this.jogadoresFiltro.filter( 
-                    item => { return ((this.filtro.nome == "" || this.filtro.nome == null) 
-                            || item.nome.toUpperCase().includes(this.filtro.nome.toUpperCase())) 
-                        && item.selecao.id == this.filtro.selecao })
+                this.jogadores = this.jogadoresFiltro.filter(item => {
+                    const nomeJogador = item.nome ? item.nome.toUpperCase() : "";
+                    const filtraNome = nomeFiltro == null || nomeFiltro == "" || nomeJogador.includes(nomeFiltro);
+                    const filtraSelecao = selecaoFiltro == null || selecaoFiltro == "" || item.selecao.id == selecaoFiltro;
+
+                    return filtraNome && filtraSelecao;
+                })
             }
         }
     }
