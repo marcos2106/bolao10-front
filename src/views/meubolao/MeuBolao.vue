@@ -354,10 +354,10 @@ export default {
 			const mapa = {
 				'SEM_NIVEL':    { codigo: 0, descricao: 'Sem Nível',    imagem: null,       min: 0,   max: 19,  prox: 'Amador',        proxMin: 20,  corHex: '#8a8e91' },
 				'AMADOR':       { codigo: 1, descricao: 'Amador',        imagem: '01.png',   min: 20,  max: 39,  prox: 'Juvenil',       proxMin: 40,  corHex: '#575757' },
-				'JUVENIL':      { codigo: 2, descricao: 'Juvenil',       imagem: '02.png',   min: 40,  max: 119, prox: 'Profissional',  proxMin: 120, corHex: '#643030' },
-				'PROFISSIONAL': { codigo: 3, descricao: 'Profissional',  imagem: '03.png',   min: 120, max: 144, prox: 'Beteiro',       proxMin: 145, corHex: '#28378f' },
-				'BETEIRO':      { codigo: 4, descricao: 'Beteiro',       imagem: '04.png',   min: 145, max: 169, prox: 'Lenda',         proxMin: 170, corHex: '#9e0f0f' },
-				'LENDA':        { codigo: 5, descricao: 'Lenda',         imagem: '05.png',   min: 170, max: 9999,prox: null,            proxMin: null,corHex: '#ecc517' },
+				'JUVENIL':      { codigo: 2, descricao: 'Juvenil',       imagem: '02.png',   min: 40,  max: 101, prox: 'Profissional',  proxMin: 102, corHex: '#643030' },
+				'PROFISSIONAL': { codigo: 3, descricao: 'Profissional',  imagem: '03.png',   min: 102, max: 123, prox: 'Beteiro',       proxMin: 124, corHex: '#28378f' },
+				'BETEIRO':      { codigo: 4, descricao: 'Beteiro',       imagem: '04.png',   min: 124, max: 144, prox: 'Lenda',         proxMin: 145, corHex: '#9e0f0f' },
+				'LENDA':        { codigo: 5, descricao: 'Lenda',         imagem: '05.png',   min: 145, max: 9999,prox: null,            proxMin: null,corHex: '#ecc517' },
 			};
 			const nivel = this.dadosUsuario && this.dadosUsuario.usuario && this.dadosUsuario.usuario.nivel;
 			return mapa[nivel] || mapa['SEM_NIVEL'];
